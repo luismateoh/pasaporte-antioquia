@@ -58,7 +58,8 @@
       "subject": "The Iglesia de Santa Gertrudis on the main park of Envigado, the Señorial City, with the green slopes of Cerro Astilleros rising behind and the Ayurá stream.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com)",
+      "rehacer": "iglesia genérica repetida"
     },
     {
       "id": "girardota",
@@ -102,19 +103,19 @@
       "id": "abejorral",
       "name": "Abejorral",
       "subregion": "Oriente",
-      "subject": "whitewashed colonial houses with wooden balconies on steep streets of Abejorral and the church",
+      "subject": "A steep cobbled street of Abejorral lined with whitewashed colonial houses with carved wooden balconies, doors and windows painted in bright colors, green mountains behind. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "alejandria",
       "name": "Alejandría",
       "subregion": "Oriente",
-      "subject": "A river town known as the Pearl of the Nare: the Nare river winding through a green valley with the Velo de Novia waterfall and reservoir waters, coffee beans drying on the main park, the San Pedro Alejandrino church.",
+      "subject": "The Nare river winding through a green valley with the Velo de Novia waterfall falling over a rock wall and calm reservoir water. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "argelia",
@@ -128,10 +129,10 @@
       "id": "el-carmen-de-viboral",
       "name": "El Carmen de Viboral",
       "subregion": "Oriente",
-      "subject": "hand-painted ceramic plates and cups with blue and red floral motifs, the town church behind",
+      "subject": "Close-up still life of hand-painted ceramic plates, cups and jugs with the town's blue and red floral motifs, a painter's brush, on a workshop table with green hills beyond the window. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "cocorna",
@@ -147,9 +148,10 @@
       "id": "concepcion",
       "name": "Concepción",
       "subregion": "Oriente",
-      "subject": "Cobbled streets of Concepcion lined with white colonial walls and brightly painted doors and windows, with the Alto de la Virgen stairway of zigzag steps climbing a green hill behind the town.",
+      "subject": "A cobbled street of Concepción lined with white colonial walls and brightly painted doors and windows, with the zigzag stone stairway of the Alto de la Virgen climbing a green hill behind. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "el-penol",
@@ -163,19 +165,21 @@
       "id": "el-retiro",
       "name": "El Retiro",
       "subregion": "Oriente",
-      "subject": "The baroque Iglesia de Nuestra Señora del Rosario of El Retiro with its dome and stained-glass windows facing the main park, colonial houses, furniture workshops with wooden chairs and tables, and avocado trees.",
+      "subject": "The real church of Nuestra Señora del Rosario of El Retiro, drawn faithfully from the reference photo, with hand-carved wooden furniture from the town's woodworking tradition in the foreground.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva",
+      "referencia_foto": "Iglesia Nuestra Señora del Rosario, El Retiro, Antioquia"
     },
     {
       "id": "el-santuario",
       "name": "El Santuario",
       "subregion": "Oriente",
-      "subject": "The central park of El Santuario with its fountain and church, the Basilica Menor de San Judas Tadeo, the Puente Centenario bridge, and cool Oriente fields of vegetables and potatoes.",
+      "subject": "The real main church on the central park of El Santuario, drawn faithfully from the reference photo, with the park fountain and cool Oriente fields.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva",
+      "referencia_foto": "iglesia principal parque El Santuario, Antioquia"
     },
     {
       "id": "granada",
@@ -190,10 +194,11 @@
       "id": "guarne",
       "name": "Guarne",
       "subregion": "Oriente",
-      "subject": "The Iglesia de Nuestra Señora de la Candelaria on the plaza of Guarne in a valley ringed by green hills, with the La Mosca river, the Laguna de Guarne and a misty waterfall nearby.",
+      "subject": "The real church of Nuestra Señora de la Candelaria of Guarne, drawn faithfully from the reference photo, in a valley ringed by green hills with the La Mosca river.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva",
+      "referencia_foto": "Iglesia Nuestra Señora de la Candelaria, Guarne, Antioquia"
     },
     {
       "id": "guatape",
@@ -227,28 +232,30 @@
       "id": "marinilla",
       "name": "Marinilla",
       "subregion": "Oriente",
-      "subject": "The main church of Marinilla, Nuestra Señora de la Asunción, on the north side of the town plaza: a lime-whitewashed Romanesque facade with ONE single central tower rising above the arched main entrance, a round clock on the front of the tower, topped by a slender brick spire (no domes, no twin towers); in the foreground a luthier's handcrafted wooden Colombian guitar and tiple.",
+      "subject": "The real main church of Marinilla, Nuestra Señora de la Asunción, drawn faithfully from the reference photo: whitewashed facade with one single central tower, clock and slender spire; in the foreground a luthier's handcrafted wooden guitar and tiple.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva",
+      "referencia_foto": "Iglesia Nuestra Señora de la Asunción, Marinilla, Antioquia"
     },
     {
       "id": "narino",
       "name": "Nariño",
       "subregion": "Oriente",
-      "subject": "The Green Balcony of Antioquia: a canyon of the Samaná river among green fields, the Espíritu Santo waterfall, and the neo-Gothic and neo-Baroque church of Nuestra Señora de las Mercedes.",
+      "subject": "The deep green canyon of the Samaná river with the white Espíritu Santo waterfall plunging into it, lush forest and steep mountains. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "rionegro",
       "name": "Rionegro",
       "subregion": "Oriente",
-      "subject": "the colonial cathedral of San Nicolás in Rionegro on its plaza, flower fields of the Oriente highlands",
+      "subject": "The real Cathedral of San Nicolás el Magno on the main plaza of Rionegro, drawn faithfully from the reference photo (its exact facade, towers and colors), with Oriente highland flower fields.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva",
+      "referencia_foto": "Catedral San Nicolás el Magno, Rionegro, Antioquia"
     },
     {
       "id": "san-carlos",
@@ -263,10 +270,10 @@
       "id": "san-francisco",
       "name": "San Francisco",
       "subregion": "Oriente",
-      "subject": "Exotic heliconia flowers planted in the main park of San Francisco, with the green-and-blue natural pools of Pailania and the Santo Domingo river with small islands and forested hills.",
+      "subject": "Tall exotic red and orange heliconia flowers in the foreground, emerald natural pools of a jungle river with boulders and dense tropical forest. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "san-luis",
@@ -290,10 +297,10 @@
       "id": "san-vicente-ferrer",
       "name": "San Vicente Ferrer",
       "subregion": "Oriente",
-      "subject": "The mid-nineteenth-century parish church of San Vicente Ferrer on its plaza, the Piedra de San Vicente Ferrer monolith, the 60-meter Cascada de Los Cachos and handwoven fique tapestries.",
+      "subject": "The great granite monolith Piedra de San Vicente rising over green mountains, with the tall Cascada de Los Cajones waterfall nearby. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "sonson",
@@ -311,7 +318,8 @@
       "subject": "A coal-mining and coffee town known as the Golden Gate of the Suroeste: a stone railway viaduct and old rail tunnel on the Ferrocarril de Antioquia line, coal carts at a mine entrance, green hills and the El Salto waterfall.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com)",
+      "rehacer": "iglesia genérica repetida"
     },
     {
       "id": "andes",
@@ -372,7 +380,8 @@
       "revisar": false,
       "hecho": true,
       "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "revisar_estilo": true,
+      "rehacer": "iglesia genérica repetida"
     },
     {
       "id": "fredonia",
@@ -390,7 +399,8 @@
       "subject": "The land of the samanes: giant spreading samán trees shading the main park of Hispania beside the parish church, with sugarcane trapiche, coffee and cattle hills, and a bridge over the Pedral river.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com)",
+      "rehacer": "iglesia genérica repetida"
     },
     {
       "id": "jardin",
@@ -443,7 +453,8 @@
       "subject": "The yellow two-story Casa de la Cultura of Salgar beside the San Juan Evangelista church with three naves, coffee hills, Cerro Plateado behind and the Charcos de Mulato pools.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com)",
+      "rehacer": "iglesia genérica repetida"
     },
     {
       "id": "santa-barbara",
@@ -451,8 +462,8 @@
       "subregion": "Suroeste",
       "subject": "The Balcón de los bellos paisajes: a lookout over distant valleys and the Cauca river toward the snowy Nevado del Ruiz at dawn, with mango trees and the parish church on the central park.",
       "revisar": false,
-      "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "hecho": false,
+      "rehacer": "iglesia genérica repetida"
     },
     {
       "id": "tamesis",
@@ -595,7 +606,8 @@
       "subject": "The Iglesia de San Rafael of Heliconia in the mountains, with the Salinas de Guaca salt springs, the La Abuelita waterfalls and fields of coffee, sugar cane and plantain.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com)",
+      "rehacer": "iglesia genérica repetida"
     },
     {
       "id": "liborina",
@@ -638,7 +650,8 @@
       "subject": "The Land of Cacao: cacao pods on the branch, the Iglesia de Nuestra Señora de la Candelaria on the plaza, the Aurra river and a waterfall among warm green hills near the Occidente tunnel.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com)",
+      "rehacer": "iglesia genérica repetida"
     },
     {
       "id": "santa-fe-de-antioquia",
@@ -654,8 +667,8 @@
       "subregion": "Occidente",
       "subject": "A small white colonial chapel of San Nicolás dating from 1622 beside bahareque houses and stone streets, a large ceiba tree on the main park, the Cauca river and the La Nevera waterfall.",
       "revisar": false,
-      "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "hecho": false,
+      "rehacer": "iglesia genérica repetida"
     },
     {
       "id": "uramita",
@@ -744,7 +757,8 @@
       "subject": "The parish church of Nuestra Señora de Guadalupe over a mountain town called Light among Mountains, with the Troneras dam and river pools of the Charcos del Cañal among green hills.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "motor": "ChatGPT (chatgpt.com)",
+      "rehacer": "iglesia genérica repetida"
     },
     {
       "id": "ituango",
@@ -776,8 +790,8 @@
       "subregion": "Norte",
       "subject": "the basilica of the Señor de los Milagros and dairy cows on green pastures",
       "revisar": false,
-      "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "hecho": false,
+      "rehacer": "iglesia genérica repetida"
     },
     {
       "id": "santa-rosa-de-osos",
@@ -785,8 +799,8 @@
       "subregion": "Norte",
       "subject": "dairy cows on green cold highlands and the cathedral of Santa Rosa de Osos",
       "revisar": false,
-      "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "hecho": false,
+      "rehacer": "iglesia genérica repetida"
     },
     {
       "id": "toledo",
@@ -859,8 +873,8 @@
       "subregion": "Nordeste",
       "subject": "The well-preserved central square of Santo Domingo with its old houses, the Iglesia de Santo Domingo de Guzmán and Capilla del Sagrado Corazón, a 50-meter waterfall and mountains encircled by the Nus and Nare rivers.",
       "revisar": false,
-      "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)"
+      "hecho": false,
+      "rehacer": "iglesia genérica repetida"
     },
     {
       "id": "segovia",
