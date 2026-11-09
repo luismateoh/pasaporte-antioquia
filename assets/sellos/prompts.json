@@ -149,9 +149,7 @@
       "subregion": "Oriente",
       "subject": "Cobbled streets of Concepcion lined with white colonial walls and brightly painted doors and windows, with the Alto de la Virgen stairway of zigzag steps climbing a green hill behind the town.",
       "revisar": false,
-      "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "hecho": false
     },
     {
       "id": "el-penol",
@@ -174,9 +172,10 @@
       "id": "el-santuario",
       "name": "El Santuario",
       "subregion": "Oriente",
-      "subject": "the main plaza and church of El Santuario, Antioquia, Colombia, with the typical landscape of the Oriente subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "The central park of El Santuario with its fountain and church, the Basilica Menor de San Judas Tadeo, the Puente Centenario bridge, and cool Oriente fields of vegetables and potatoes.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com)"
     },
     {
       "id": "granada",
@@ -284,15 +283,17 @@
       "subregion": "Oriente",
       "subject": "a crystal-clear river with natural pools and river beaches in the forest of San Rafael",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com)"
     },
     {
       "id": "san-vicente-ferrer",
       "name": "San Vicente Ferrer",
       "subregion": "Oriente",
-      "subject": "the main plaza and church of San Vicente Ferrer, Antioquia, Colombia, with the typical landscape of the Oriente subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "The mid-nineteenth-century parish church of San Vicente Ferrer on its plaza, the Piedra de San Vicente Ferrer monolith, the 60-meter Cascada de Los Cachos and handwoven fique tapestries.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com)"
     },
     {
       "id": "sonson",
@@ -300,7 +301,8 @@
       "subregion": "Oriente",
       "subject": "the high Páramo de Sonsón with frailejón plants and misty mountains, the colonial town below",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com)"
     },
     {
       "id": "amaga",
@@ -447,9 +449,10 @@
       "id": "santa-barbara",
       "name": "Santa Bárbara",
       "subregion": "Suroeste",
-      "subject": "the main plaza and church of Santa Bárbara, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "The Balcón de los bellos paisajes: a lookout over distant valleys and the Cauca river toward the snowy Nevado del Ruiz at dawn, with mango trees and the parish church on the central park.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com)"
     },
     {
       "id": "tamesis",
@@ -457,7 +460,8 @@
       "subregion": "Suroeste",
       "subject": "ancient carved petroglyph rocks among coffee hills in Támesis",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com)"
     },
     {
       "id": "tarso",
@@ -648,9 +652,10 @@
       "id": "sopetran",
       "name": "Sopetrán",
       "subregion": "Occidente",
-      "subject": "the main plaza and church of Sopetrán, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A small white colonial chapel of San Nicolás dating from 1622 beside bahareque houses and stone streets, a large ceiba tree on the main park, the Cauca river and the La Nevera waterfall.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com)"
     },
     {
       "id": "uramita",
@@ -771,7 +776,8 @@
       "subregion": "Norte",
       "subject": "the basilica of the Señor de los Milagros and dairy cows on green pastures",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com)"
     },
     {
       "id": "santa-rosa-de-osos",
@@ -779,7 +785,8 @@
       "subregion": "Norte",
       "subject": "dairy cows on green cold highlands and the cathedral of Santa Rosa de Osos",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com)"
     },
     {
       "id": "toledo",
@@ -841,17 +848,19 @@
       "id": "san-roque",
       "name": "San Roque",
       "subregion": "Nordeste",
-      "subject": "the main plaza and church of San Roque, Antioquia, Colombia, with the typical landscape of the Nordeste subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A traditional trapiche panelero of San Roque with sugarcane stalks, pressed juice and blocks of panela, set on green Cordillera Central slopes near the Nus river and the Jaguas reservoir.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com)"
     },
     {
       "id": "santo-domingo",
       "name": "Santo Domingo",
       "subregion": "Nordeste",
-      "subject": "the main plaza and church of Santo Domingo, Antioquia, Colombia, with the typical landscape of the Nordeste subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "The well-preserved central square of Santo Domingo with its old houses, the Iglesia de Santo Domingo de Guzmán and Capilla del Sagrado Corazón, a 50-meter waterfall and mountains encircled by the Nus and Nare rivers.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com)"
     },
     {
       "id": "segovia",
@@ -859,7 +868,8 @@
       "subregion": "Nordeste",
       "subject": "a gold mine entrance with mining carts and a shining gold nugget, hills of Segovia",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com)"
     },
     {
       "id": "vegachi",
