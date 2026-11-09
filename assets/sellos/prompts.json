@@ -1,0 +1,1079 @@
+{
+ "estilo": "Circular vintage travel stamp illustration, screen-print poster style, flat colors with subtle grain and slight ink misregistration, limited palette of 5 colors (deep teal, warm green, brick red, mustard ochre, off-white), bold simplified shapes, clean thick outline around a perfect circle filling the square canvas, white background outside the circle, centered composition, no text, no letters, no words, no numbers, no watermark.",
+ "modelo_usado": "ChatGPT (gpt-image en chatgpt.com), 2026-11-08",
+ "formato": "cuadrado 1:1, guardar como assets/sellos/<id>.webp",
+ "lugares": [
+  {
+   "id": "medellin",
+   "name": "Medellín",
+   "subregion": "Valle de Aburrá",
+   "subject": "Metrocable gondola cabins gliding over the Aburrá valley, hillside neighborhoods and the city skyline of Medellín",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "barbosa",
+   "name": "Barbosa",
+   "subregion": "Valle de Aburrá",
+   "subject": "ripe pineapples in the foreground, green hills and the Medellín river valley of Barbosa",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "bello",
+   "name": "Bello",
+   "subregion": "Valle de Aburrá",
+   "subject": "the main plaza and church of Bello, Antioquia, Colombia, with the typical landscape of the Valle de Aburrá subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "caldas",
+   "name": "Caldas",
+   "subregion": "Valle de Aburrá",
+   "subject": "the main plaza and church of Caldas, Antioquia, Colombia, with the typical landscape of the Valle de Aburrá subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "copacabana",
+   "name": "Copacabana",
+   "subregion": "Valle de Aburrá",
+   "subject": "the main plaza and church of Copacabana, Antioquia, Colombia, with the typical landscape of the Valle de Aburrá subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "envigado",
+   "name": "Envigado",
+   "subregion": "Valle de Aburrá",
+   "subject": "the main plaza and church of Envigado, Antioquia, Colombia, with the typical landscape of the Valle de Aburrá subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "girardota",
+   "name": "Girardota",
+   "subregion": "Valle de Aburrá",
+   "subject": "the large brick cathedral of the Señor Caído in Girardota with pilgrims in the plaza",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "itagui",
+   "name": "Itagüí",
+   "subregion": "Valle de Aburrá",
+   "subject": "the main plaza and church of Itagüí, Antioquia, Colombia, with the typical landscape of the Valle de Aburrá subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "la-estrella",
+   "name": "La Estrella",
+   "subregion": "Valle de Aburrá",
+   "subject": "the main plaza and church of La Estrella, Antioquia, Colombia, with the typical landscape of the Valle de Aburrá subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "sabaneta",
+   "name": "Sabaneta",
+   "subregion": "Valle de Aburrá",
+   "subject": "the main plaza and church of Sabaneta, Antioquia, Colombia, with the typical landscape of the Valle de Aburrá subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "abejorral",
+   "name": "Abejorral",
+   "subregion": "Oriente",
+   "subject": "whitewashed colonial houses with wooden balconies on steep streets of Abejorral and the church",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "alejandria",
+   "name": "Alejandría",
+   "subregion": "Oriente",
+   "subject": "the main plaza and church of Alejandría, Antioquia, Colombia, with the typical landscape of the Oriente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "argelia",
+   "name": "Argelia",
+   "subregion": "Oriente",
+   "subject": "the main plaza and church of Argelia, Antioquia, Colombia, with the typical landscape of the Oriente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "el-carmen-de-viboral",
+   "name": "El Carmen de Viboral",
+   "subregion": "Oriente",
+   "subject": "hand-painted ceramic plates and cups with blue and red floral motifs, the town church behind",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "cocorna",
+   "name": "Cocorná",
+   "subregion": "Oriente",
+   "subject": "a tall waterfall in a lush canyon with a person canyoning down a rope in Cocorná",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "concepcion",
+   "name": "Concepción",
+   "subregion": "Oriente",
+   "subject": "the main plaza and church of Concepción, Antioquia, Colombia, with the typical landscape of the Oriente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "el-penol",
+   "name": "El Peñol",
+   "subregion": "Oriente",
+   "subject": "the replica church of the old drowned town of El Peñol on the shore of the reservoir, islands and water",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "el-retiro",
+   "name": "El Retiro",
+   "subregion": "Oriente",
+   "subject": "the main plaza and church of El Retiro, Antioquia, Colombia, with the typical landscape of the Oriente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "el-santuario",
+   "name": "El Santuario",
+   "subregion": "Oriente",
+   "subject": "the main plaza and church of El Santuario, Antioquia, Colombia, with the typical landscape of the Oriente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "granada",
+   "name": "Granada",
+   "subregion": "Oriente",
+   "subject": "the main plaza and church of Granada, Antioquia, Colombia, with the typical landscape of the Oriente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "guarne",
+   "name": "Guarne",
+   "subregion": "Oriente",
+   "subject": "the main plaza and church of Guarne, Antioquia, Colombia, with the typical landscape of the Oriente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "guatape",
+   "name": "Guatapé",
+   "subregion": "Oriente",
+   "subject": "the giant granite monolith Piedra del Peñol with its zigzag white staircase above the islands of the blue Peñol-Guatapé reservoir",
+   "revisar": false,
+   "hecho": true
+  },
+  {
+   "id": "la-ceja",
+   "name": "La Ceja",
+   "subregion": "Oriente",
+   "subject": "rows of flower greenhouses and blooming hydrangeas on the green plateau of La Ceja",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "la-union",
+   "name": "La Unión",
+   "subregion": "Oriente",
+   "subject": "the main plaza and church of La Unión, Antioquia, Colombia, with the typical landscape of the Oriente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "marinilla",
+   "name": "Marinilla",
+   "subregion": "Oriente",
+   "subject": "handcrafted wooden Colombian guitars and tiples in a luthier workshop, colonial church of Marinilla behind",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "narino",
+   "name": "Nariño",
+   "subregion": "Oriente",
+   "subject": "the main plaza and church of Nariño, Antioquia, Colombia, with the typical landscape of the Oriente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "rionegro",
+   "name": "Rionegro",
+   "subregion": "Oriente",
+   "subject": "the colonial cathedral of San Nicolás in Rionegro on its plaza, flower fields of the Oriente highlands",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "san-carlos",
+   "name": "San Carlos",
+   "subregion": "Oriente",
+   "subject": "waterfalls and turquoise rivers among dense green forest in San Carlos",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "san-francisco",
+   "name": "San Francisco",
+   "subregion": "Oriente",
+   "subject": "the main plaza and church of San Francisco, Antioquia, Colombia, with the typical landscape of the Oriente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "san-luis",
+   "name": "San Luis",
+   "subregion": "Oriente",
+   "subject": "the main plaza and church of San Luis, Antioquia, Colombia, with the typical landscape of the Oriente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "san-rafael",
+   "name": "San Rafael",
+   "subregion": "Oriente",
+   "subject": "a crystal-clear river with natural pools and river beaches in the forest of San Rafael",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "san-vicente-ferrer",
+   "name": "San Vicente Ferrer",
+   "subregion": "Oriente",
+   "subject": "the main plaza and church of San Vicente Ferrer, Antioquia, Colombia, with the typical landscape of the Oriente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "sonson",
+   "name": "Sonsón",
+   "subregion": "Oriente",
+   "subject": "the high Páramo de Sonsón with frailejón plants and misty mountains, the colonial town below",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "amaga",
+   "name": "Amagá",
+   "subregion": "Suroeste",
+   "subject": "the main plaza and church of Amagá, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "andes",
+   "name": "Andes",
+   "subregion": "Suroeste",
+   "subject": "a colorful chiva bus loaded with coffee sacks on a mountain road of Andes, coffee plantations",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "angelopolis",
+   "name": "Angelópolis",
+   "subregion": "Suroeste",
+   "subject": "the main plaza and church of Angelópolis, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "betania",
+   "name": "Betania",
+   "subregion": "Suroeste",
+   "subject": "the main plaza and church of Betania, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "betulia",
+   "name": "Betulia",
+   "subregion": "Suroeste",
+   "subject": "the main plaza and church of Betulia, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "caramanta",
+   "name": "Caramanta",
+   "subregion": "Suroeste",
+   "subject": "the main plaza and church of Caramanta, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "ciudad-bolivar",
+   "name": "Ciudad Bolívar",
+   "subregion": "Suroeste",
+   "subject": "coffee pickers among coffee bushes with the Farallones del Citará cliffs behind Ciudad Bolívar",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "concordia",
+   "name": "Concordia",
+   "subregion": "Suroeste",
+   "subject": "the main plaza and church of Concordia, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "fredonia",
+   "name": "Fredonia",
+   "subregion": "Suroeste",
+   "subject": "the main plaza and church of Fredonia, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "hispania",
+   "name": "Hispania",
+   "subregion": "Suroeste",
+   "subject": "the main plaza and church of Hispania, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "jardin",
+   "name": "Jardín",
+   "subregion": "Suroeste",
+   "subject": "the neo-gothic basilica with twin spires on the main plaza of Jardín, colorful colonial balconies, chivas and coffee mountains",
+   "revisar": false,
+   "hecho": true
+  },
+  {
+   "id": "jerico",
+   "name": "Jericó",
+   "subregion": "Suroeste",
+   "subject": "a leather carriel bag in the foreground, the colonial town of Jericó on a ridge, Cristo Rey statue on the hilltop and the Cauca canyon",
+   "revisar": false,
+   "hecho": true
+  },
+  {
+   "id": "la-pintada",
+   "name": "La Pintada",
+   "subregion": "Suroeste",
+   "subject": "the main plaza and church of La Pintada, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "montebello",
+   "name": "Montebello",
+   "subregion": "Suroeste",
+   "subject": "the main plaza and church of Montebello, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "pueblorrico",
+   "name": "Pueblorrico",
+   "subregion": "Suroeste",
+   "subject": "the main plaza and church of Pueblorrico, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "salgar",
+   "name": "Salgar",
+   "subregion": "Suroeste",
+   "subject": "the main plaza and church of Salgar, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "santa-barbara",
+   "name": "Santa Bárbara",
+   "subregion": "Suroeste",
+   "subject": "the main plaza and church of Santa Bárbara, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "tamesis",
+   "name": "Támesis",
+   "subregion": "Suroeste",
+   "subject": "ancient carved petroglyph rocks among coffee hills in Támesis",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "tarso",
+   "name": "Tarso",
+   "subregion": "Suroeste",
+   "subject": "the main plaza and church of Tarso, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "titiribi",
+   "name": "Titiribí",
+   "subregion": "Suroeste",
+   "subject": "the main plaza and church of Titiribí, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "urrao",
+   "name": "Urrao",
+   "subregion": "Suroeste",
+   "subject": "the Páramo del Sol with tall frailejón plants, high peaks and a cold lagoon above Urrao",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "valparaiso",
+   "name": "Valparaíso",
+   "subregion": "Suroeste",
+   "subject": "the main plaza and church of Valparaíso, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "venecia",
+   "name": "Venecia",
+   "subregion": "Suroeste",
+   "subject": "the pyramid-shaped mountain Cerro Tusa rising above green coffee hills near Venecia",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "abriaqui",
+   "name": "Abriaquí",
+   "subregion": "Occidente",
+   "subject": "the main plaza and church of Abriaquí, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "anza",
+   "name": "Anzá",
+   "subregion": "Occidente",
+   "subject": "the main plaza and church of Anzá, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "armenia",
+   "name": "Armenia",
+   "subregion": "Occidente",
+   "subject": "the main plaza and church of Armenia, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "buritica",
+   "name": "Buriticá",
+   "subregion": "Occidente",
+   "subject": "the main plaza and church of Buriticá, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "caicedo",
+   "name": "Caicedo",
+   "subregion": "Occidente",
+   "subject": "the main plaza and church of Caicedo, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "canasgordas",
+   "name": "Cañasgordas",
+   "subregion": "Occidente",
+   "subject": "the main plaza and church of Cañasgordas, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "dabeiba",
+   "name": "Dabeiba",
+   "subregion": "Occidente",
+   "subject": "the main plaza and church of Dabeiba, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "ebejico",
+   "name": "Ebéjico",
+   "subregion": "Occidente",
+   "subject": "the main plaza and church of Ebéjico, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "frontino",
+   "name": "Frontino",
+   "subregion": "Occidente",
+   "subject": "the main plaza and church of Frontino, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "giraldo",
+   "name": "Giraldo",
+   "subregion": "Occidente",
+   "subject": "the main plaza and church of Giraldo, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "heliconia",
+   "name": "Heliconia",
+   "subregion": "Occidente",
+   "subject": "the main plaza and church of Heliconia, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "liborina",
+   "name": "Liborina",
+   "subregion": "Occidente",
+   "subject": "the main plaza and church of Liborina, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "olaya",
+   "name": "Olaya",
+   "subregion": "Occidente",
+   "subject": "the Puente de Occidente suspension bridge seen from the Olaya side of the Cauca river",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "peque",
+   "name": "Peque",
+   "subregion": "Occidente",
+   "subject": "the main plaza and church of Peque, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "sabanalarga",
+   "name": "Sabanalarga",
+   "subregion": "Occidente",
+   "subject": "the main plaza and church of Sabanalarga, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "san-jeronimo",
+   "name": "San Jerónimo",
+   "subregion": "Occidente",
+   "subject": "the main plaza and church of San Jerónimo, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "santa-fe-de-antioquia",
+   "name": "Santa Fe de Antioquia",
+   "subregion": "Occidente",
+   "subject": "the Puente de Occidente suspension bridge with two stone towers over the wide brown Cauca river, dry hills and a colonial church tower",
+   "revisar": false,
+   "hecho": true
+  },
+  {
+   "id": "sopetran",
+   "name": "Sopetrán",
+   "subregion": "Occidente",
+   "subject": "the main plaza and church of Sopetrán, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "uramita",
+   "name": "Uramita",
+   "subregion": "Occidente",
+   "subject": "the main plaza and church of Uramita, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "angostura",
+   "name": "Angostura",
+   "subregion": "Norte",
+   "subject": "the main plaza and church of Angostura, Antioquia, Colombia, with the typical landscape of the Norte subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "belmira",
+   "name": "Belmira",
+   "subregion": "Norte",
+   "subject": "the Páramo de Belmira with frailejón plants, cold lagoons and mist",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "briceno",
+   "name": "Briceño",
+   "subregion": "Norte",
+   "subject": "the main plaza and church of Briceño, Antioquia, Colombia, with the typical landscape of the Norte subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "campamento",
+   "name": "Campamento",
+   "subregion": "Norte",
+   "subject": "the main plaza and church of Campamento, Antioquia, Colombia, with the typical landscape of the Norte subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "carolina-del-principe",
+   "name": "Carolina del Príncipe",
+   "subregion": "Norte",
+   "subject": "the main plaza and church of Carolina del Príncipe, Antioquia, Colombia, with the typical landscape of the Norte subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "donmatias",
+   "name": "Donmatías",
+   "subregion": "Norte",
+   "subject": "a sewing machine and colorful fabric rolls of the textile workshops of Donmatías, green hills behind",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "entrerrios",
+   "name": "Entrerríos",
+   "subregion": "Norte",
+   "subject": "the main plaza and church of Entrerríos, Antioquia, Colombia, with the typical landscape of the Norte subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "gomez-plata",
+   "name": "Gómez Plata",
+   "subregion": "Norte",
+   "subject": "the main plaza and church of Gómez Plata, Antioquia, Colombia, with the typical landscape of the Norte subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "guadalupe",
+   "name": "Guadalupe",
+   "subregion": "Norte",
+   "subject": "the main plaza and church of Guadalupe, Antioquia, Colombia, with the typical landscape of the Norte subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "ituango",
+   "name": "Ituango",
+   "subregion": "Norte",
+   "subject": "the huge Hidroituango dam wall and reservoir in the deep Cauca canyon",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "san-andres-de-cuerquia",
+   "name": "San Andrés de Cuerquia",
+   "subregion": "Norte",
+   "subject": "the main plaza and church of San Andrés de Cuerquia, Antioquia, Colombia, with the typical landscape of the Norte subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "san-jose-de-la-montana",
+   "name": "San José de la Montaña",
+   "subregion": "Norte",
+   "subject": "the main plaza and church of San José de la Montaña, Antioquia, Colombia, with the typical landscape of the Norte subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "san-pedro-de-los-milagros",
+   "name": "San Pedro de los Milagros",
+   "subregion": "Norte",
+   "subject": "the basilica of the Señor de los Milagros and dairy cows on green pastures",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "santa-rosa-de-osos",
+   "name": "Santa Rosa de Osos",
+   "subregion": "Norte",
+   "subject": "dairy cows on green cold highlands and the cathedral of Santa Rosa de Osos",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "toledo",
+   "name": "Toledo",
+   "subregion": "Norte",
+   "subject": "the main plaza and church of Toledo, Antioquia, Colombia, with the typical landscape of the Norte subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "valdivia",
+   "name": "Valdivia",
+   "subregion": "Norte",
+   "subject": "the main plaza and church of Valdivia, Antioquia, Colombia, with the typical landscape of the Norte subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "yarumal",
+   "name": "Yarumal",
+   "subregion": "Norte",
+   "subject": "the main plaza and church of Yarumal, Antioquia, Colombia, with the typical landscape of the Norte subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "amalfi",
+   "name": "Amalfi",
+   "subregion": "Nordeste",
+   "subject": "the main plaza and church of Amalfi, Antioquia, Colombia, with the typical landscape of the Nordeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "anori",
+   "name": "Anorí",
+   "subregion": "Nordeste",
+   "subject": "the main plaza and church of Anorí, Antioquia, Colombia, with the typical landscape of the Nordeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "cisneros",
+   "name": "Cisneros",
+   "subregion": "Nordeste",
+   "subject": "the main plaza and church of Cisneros, Antioquia, Colombia, with the typical landscape of the Nordeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "remedios",
+   "name": "Remedios",
+   "subregion": "Nordeste",
+   "subject": "artisanal gold panning in a river and a gold nugget, jungle hills of Remedios",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "san-roque",
+   "name": "San Roque",
+   "subregion": "Nordeste",
+   "subject": "the main plaza and church of San Roque, Antioquia, Colombia, with the typical landscape of the Nordeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "santo-domingo",
+   "name": "Santo Domingo",
+   "subregion": "Nordeste",
+   "subject": "the main plaza and church of Santo Domingo, Antioquia, Colombia, with the typical landscape of the Nordeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "segovia",
+   "name": "Segovia",
+   "subregion": "Nordeste",
+   "subject": "a gold mine entrance with mining carts and a shining gold nugget, hills of Segovia",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "vegachi",
+   "name": "Vegachí",
+   "subregion": "Nordeste",
+   "subject": "the main plaza and church of Vegachí, Antioquia, Colombia, with the typical landscape of the Nordeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "yali",
+   "name": "Yalí",
+   "subregion": "Nordeste",
+   "subject": "the main plaza and church of Yalí, Antioquia, Colombia, with the typical landscape of the Nordeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "yolombo",
+   "name": "Yolombó",
+   "subregion": "Nordeste",
+   "subject": "the main plaza and church of Yolombó, Antioquia, Colombia, with the typical landscape of the Nordeste subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "caucasia",
+   "name": "Caucasia",
+   "subregion": "Bajo Cauca",
+   "subject": "the wide Cauca river with a long bridge and wooden canoes at Caucasia, tropical lowlands",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "caceres",
+   "name": "Cáceres",
+   "subregion": "Bajo Cauca",
+   "subject": "the main plaza and church of Cáceres, Antioquia, Colombia, with the typical landscape of the Bajo Cauca subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "el-bagre",
+   "name": "El Bagre",
+   "subregion": "Bajo Cauca",
+   "subject": "the main plaza and church of El Bagre, Antioquia, Colombia, with the typical landscape of the Bajo Cauca subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "nechi",
+   "name": "Nechí",
+   "subregion": "Bajo Cauca",
+   "subject": "the main plaza and church of Nechí, Antioquia, Colombia, with the typical landscape of the Bajo Cauca subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "taraza",
+   "name": "Tarazá",
+   "subregion": "Bajo Cauca",
+   "subject": "the main plaza and church of Tarazá, Antioquia, Colombia, with the typical landscape of the Bajo Cauca subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "zaragoza",
+   "name": "Zaragoza",
+   "subregion": "Bajo Cauca",
+   "subject": "the main plaza and church of Zaragoza, Antioquia, Colombia, with the typical landscape of the Bajo Cauca subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "puerto-berrio",
+   "name": "Puerto Berrío",
+   "subregion": "Magdalena Medio",
+   "subject": "an old steel railway bridge and a train over the Magdalena river at Puerto Berrío",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "caracoli",
+   "name": "Caracolí",
+   "subregion": "Magdalena Medio",
+   "subject": "the main plaza and church of Caracolí, Antioquia, Colombia, with the typical landscape of the Magdalena Medio subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "maceo",
+   "name": "Maceo",
+   "subregion": "Magdalena Medio",
+   "subject": "the main plaza and church of Maceo, Antioquia, Colombia, with the typical landscape of the Magdalena Medio subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "puerto-nare",
+   "name": "Puerto Nare",
+   "subregion": "Magdalena Medio",
+   "subject": "the main plaza and church of Puerto Nare, Antioquia, Colombia, with the typical landscape of the Magdalena Medio subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "puerto-triunfo",
+   "name": "Puerto Triunfo",
+   "subregion": "Magdalena Medio",
+   "subject": "the main plaza and church of Puerto Triunfo, Antioquia, Colombia, with the typical landscape of the Magdalena Medio subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "yondo",
+   "name": "Yondó",
+   "subregion": "Magdalena Medio",
+   "subject": "the main plaza and church of Yondó, Antioquia, Colombia, with the typical landscape of the Magdalena Medio subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "apartado",
+   "name": "Apartadó",
+   "subregion": "Urabá",
+   "subject": "endless banana plantations with banana bunches wrapped in blue bags in Apartadó",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "arboletes",
+   "name": "Arboletes",
+   "subregion": "Urabá",
+   "subject": "the bubbling mud volcano pool of Arboletes next to the Caribbean sea",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "carepa",
+   "name": "Carepa",
+   "subregion": "Urabá",
+   "subject": "banana plantations and a cable line carrying banana bunches in Carepa",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "chigorodo",
+   "name": "Chigorodó",
+   "subregion": "Urabá",
+   "subject": "banana plantations with the Serranía de Abibe mountains behind Chigorodó",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "murindo",
+   "name": "Murindó",
+   "subregion": "Urabá",
+   "subject": "dense rainforest and dugout canoes on the Atrato river at Murindó",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "mutata",
+   "name": "Mutatá",
+   "subregion": "Urabá",
+   "subject": "the main plaza and church of Mutatá, Antioquia, Colombia, with the typical landscape of the Urabá subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "necocli",
+   "name": "Necoclí",
+   "subregion": "Urabá",
+   "subject": "a Caribbean beach on the Gulf of Urabá with coconut palms, a wooden fishing canoe, turquoise sea and a low sunset sun",
+   "revisar": false,
+   "hecho": true
+  },
+  {
+   "id": "san-juan-de-uraba",
+   "name": "San Juan de Urabá",
+   "subregion": "Urabá",
+   "subject": "a quiet Caribbean beach with fishing boats and palms at San Juan de Urabá",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "san-pedro-de-uraba",
+   "name": "San Pedro de Urabá",
+   "subregion": "Urabá",
+   "subject": "the main plaza and church of San Pedro de Urabá, Antioquia, Colombia, with the typical landscape of the Urabá subregion",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "turbo",
+   "name": "Turbo",
+   "subregion": "Urabá",
+   "subject": "a port on the Gulf of Urabá with banana boats and coconut palms in Turbo",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "vigia-del-fuerte",
+   "name": "Vigía del Fuerte",
+   "subregion": "Urabá",
+   "subject": "stilt houses and dugout canoes on the wide Atrato river in the rainforest of Vigía del Fuerte",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "canon-del-rio-claro",
+   "name": "Cañón del Río Claro",
+   "subregion": "Magdalena Medio",
+   "extra": true,
+   "subject": "a white marble canyon with a turquoise river, caves and jungle at Cañón del Río Claro",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "hacienda-napoles",
+   "name": "Hacienda Nápoles",
+   "subregion": "Magdalena Medio",
+   "extra": true,
+   "subject": "hippos in a lagoon and giant dinosaur sculptures in a tropical park, Hacienda Nápoles",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "doradal",
+   "name": "Doradal",
+   "subregion": "Magdalena Medio",
+   "extra": true,
+   "subject": "the town of Doradal, Antioquia, Colombia, in the tropical Magdalena Medio lowlands",
+   "revisar": true,
+   "hecho": false
+  },
+  {
+   "id": "cerro-tusa",
+   "name": "Cerro Tusa",
+   "subregion": "Suroeste",
+   "extra": true,
+   "subject": "the pyramid-shaped mountain Cerro Tusa above coffee hills, a hiker on the summit trail",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "plaza-botero",
+   "name": "Plaza Botero",
+   "subregion": "Valle de Aburrá",
+   "extra": true,
+   "subject": "Botero's voluptuous bronze sculptures in the plaza with the black-and-white gothic Palacio de la Cultura behind, Medellín",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "jardin-botanico",
+   "name": "Jardín Botánico",
+   "subregion": "Valle de Aburrá",
+   "extra": true,
+   "subject": "the wooden hexagonal flower-like canopy of the Orquideorama among tropical plants and orchids in the Medellín botanical garden",
+   "revisar": false,
+   "hecho": false
+  },
+  {
+   "id": "comuna-13",
+   "name": "Comuna 13",
+   "subregion": "Valle de Aburrá",
+   "extra": true,
+   "subject": "orange covered outdoor escalators on a hillside of red-brick houses with abstract graffiti murals (no readable words), Medellín valley behind",
+   "revisar": false,
+   "hecho": true
+  },
+  {
+   "id": "el-poblado",
+   "name": "El Poblado",
+   "subregion": "Valle de Aburrá",
+   "extra": true,
+   "subject": "tree-lined streets with tall modern buildings of El Poblado on the slopes of Medellín, green hills behind",
+   "revisar": false,
+   "hecho": false
+  }
+ ]
+}

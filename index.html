@@ -1,0 +1,1562 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mi pasaporte · Antioquia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* OD-LAYOUT-PRIMITIVES v1 — structure only: display, flex/grid, overflow, wrapping, ratio, geometry.
+   Put this @layer first; product CSS outside the layer wins ordinary layout rules.
+   Native hidden and closed-dialog states take precedence over component display rules. */
+@layer od-layout {
+  [hidden]:not([hidden="until-found" i]) { display: none !important; }
+  dialog:not([open]) { display: none !important; }
+
+  :where(.od-stack,.od-row,.od-row-top,.od-cluster,.od-grid,.od-field,.od-stat,.od-cell,.od-tile) > :where(*) { min-width: 0; }
+
+  /* containers */
+  .od-stack   { display: flex; flex-direction: column; gap: var(--od-gap, 8px); }
+  .od-row     { display: flex; align-items: center; gap: var(--od-gap, 8px); }
+  .od-row-top { display: flex; align-items: flex-start; gap: var(--od-gap, 8px); }
+  .od-cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--od-gap, 8px); }
+  .od-fill    { flex: 1 1 0; min-width: 0; }
+  .od-fixed   { flex: none; }
+  .od-grid    { display: grid; gap: var(--od-gap, 12px); grid-template-columns: repeat(var(--od-cols, 3), minmax(0, 1fr)); }
+
+  /* stacked information: each piece is its own line — never sibling inline spans */
+  .od-stat, .od-field, .od-cell { display: grid; gap: var(--od-gap, 2px); }
+  :where(.od-stat,.od-field,.od-cell) > :where(*) { display: block; }
+  .od-tile { display: grid; grid-template-rows: auto 1fr; }
+  :where(.od-tile) > :where(*) { display: block; }
+
+  /* media keeps its intrinsic ratio by default; never a distorted or cropped
+     cover by accident. height:auto lets the ratio win over an <img height="…">
+     attribute. Cropping to a uniform box is an explicit opt-in: set --od-ratio
+     AND add .od-media-cover together (per the core rule, only where a crop is
+     deliberate — tile thumbs, decorative fills — never on full-frame content). */
+  .od-media { display: block; width: 100%; height: auto; aspect-ratio: var(--od-ratio, auto); }
+  .od-media-cover { object-fit: cover; }
+
+  /* functional inline SVG icons opt into bounded geometry; content SVGs keep their own */
+  .od-icon { display: inline-block; inline-size: var(--od-icon-size, 1em); block-size: var(--od-icon-size, 1em); flex: none; }
+
+  /* data text only — authored copy is rewritten to its budget instead */
+  .od-truncate { display: block; max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .od-clamp-2, .od-clamp-3 { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
+  .od-clamp-2 { -webkit-line-clamp: 2; }
+  .od-clamp-3 { -webkit-line-clamp: 3; }
+  .od-lines-2 { min-height: calc(2 * 1.4em); }   /* block-level reservation for a shared baseline */
+  .od-nowrap  { white-space: nowrap; }           /* 数字+单位 · 价格+起 · 日期+星期 */
+  .od-keep    { word-break: keep-all; overflow-wrap: anywhere; } /* CJK labels break at spaces / <wbr> first */
+
+  /* screen skeleton (optional): bars take their own space, the middle scrolls — no padding guessed for chrome */
+  .od-screen { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: 100%; }
+  .od-scroll { overflow-y: auto; overscroll-behavior: contain; min-height: 0; }
+
+  /* horizontal rail: the next item peeks at the edge; trailing room survives overflow */
+  .od-rail { display: flex; gap: var(--od-gap, 8px); overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none;
+             padding-inline: var(--od-rail-pad, 16px); scroll-padding-inline: var(--od-rail-pad, 16px); }
+  .od-rail::-webkit-scrollbar { display: none; }
+  :where(.od-rail) > :where(*) { flex: none; scroll-snap-align: start; }
+  :where(.od-rail) > :where(:last-child) { margin-inline-end: var(--od-rail-pad, 16px); }
+
+  .od-spacer { flex: none; visibility: hidden; pointer-events: none; }
+  .od-touch  { min-width: 44px; min-height: 44px; }
+}
+:root [hidden]:where(:not([hidden="until-found" i])) { display: none; }
+/* /OD-LAYOUT-PRIMITIVES v1 */
+
+:root {
+  --bg: #f2f3f5;
+  --surface: #ffffff;
+  --wash: #e7e9ed;
+  --fg: #16191e;
+  --muted: #565c66;
+  --ring: #d8dbe0;
+  --ring-strong: #b4b9c1;
+  --locked: #8b919a;
+  --focus: #1f4e8c;
+  --danger: #b3261e;
+  --danger-wash: #fbeceb;
+
+  --font-display: "Bricolage Grotesque", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: "Instrument Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
+  --radius: 6px;
+  --radius-sm: 4px;
+  --page: 1180px;
+  --gutter: 16px;
+
+  --t-fast: 150ms;
+  --t-enter: 280ms;
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+}
+@media (min-width: 768px) { :root { --gutter: 24px; } }
+@media (min-width: 1024px) { :root { --gutter: 32px; } }
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font: 400 16px/1.55 var(--font-body);
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+h1, h2, h3, p { margin: 0; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.wrap { max-width: var(--page); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* ---------- header ---------- */
+.top { padding: var(--s6) 0 var(--s5); }
+.top-grid { display: grid; gap: var(--s5); }
+@media (min-width: 1024px) { .top-grid { grid-template-columns: minmax(0, 1fr) auto; align-items: end; } }
+.eyebrow { font: 600 12px/1.4 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.title { font: 800 clamp(34px, 6vw, 56px)/1.02 var(--font-display); letter-spacing: -.02em; margin-top: var(--s2); }
+.lede { color: var(--muted); margin-top: var(--s3); max-width: 60ch; }
+
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); }
+.stat { background: var(--surface); border: 1px solid var(--ring); border-radius: var(--radius); padding: var(--s3) var(--s4); min-width: 0; }
+@media (min-width: 1024px) { .stat { min-width: 148px; } }
+.stat-num { font: 800 clamp(26px, 4vw, 36px)/1.1 var(--font-display); white-space: nowrap; }
+.stat-num small { font-size: .5em; font-weight: 600; color: var(--muted); }
+.stat-cap { font-size: 13px; color: var(--muted); line-height: 1.35; }
+
+.actions { margin-top: var(--s4); }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s2);
+  min-height: 44px; padding: 0 var(--s4); border-radius: var(--radius-sm);
+  border: 1px solid var(--ring-strong); background: var(--surface); color: var(--fg);
+  font-weight: 600; font-size: 15px; cursor: pointer; white-space: nowrap;
+  transition: background-color var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out), transform 80ms var(--ease-out);
+  --od-icon-size: 18px;
+}
+.btn:active { transform: translateY(1px); }
+.btn-sm { min-height: 36px; padding: 0 var(--s3); font-size: 13.5px; --od-icon-size: 16px; }
+.btn-primary { background: var(--fg); border-color: var(--fg); color: #ffffff; }
+.btn-danger { color: var(--danger); border-color: #e2b4b0; }
+.btn-ghost { border-color: transparent; background: transparent; }
+@media (hover: hover) {
+  .btn:hover { background: var(--wash); border-color: var(--locked); }
+  .btn-primary:hover { background: #2b3038; border-color: #2b3038; color: #ffffff; }
+  .btn-danger:hover { background: var(--danger-wash); border-color: var(--danger); }
+  .btn-ghost:hover { background: var(--wash); border-color: transparent; }
+}
+
+/* ---------- subregion chips ---------- */
+.subs-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); margin-bottom: var(--s3); }
+.h-sm { font: 600 13px/1.4 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.subs { display: grid; grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap: var(--s2); }
+@media (max-width: 767px) {
+  .subs { display: flex; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none;
+          margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter) var(--s1); scroll-padding-inline: var(--gutter); }
+  .subs::-webkit-scrollbar { display: none; }
+  .subs > * { flex: 0 0 168px; scroll-snap-align: start; }
+}
+.chip {
+  display: grid; grid-template-columns: 36px minmax(0, 1fr); align-items: center; column-gap: var(--s3); row-gap: var(--s2);
+  text-align: left; padding: var(--s3); min-height: 64px;
+  background: var(--surface); border: 1px solid var(--ring); border-radius: var(--radius); cursor: pointer;
+  transition: border-color var(--t-fast) var(--ease-out), background-color var(--t-fast) var(--ease-out);
+}
+@media (hover: hover) { .chip:hover { background: #f7f8f9; border-color: var(--ring-strong); } }
+.chip[aria-pressed="true"] { border-color: var(--ink, var(--fg)); box-shadow: inset 0 0 0 1px var(--ink, var(--fg)); }
+.chip-all { grid-template-columns: 36px minmax(0, 1fr); }
+.medal { width: 36px; height: 36px; display: block; }
+.chip-body { display: grid; gap: 2px; min-width: 0; }
+.chip-name { font-weight: 600; font-size: 14px; line-height: 1.3; }
+.chip-count { font: 500 12px/1.3 var(--font-mono); color: var(--muted); white-space: nowrap; }
+.bar { grid-column: 1 / -1; height: 4px; border-radius: 2px; background: var(--wash); overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--ink, var(--fg)); transform-origin: left; transform: scaleX(var(--p, 0)); transition: transform var(--t-enter) var(--ease-out); }
+
+/* ---------- toolbar ---------- */
+.toolbar {
+  position: sticky; top: 0; z-index: 5; background: var(--bg);
+  padding: var(--s4) 0; margin-top: var(--s5); border-bottom: 1px solid var(--ring);
+}
+.toolbar-grid { display: grid; gap: var(--s3); }
+@media (min-width: 768px) { .toolbar-grid { grid-template-columns: minmax(0, 1fr) auto; align-items: end; } }
+.field { display: grid; gap: var(--s1); }
+.label { font-weight: 600; font-size: 14px; }
+.label .req { color: var(--danger); }
+.hint { font-size: 13px; color: var(--muted); }
+.input-wrap { position: relative; }
+.input-wrap .od-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); --od-icon-size: 18px; pointer-events: none; }
+.input, .select, .textarea {
+  width: 100%; min-height: 48px; padding: 0 var(--s3);
+  background: var(--surface); border: 1px solid var(--ring-strong); border-radius: var(--radius-sm);
+  transition: border-color var(--t-fast) var(--ease-out), box-shadow var(--t-fast) var(--ease-out);
+}
+.input-search { padding-left: 42px; }
+.textarea { padding: var(--s3); min-height: 96px; resize: vertical; line-height: 1.5; }
+.input:focus, .select:focus, .textarea:focus { outline: none; border-color: var(--focus); box-shadow: 0 0 0 3px rgba(31, 78, 140, .18); }
+.is-invalid { border-color: var(--danger) !important; background: var(--danger-wash); }
+.err { display: flex; gap: var(--s1); align-items: flex-start; color: var(--danger); font-size: 13px; font-weight: 500; --od-icon-size: 16px; }
+.err .od-icon { margin-top: 2px; }
+
+.seg { display: inline-grid; grid-auto-flow: column; border: 1px solid var(--ring-strong); border-radius: var(--radius-sm); overflow: hidden; background: var(--surface); }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg label { display: flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 var(--s4); cursor: pointer; font-weight: 500; font-size: 14px; white-space: nowrap; transition: background-color var(--t-fast) var(--ease-out); }
+.seg label + input + label, .seg input + label ~ label { border-left: 1px solid var(--ring); }
+.seg input:checked + label { background: var(--fg); color: #ffffff; }
+.seg input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: -3px; }
+@media (hover: hover) { .seg input:not(:checked) + label:hover { background: var(--wash); } }
+@media (max-width: 767px) { .seg { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-flow: row; } .seg label { padding: 0 var(--s2); } }
+
+.result-line { margin-top: var(--s3); font-size: 13px; color: var(--muted); }
+
+/* ---------- sections and badges ---------- */
+.notice {
+  display: flex; gap: var(--s3); align-items: flex-start; margin-top: var(--s5);
+  background: var(--surface); border: 1px dashed var(--ring-strong); border-radius: var(--radius); padding: var(--s4);
+  --od-icon-size: 22px;
+}
+.notice strong { display: block; }
+.section { padding-top: var(--s6); scroll-margin-top: 160px; }
+.section-head { display: flex; align-items: center; gap: var(--s3); padding-bottom: var(--s3); border-bottom: 2px solid var(--ink); margin-bottom: var(--s4); }
+.section-title { font: 800 clamp(22px, 3vw, 28px)/1.15 var(--font-display); letter-spacing: -.01em; }
+.section-count { margin-left: auto; font: 600 13px/1.3 var(--font-mono); color: var(--muted); white-space: nowrap; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ink); flex: none; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: var(--s4) var(--s3); }
+@media (min-width: 768px) { .grid { grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); } }
+.badge {
+  display: grid; grid-template-rows: auto auto auto; justify-items: center; gap: var(--s1);
+  padding: var(--s2) var(--s1) var(--s3); background: transparent; border: 1px solid transparent; border-radius: var(--radius);
+  cursor: pointer; text-align: center; min-width: 0;
+  transition: background-color var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out);
+}
+@media (hover: hover) { .badge:hover { background: var(--surface); border-color: var(--ring); } }
+.badge-name { font-weight: 600; font-size: 14px; line-height: 1.3; width: 100%; margin-top: var(--s1); }
+.badge-meta { font: 500 12px/1.3 var(--font-mono); color: var(--muted); white-space: nowrap; }
+.badge-meta.on { color: var(--fg); }
+.badge-meta.on::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--ink); margin-right: 6px; vertical-align: 1px; }
+
+.stamp { display: block; width: 100%; max-width: 116px; aspect-ratio: 1; height: auto; overflow: visible; }
+.stamp text { font-family: var(--font-mono); }
+.stamp.is-on { transform: rotate(var(--rot, 0deg)); }
+.stamp .glyph-off { opacity: .55; }
+.stamp .art { transition: filter var(--t-fast) var(--ease-out), opacity var(--t-fast) var(--ease-out); }
+.stamp .art-off { filter: grayscale(1) contrast(.85); opacity: .5; }
+@media (hover: hover) { .badge:hover .art-off { opacity: .75; } }
+.extra-tag { font: 600 10.5px/1.3 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.just-stamped .stamp { animation: stampIn var(--t-enter) var(--ease-out); }
+@keyframes stampIn { from { opacity: 0; transform: scale(1.25) rotate(var(--rot, 0deg)); } to { opacity: 1; transform: scale(1) rotate(var(--rot, 0deg)); } }
+
+.empty { text-align: center; padding: var(--s7) var(--s4); }
+.empty h2 { font: 800 24px/1.2 var(--font-display); }
+.empty p { color: var(--muted); margin: var(--s2) auto var(--s4); max-width: 46ch; }
+
+.foot { margin-top: var(--s7); padding: var(--s5) 0 var(--s6); border-top: 1px solid var(--ring); font-size: 13px; color: var(--muted); }
+
+/* ---------- dialogs ---------- */
+dialog {
+  width: min(560px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); padding: 0;
+  border: 1px solid var(--ring); border-radius: var(--radius); background: var(--surface); color: var(--fg);
+  box-shadow: 0 24px 48px -16px rgba(22, 25, 30, .28);
+}
+dialog[open] { animation: dlgIn var(--t-enter) var(--ease-out); }
+dialog::backdrop { background: rgba(22, 25, 30, .48); }
+@keyframes dlgIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@media (max-width: 559px) {
+  dialog { width: 100vw; max-width: 100vw; margin: auto 0 0; border-radius: 8px 8px 0 0; max-height: 92dvh; }
+}
+.dlg { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; max-height: inherit; }
+.dlg-head { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s3) var(--s3) var(--s5); border-bottom: 1px solid var(--ring); }
+.dlg-head h2 { font: 800 20px/1.25 var(--font-display); }
+.icon-btn { width: 44px; height: 44px; display: grid; place-items: center; border: 0; background: transparent; border-radius: var(--radius-sm); cursor: pointer; --od-icon-size: 20px; flex: none; }
+@media (hover: hover) { .icon-btn:hover { background: var(--wash); } }
+.dlg-body { overflow-y: auto; padding: var(--s5); display: grid; gap: var(--s4); }
+.dlg-foot { display: flex; flex-wrap: wrap; gap: var(--s2); padding: var(--s4) var(--s5); border-top: 1px solid var(--ring); }
+.dlg-foot .spacer { flex: 1 1 auto; }
+@media (max-width: 559px) { .dlg-foot { padding-bottom: calc(var(--s4) + env(safe-area-inset-bottom)); } .dlg-foot .btn { flex: 1 1 auto; } .dlg-foot .spacer { display: none; } }
+
+.place-hero { display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: var(--s4); align-items: center; }
+@media (max-width: 380px) { .place-hero { grid-template-columns: 104px minmax(0, 1fr); } }
+.place-hero .stamp { max-width: 128px; }
+@media (min-width: 420px) { .place-hero.has-art { grid-template-columns: 176px minmax(0, 1fr); } .place-hero.has-art .stamp { max-width: 176px; } }
+.place-hero-badge {
+  position: relative;
+  display: block;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 1px dashed transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out);
+  text-align: center;
+}
+@media (hover: hover) {
+  .place-hero-badge:hover {
+    transform: scale(1.05);
+    border-color: var(--ring-strong);
+  }
+  .place-hero-badge:hover .zoom-badge-hint {
+    background: var(--fg);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(22, 25, 30, .3);
+  }
+}
+.place-hero-badge:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.zoom-badge-hint {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(22, 25, 30, 0.9);
+  color: #ffffff;
+  font: 600 11px/1.2 var(--font-mono);
+  padding: 3px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 6px rgba(22, 25, 30, .25);
+  transition: background-color var(--t-fast) var(--ease-out);
+}
+.place-name { font: 800 clamp(24px, 4vw, 30px)/1.1 var(--font-display); overflow-wrap: anywhere; }
+.place-sub { display: flex; align-items: center; gap: var(--s2); margin-top: var(--s2); font-size: 14px; color: var(--muted); }
+.place-state { margin-top: var(--s2); font: 600 12px/1.3 var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
+
+.check { display: flex; align-items: center; gap: var(--s3); min-height: 44px; cursor: pointer; font-weight: 500; }
+.check input { width: 20px; height: 20px; accent-color: var(--fg); flex: none; }
+
+.confirm { border: 1px solid #e2b4b0; background: var(--danger-wash); border-radius: var(--radius); padding: var(--s4); display: grid; gap: var(--s3); }
+.confirm p { font-weight: 500; }
+
+.glyphs { border: 0; padding: 0; margin: 0; min-width: 0; }
+.glyphs legend { padding: 0; margin-bottom: var(--s2); }
+.glyph-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: var(--s2); }
+.glyph-opt input { position: absolute; opacity: 0; pointer-events: none; }
+.glyph-opt label {
+  display: grid; justify-items: center; gap: var(--s1); padding: var(--s2) var(--s1); min-height: 64px;
+  border: 1px solid var(--ring); border-radius: var(--radius-sm); cursor: pointer; font-size: 12px; text-align: center;
+  --od-icon-size: 24px; transition: border-color var(--t-fast) var(--ease-out), background-color var(--t-fast) var(--ease-out);
+}
+.glyph-opt input:checked + label { border-color: var(--fg); box-shadow: inset 0 0 0 1px var(--fg); background: var(--wash); }
+.glyph-opt input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (hover: hover) { .glyph-opt label:hover { border-color: var(--ring-strong); } }
+
+/* ---------- toast ---------- */
+.toast-zone { position: fixed; left: 0; right: 0; bottom: calc(var(--s5) + env(safe-area-inset-bottom)); display: grid; justify-items: center; pointer-events: none; z-index: 50; padding: 0 var(--s4); }
+.toast {
+  display: flex; align-items: center; gap: var(--s2); max-width: 520px;
+  background: var(--fg); color: #ffffff; padding: var(--s3) var(--s4); border-radius: var(--radius-sm);
+  font-weight: 500; font-size: 15px; box-shadow: 0 12px 24px -8px rgba(22, 25, 30, .4); --od-icon-size: 18px;
+  animation: toastIn var(--t-enter) var(--ease-out);
+}
+.toast.out { animation: toastOut 180ms var(--ease-in) forwards; }
+@keyframes toastIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes toastOut { to { opacity: 0; transform: translateY(8px); } }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ---------- visor ampliado y print ---------- */
+#zoomDlg {
+  width: min(720px, calc(100vw - 24px));
+  max-height: calc(100dvh - 24px);
+  padding: 0;
+  border: 1px solid var(--ring);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--fg);
+  box-shadow: 0 32px 64px -16px rgba(22, 25, 30, .36);
+}
+@media (max-width: 559px) {
+  #zoomDlg {
+    width: 100vw;
+    max-width: 100vw;
+    margin: auto 0 0;
+    border-radius: 12px 12px 0 0;
+    max-height: 96dvh;
+  }
+}
+.zd-dlg { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; max-height: inherit; }
+.zd-sub { font: 500 13px/1.3 var(--font-mono); color: var(--muted); margin-top: 2px; }
+.zd-body {
+  overflow-y: auto;
+  padding: var(--s4) var(--s5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s4);
+}
+.zd-tabs {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.zd-stage {
+  width: 100%;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #ffffff 0%, #f7f8fa 65%, #ebedf2 100%);
+  border: 1px solid var(--ring);
+  border-radius: var(--radius);
+  padding: var(--s5) var(--s3);
+  position: relative;
+  overflow: hidden;
+}
+.zd-stamp-container {
+  width: min(76vw, 380px);
+  max-width: 380px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.zd-stamp-container .stamp {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 14px 28px rgba(22, 25, 30, 0.16));
+}
+.zd-art-full {
+  width: min(76vw, 380px);
+  max-width: 380px;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: var(--radius);
+  box-shadow: 0 14px 28px rgba(22, 25, 30, 0.18);
+  border: 1px solid var(--ring);
+  background: #ffffff;
+}
+.zd-controls {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2) var(--s4);
+  font: 500 13px/1.4 var(--font-mono);
+  color: var(--muted);
+  border-top: 1px solid var(--ring);
+  padding-top: var(--s3);
+}
+.zd-controls label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  cursor: pointer;
+  color: var(--fg);
+}
+.zd-controls input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--fg);
+}
+.zd-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2);
+  padding: var(--s4) var(--s5);
+  border-top: 1px solid var(--ring);
+}
+@media (max-width: 599px) {
+  .zd-foot .od-cluster { width: 100%; }
+  .zd-foot .btn { flex: 1 1 auto; }
+}
+
+/* ---------- impresión ---------- */
+.print-sheet-box { display: none; }
+@media print {
+  @page {
+    size: letter portrait;
+    margin: 1.5cm;
+  }
+  html, body {
+    background: #ffffff !important;
+    color: #111111 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  body > *:not(#printSheet) {
+    display: none !important;
+  }
+  #printSheet {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 80vh !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    background: #ffffff !important;
+    page-break-inside: avoid !important;
+  }
+  .print-sheet-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    max-width: 15cm !important;
+    width: 100% !important;
+    border: 1px dashed #cccccc !important;
+    border-radius: 12px !important;
+    padding: 1.5cm 1cm !important;
+  }
+  .print-eyebrow {
+    font-family: var(--font-mono) !important;
+    font-size: 9pt !important;
+    letter-spacing: 0.15em !important;
+    text-transform: uppercase !important;
+    color: #666666 !important;
+    margin-bottom: 0.3cm !important;
+  }
+  .print-title {
+    font-family: var(--font-display) !important;
+    font-size: 26pt !important;
+    font-weight: 800 !important;
+    line-height: 1.1 !important;
+    margin: 0 0 0.2cm 0 !important;
+    color: #111111 !important;
+  }
+  .print-sub {
+    font-family: var(--font-body) !important;
+    font-size: 11pt !important;
+    color: #555555 !important;
+    margin-bottom: 0.8cm !important;
+  }
+  .print-stamp-canvas {
+    width: 10cm !important;
+    height: 10cm !important;
+    margin: 0 auto 0.8cm auto !important;
+  }
+  .print-stamp-canvas .stamp {
+    width: 10cm !important;
+    max-width: 10cm !important;
+    height: 10cm !important;
+  }
+  .print-meta-box {
+    margin-top: 0.4cm !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.2cm !important;
+  }
+  .print-status {
+    font-family: var(--font-mono) !important;
+    font-size: 10pt !important;
+    font-weight: 600 !important;
+    color: #222222 !important;
+  }
+  .print-guide {
+    font-family: var(--font-mono) !important;
+    font-size: 8.5pt !important;
+    color: #888888 !important;
+    letter-spacing: 0.04em !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
+  .just-stamped .stamp, dialog[open], .toast { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-grid">
+    <div>
+      <p class="eyebrow">Pasaporte de viajero</p>
+      <h1 class="title">Mis sellos de Antioquia</h1>
+      <p class="lede">Un sello por cada lugar que visites. Toca uno para registrar la fecha, una nota y si te quedaste a dormir.</p>
+      <div class="actions od-cluster">
+        <button type="button" class="btn btn-primary" id="newBtn" data-ic="plus">Nuevo lugar</button>
+        <button type="button" class="btn" id="exportBtn" data-ic="download">Exportar</button>
+        <button type="button" class="btn" id="importBtn" data-ic="upload">Importar</button>
+        <input type="file" id="importFile" accept="application/json,.json" hidden>
+      </div>
+    </div>
+    <div class="stats" aria-live="polite">
+      <div class="stat od-stat"><span class="stat-num" id="stMuni">0<small> /125</small></span><span class="stat-cap">Municipios visitados</span></div>
+      <div class="stat od-stat"><span class="stat-num" id="stSubs">0<small> /9</small></span><span class="stat-cap">Subregiones completas</span></div>
+      <div class="stat od-stat"><span class="stat-num" id="stCustom">0</span><span class="stat-cap">Lugares extra visitados</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="subs-head">
+    <h2 class="h-sm" id="subsTitle">Subregiones</h2>
+  </div>
+  <div class="subs" id="subs" role="group" aria-labelledby="subsTitle"></div>
+
+  <div class="toolbar">
+    <div class="toolbar-grid">
+      <div class="field">
+        <label class="label" for="q">Buscar lugar</label>
+        <div class="input-wrap">
+          <span data-ic="search"></span>
+          <input class="input input-search" id="q" type="search" autocomplete="off" placeholder="Jardín, Guatapé, Urrao…">
+        </div>
+      </div>
+      <div class="field">
+        <span class="label" id="statusLbl">Mostrar</span>
+        <div class="seg" role="radiogroup" aria-labelledby="statusLbl">
+          <input type="radio" name="status" id="stAll" value="todos" checked><label for="stAll">Todos</label>
+          <input type="radio" name="status" id="stOn" value="visitados"><label for="stOn">Visitados</label>
+          <input type="radio" name="status" id="stOff" value="pendientes"><label for="stOff">Pendientes</label>
+        </div>
+      </div>
+    </div>
+    <p class="result-line" id="resultLine" aria-live="polite"></p>
+  </div>
+
+  <div class="notice" id="firstHint" hidden>
+    <span data-ic="stamp"></span>
+    <div><strong>Tu pasaporte está vacío.</strong>Toca cualquier municipio para poner tu primer sello.</div>
+  </div>
+
+  <div id="sections"></div>
+
+  <div class="empty" id="empty" hidden>
+    <h2>Ningún lugar coincide</h2>
+    <p id="emptyText">Prueba con otro nombre o cambia los filtros.</p>
+    <button type="button" class="btn" id="clearBtn">Limpiar filtros</button>
+  </div>
+
+  <footer class="foot">
+    <p id="storeNote">Tu colección se guarda en este navegador. Exporta un archivo de vez en cuando para tener copia.</p>
+  </footer>
+</main>
+
+<!-- detalle / poner sello -->
+<dialog id="placeDlg" aria-labelledby="pdName">
+  <div class="dlg">
+    <div class="dlg-head">
+      <h2 class="od-fill" id="pdTitle">Sello</h2>
+      <button type="button" class="icon-btn" id="pdClose" aria-label="Cerrar" data-ic="close"></button>
+    </div>
+    <div class="dlg-body">
+      <div class="place-hero">
+        <button type="button" class="place-hero-badge" id="pdBadgeBtn" aria-label="Ampliar e imprimir sello" title="Toca para ver el sello ampliado e imprimir">
+          <div id="pdBadge"></div>
+          <span class="zoom-badge-hint" aria-hidden="true">
+            <svg class="od-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 15l6 6M10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14Zm-3-7h6M10 7v6"/></svg>
+            <span>Ampliar</span>
+          </span>
+        </button>
+        <div>
+          <p class="place-name" id="pdName"></p>
+          <p class="place-sub"><span class="dot" id="pdDot"></span><span id="pdSub"></span></p>
+          <p class="place-state" id="pdState"></p>
+          <div style="margin-top: var(--s2);">
+            <button type="button" class="btn btn-sm" id="pdZoomBtn" data-ic="zoom">Ampliar e imprimir</button>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="pdDate">Fecha de la visita</label>
+        <input class="input" type="date" id="pdDate" aria-describedby="pdDateHint pdDateErr">
+        <p class="hint" id="pdDateHint">Opcional. Si no la recuerdas, déjala en blanco.</p>
+        <p class="err" id="pdDateErr" hidden></p>
+      </div>
+      <div class="field">
+        <label class="label" for="pdNote">Nota</label>
+        <textarea class="textarea" id="pdNote" maxlength="280" aria-describedby="pdNoteHint"></textarea>
+        <p class="hint" id="pdNoteHint">Opcional. Qué hiciste, con quién fuiste, qué comiste.</p>
+      </div>
+      <label class="check"><input type="checkbox" id="pdNight"> Me quedé a dormir</label>
+      <div class="confirm" id="pdConfirm" hidden role="alertdialog" aria-labelledby="pdConfirmText">
+        <p id="pdConfirmText"></p>
+        <div class="od-cluster">
+          <button type="button" class="btn btn-danger" id="pdConfirmYes">Sí, quitar</button>
+          <button type="button" class="btn" id="pdConfirmNo">No, conservar</button>
+        </div>
+      </div>
+    </div>
+    <div class="dlg-foot">
+      <button type="button" class="btn btn-danger" id="pdRemove">Quitar sello</button>
+      <button type="button" class="btn btn-danger" id="pdDelete">Eliminar lugar</button>
+      <span class="spacer"></span>
+      <button type="button" class="btn btn-ghost" id="pdCancel">Cancelar</button>
+      <button type="button" class="btn btn-primary" id="pdSave">Poner sello</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- nuevo lugar propio -->
+<dialog id="newDlg" aria-labelledby="npTitle">
+  <div class="dlg">
+    <div class="dlg-head">
+      <h2 class="od-fill" id="npTitle">Nuevo lugar propio</h2>
+      <button type="button" class="icon-btn" id="npClose" aria-label="Cerrar" data-ic="close"></button>
+    </div>
+    <div class="dlg-body">
+      <p class="hint">Para sitios que no son municipios: una piedra, un páramo, una cascada, una vereda.</p>
+      <div class="field">
+        <label class="label" for="npName">Nombre <span class="req" aria-hidden="true">*</span></label>
+        <input class="input" id="npName" maxlength="40" required autocomplete="off" aria-describedby="npNameErr">
+        <p class="err" id="npNameErr" hidden></p>
+      </div>
+      <div class="field">
+        <label class="label" for="npSub">Subregión</label>
+        <select class="select" id="npSub"></select>
+      </div>
+      <fieldset class="glyphs">
+        <legend class="label">Figura del sello</legend>
+        <div class="glyph-grid" id="npGlyphs"></div>
+      </fieldset>
+      <div class="field">
+        <label class="label" for="npDate">Fecha de la visita</label>
+        <input class="input" type="date" id="npDate" aria-describedby="npDateHint npDateErr">
+        <p class="hint" id="npDateHint">Opcional. Si la escribes, el sello queda puesto de una vez.</p>
+        <p class="err" id="npDateErr" hidden></p>
+      </div>
+    </div>
+    <div class="dlg-foot">
+      <span class="spacer"></span>
+      <button type="button" class="btn btn-ghost" id="npCancel">Cancelar</button>
+      <button type="button" class="btn btn-primary" id="npCreate">Crear sello</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- visor ampliado y preparado para imprimir -->
+<dialog id="zoomDlg" aria-labelledby="zdTitle">
+  <div class="dlg zd-dlg">
+    <div class="dlg-head">
+      <div class="od-fill">
+        <h2 id="zdTitle">Visor de sello</h2>
+        <p class="zd-sub" id="zdSub"></p>
+      </div>
+      <div class="od-row">
+        <button type="button" class="icon-btn" id="zdPrev" aria-label="Sello anterior" title="Anterior (←)" data-ic="chevronLeft"></button>
+        <button type="button" class="icon-btn" id="zdNext" aria-label="Siguiente sello" title="Siguiente (→)" data-ic="chevronRight"></button>
+        <button type="button" class="icon-btn" id="zdClose" aria-label="Cerrar visor" data-ic="close"></button>
+      </div>
+    </div>
+    <div class="dlg-body zd-body">
+      <div class="zd-tabs" id="zdTabs" hidden>
+        <div class="seg" role="tablist">
+          <input type="radio" name="zdView" id="zvStamp" value="stamp" checked>
+          <label for="zvStamp">Sello completo</label>
+          <input type="radio" name="zdView" id="zvArt" value="art">
+          <label for="zvArt">Ilustración original (1024px)</label>
+        </div>
+      </div>
+
+      <div class="zd-stage" id="zdStage">
+        <div class="zd-stamp-container" id="zdStampWrap"></div>
+        <img id="zdArtImg" class="zd-art-full" alt="Ilustración original" hidden>
+      </div>
+
+      <div class="zd-controls">
+        <label id="zdStraightWrap">
+          <input type="checkbox" id="zdStraight" checked>
+          <span>Enderezar a 0° (ideal para imprimir)</span>
+        </label>
+        <span class="zd-meta-note" id="zdMetaNote"></span>
+      </div>
+    </div>
+    <div class="dlg-foot zd-foot">
+      <div class="od-cluster od-fill">
+        <button type="button" class="btn btn-primary" id="zdPrint" data-ic="print">Imprimir sello</button>
+        <button type="button" class="btn" id="zdDownloadPng" data-ic="download">Descargar PNG (HD)</button>
+        <button type="button" class="btn" id="zdDownloadSvg" data-ic="download">Descargar SVG</button>
+      </div>
+      <button type="button" class="btn btn-ghost" id="zdBack">Volver</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- hoja de impresión limpia (solo para @media print) -->
+<div id="printSheet" class="print-sheet-box" aria-hidden="true">
+  <div class="print-sheet-inner">
+    <p class="print-eyebrow">PASAPORTE DE VIAJERO · ANTIOQUIA</p>
+    <h1 class="print-title" id="prPlace">LUGAR</h1>
+    <p class="print-sub" id="prSub">Subregión · Colombia</p>
+    <div class="print-stamp-canvas" id="prStampWrap"></div>
+    <div class="print-meta-box">
+      <p class="print-status" id="prStatus">Visitado</p>
+      <p class="print-guide">✁ Guía de corte para sello / parche (10 cm)</p>
+    </div>
+  </div>
+</div>
+
+<div class="toast-zone" id="toastZone" aria-live="polite"></div>
+
+<script>
+(() => {
+  'use strict';
+
+  // ---------- datos ----------
+  const SUBS = [
+    { k: 'valle', n: 'Valle de Aburrá', c: 'VA', ink: '#1f4e8c', g: 'ciudad',
+      m: ['Medellín','Barbosa','Bello','Caldas','Copacabana','Envigado','Girardota','Itagüí','La Estrella','Sabaneta'] },
+    { k: 'oriente', n: 'Oriente', c: 'OR', ink: '#1d6b4f', g: 'montana',
+      m: ['Abejorral','Alejandría','Argelia','El Carmen de Viboral','Cocorná','Concepción','El Peñol','El Retiro','El Santuario','Granada','Guarne','Guatapé','La Ceja','La Unión','Marinilla','Nariño','Rionegro','San Carlos','San Francisco','San Luis','San Rafael','San Vicente Ferrer','Sonsón'] },
+    { k: 'suroeste', n: 'Suroeste', c: 'SO', ink: '#7a3b1d', g: 'cafe',
+      m: ['Amagá','Andes','Angelópolis','Betania','Betulia','Caramanta','Ciudad Bolívar','Concordia','Fredonia','Hispania','Jardín','Jericó','La Pintada','Montebello','Pueblorrico','Salgar','Santa Bárbara','Támesis','Tarso','Titiribí','Urrao','Valparaíso','Venecia'] },
+    { k: 'occidente', n: 'Occidente', c: 'OC', ink: '#ad3e2b', g: 'sol',
+      m: ['Abriaquí','Anzá','Armenia','Buriticá','Caicedo','Cañasgordas','Dabeiba','Ebéjico','Frontino','Giraldo','Heliconia','Liborina','Olaya','Peque','Sabanalarga','San Jerónimo','Santa Fe de Antioquia','Sopetrán','Uramita'] },
+    { k: 'norte', n: 'Norte', c: 'NO', ink: '#2c5866', g: 'bosque',
+      m: ['Angostura','Belmira','Briceño','Campamento','Carolina del Príncipe','Donmatías','Entrerríos','Gómez Plata','Guadalupe','Ituango','San Andrés de Cuerquia','San José de la Montaña','San Pedro de los Milagros','Santa Rosa de Osos','Toledo','Valdivia','Yarumal'] },
+    { k: 'nordeste', n: 'Nordeste', c: 'NE', ink: '#7f6200', g: 'oro',
+      m: ['Amalfi','Anorí','Cisneros','Remedios','San Roque','Santo Domingo','Segovia','Vegachí','Yalí','Yolombó'] },
+    { k: 'bajocauca', n: 'Bajo Cauca', c: 'BC', ink: '#55459a', g: 'rio',
+      m: ['Caucasia','Cáceres','El Bagre','Nechí','Tarazá','Zaragoza'] },
+    { k: 'magdalena', n: 'Magdalena Medio', c: 'MM', ink: '#8a2d57', g: 'rio',
+      m: ['Puerto Berrío','Caracolí','Maceo','Puerto Nare','Puerto Triunfo','Yondó'] },
+    { k: 'uraba', n: 'Urabá', c: 'UR', ink: '#006b85', g: 'palma',
+      m: ['Apartadó','Arboletes','Carepa','Chigorodó','Murindó','Mutatá','Necoclí','San Juan de Urabá','San Pedro de Urabá','Turbo','Vigía del Fuerte'] },
+  ];
+  const SUB = Object.fromEntries(SUBS.map(s => [s.k, s]));
+
+  const GLYPHS = {
+    montana: { n: 'Montaña', d: 'M2 20 9 8l4 6 3-4 6 10Z' },
+    rio:     { n: 'Río',     d: 'M2 9c3 0 3 2 6 2s3-2 6-2 3 2 6 2M2 15c3 0 3 2 6 2s3-2 6-2 3 2 6 2' },
+    cafe:    { n: 'Café',    d: 'M12 3c4.5 0 7 4 7 9s-2.5 9-7 9-7-4-7-9 2.5-9 7-9ZM12 3c-2 3-2 6 0 9s2 6 0 9' },
+    lago:    { n: 'Lago',    d: 'M7 13a5 5 0 0 1 10 0M2 16c3 0 3 1.5 6 1.5s3-1.5 6-1.5 3 1.5 6 1.5M4 20c2.5 0 2.5 1 5 1s2.5-1 5-1 2.5 1 5 1' },
+    mar:     { n: 'Mar',     d: 'M12 4v2M5 7l1.4 1.4M19 7l-1.4 1.4M7 14a5 5 0 0 1 10 0M2 18c3 0 3 2 6 2s3-2 6-2 3 2 6 2' },
+    ciudad:  { n: 'Ciudad',  d: 'M3 21V11h5v10M8 21V5h7v16M15 21V9h6v12M2 21h20M10.5 8h2M10.5 11h2M10.5 14h2' },
+    puente:  { n: 'Puente',  d: 'M2 16h20M5 18V6M19 18V6M5 6c3 6 11 6 14 0M9 10v6M12 11v5M15 10v6' },
+    piedra:  { n: 'Piedra',  d: 'M8 21c-1-6 0-14 4-17 4 3 5 11 4 17ZM4 21h16M10 9h4M10 14h4' },
+    palma:   { n: 'Palma',   d: 'M12 21v-9M12 12C10 8 6 7 3 8M12 12c2-4 6-5 9-4M12 12c-1-4-4-7-7-8M12 12c1-4 4-7 7-8' },
+    oro:     { n: 'Oro',     d: 'M6 9l3-5h6l3 5-6 11ZM6 9h12M10 4l2 5 2-5' },
+    sol:     { n: 'Sol',     d: 'M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10ZM12 1v3M12 20v3M1 12h3M20 12h3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1' },
+    bosque:  { n: 'Bosque',  d: 'M12 2l6 8h-4l5 7H5l5-7H6ZM12 17v5' },
+    iglesia: { n: 'Iglesia', d: 'M12 2v4M10 4h4M7 21V11l5-4 5 4v10M10 21v-5h4v5M4 21h16' },
+  };
+  const OVERRIDE = {
+    'Guatapé': 'piedra', 'El Peñol': 'lago', 'Santa Fe de Antioquia': 'puente', 'Olaya': 'puente',
+    'Necoclí': 'mar', 'Arboletes': 'mar', 'Turbo': 'mar', 'San Juan de Urabá': 'mar',
+    'Jardín': 'iglesia', 'Jericó': 'iglesia', 'Sonsón': 'iglesia', 'Abejorral': 'iglesia', 'Santa Rosa de Osos': 'iglesia',
+    'Rionegro': 'ciudad', 'San Carlos': 'rio', 'San Rafael': 'rio', 'San Luis': 'rio', 'Cocorná': 'rio',
+    'Urrao': 'montana', 'Belmira': 'montana', 'Remedios': 'oro', 'Segovia': 'oro', 'Zaragoza': 'oro', 'El Bagre': 'oro',
+  };
+
+  const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const slug = s => norm(s).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  const MUNIS = SUBS.flatMap(s => s.m.map(name => ({ id: slug(name), name, sub: s.k, glyph: OVERRIDE[name] || s.g, custom: false })));
+  // lugares de la lista de MUCA que no son municipios; no cuentan en los 125
+  const EXTRAS = [
+    ['Cañón del Río Claro', 'magdalena', 'rio'], ['Hacienda Nápoles', 'magdalena', 'palma'], ['Doradal', 'magdalena', 'sol'],
+    ['Cerro Tusa', 'suroeste', 'montana'],
+    ['Plaza Botero', 'valle', 'ciudad'], ['Jardín Botánico', 'valle', 'bosque'], ['Comuna 13', 'valle', 'ciudad'], ['El Poblado', 'valle', 'ciudad'],
+  ].map(([name, sub, glyph]) => ({ id: slug(name), name, sub, glyph, custom: false, extra: true }));
+  // ilustraciones generadas: assets/sellos/<id>.webp (ver assets/sellos/prompts.json)
+  const ART = new Set(['guatape', 'jardin', 'santa-fe-de-antioquia', 'jerico', 'necocli', 'comuna-13']);
+  const TOTAL = MUNIS.length;
+
+  // ---------- iconos de interfaz ----------
+  const ICONS = {
+    plus: 'M12 5v14M5 12h14',
+    download: 'M12 4v11M7 10l5 5 5-5M5 20h14',
+    upload: 'M12 20V9M7 14l5-5 5 5M5 4h14',
+    search: 'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14ZM20 20l-4-4',
+    close: 'M6 6l12 12M18 6 6 18',
+    check: 'M5 12.5l4.5 4.5L19 7',
+    alert: 'M12 8v5M12 16.5v.5M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z',
+    stamp: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z',
+    zoom: 'M15 15l6 6M10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14Zm-3-7h6M10 7v6',
+    print: 'M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6v-7Z',
+    chevronLeft: 'M15 19l-7-7 7-7',
+    chevronRight: 'M9 5l7 7-7 7',
+  };
+  const icon = (name, d = ICONS[name]) =>
+    `<svg class="od-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
+  document.querySelectorAll('[data-ic]').forEach(el => el.insertAdjacentHTML('afterbegin', icon(el.dataset.ic)));
+
+  // ---------- almacenamiento ----------
+  const KEY = 'pasaporte-antioquia-v1';
+  let canStore = true;
+  try { localStorage.setItem('__t', '1'); localStorage.removeItem('__t'); } catch { canStore = false; }
+
+  const state = { visits: {}, custom: [], seeded: 0 };
+  if (canStore) {
+    try {
+      const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+      if (saved && typeof saved === 'object') {
+        state.visits = saved.visits && typeof saved.visits === 'object' ? saved.visits : {};
+        state.custom = Array.isArray(saved.custom) ? saved.custom : [];
+        state.seeded = saved.seeded || 0;
+      }
+    } catch { /* datos corruptos: arranca vacío */ }
+  } else {
+    document.getElementById('storeNote').textContent =
+      'Este navegador no permite guardar datos aquí. Tus sellos duran mientras la página esté abierta: usa Exportar para no perderlos.';
+  }
+  const persist = () => { if (canStore) try { localStorage.setItem(KEY, JSON.stringify(state)); } catch { /* sin espacio */ } };
+
+  // visitas que ya traías (2026-11-08), sin fecha; se suman una sola vez sin pisar lo guardado
+  const SEED = ['Abejorral', 'Alejandría', 'Amagá', 'Andes', 'Barbosa', 'Bello', 'Belmira', 'Caicedo', 'Caldas', 'Cañasgordas', 'Caramanta', 'El Carmen de Viboral', 'Carolina del Príncipe', 'Ciudad Bolívar', 'Cocorná', 'Concepción', 'Concordia', 'Copacabana', 'Donmatías', 'Ebéjico', 'Entrerríos', 'Envigado', 'Fredonia', 'Girardota', 'Gómez Plata', 'Granada', 'Guadalupe', 'Guarne', 'Guatapé', 'Heliconia', 'Hispania', 'Itagüí', 'Jardín', 'Jericó', 'La Ceja', 'La Estrella', 'La Pintada', 'La Unión', 'Liborina', 'Marinilla', 'Medellín', 'Mutatá', 'Nariño', 'Necoclí', 'Olaya', 'Pueblorrico', 'Puerto Berrío', 'Puerto Triunfo', 'El Retiro', 'Rionegro', 'Salgar', 'San Carlos', 'San Francisco', 'San Jerónimo', 'San Luis', 'San Pedro de los Milagros', 'San Rafael', 'San Roque', 'Santa Bárbara', 'Santa Fe de Antioquia', 'Santa Rosa de Osos', 'Santo Domingo', 'El Santuario', 'San Vicente Ferrer', 'Segovia', 'Sonsón', 'Sopetrán', 'Támesis', 'Tarso', 'Titiribí', 'Urrao', 'Valparaíso', 'Vegachí', 'Venecia', 'Yalí', 'Yolombó'];
+  if (!state.seeded) {
+    for (const name of SEED) { const id = slug(name); if (!state.visits[id]) state.visits[id] = { date: '', note: '', night: false }; }
+    state.seeded = 1;
+    persist();
+  }
+
+  const ui = { q: '', status: 'todos', sub: 'todas' };
+
+  // ---------- utilidades ----------
+  const todayISO = () => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 10); };
+  const fmtLong = new Intl.DateTimeFormat('es-CO', { day: 'numeric', month: 'short', year: 'numeric' });
+  const longDate = iso => iso ? fmtLong.format(new Date(iso + 'T12:00:00')) : '';
+  const stampDate = iso => { if (!iso) return ''; const [y, m, d] = iso.split('-'); return `${d}.${m}.${y.slice(2)}`; };
+  const visitText = v => v.date ? 'Visitado el ' + longDate(v.date) : 'Visitado · fecha por registrar';
+  const allPlaces = () => MUNIS.concat(EXTRAS, state.custom);
+  const findPlace = id => allPlaces().find(p => p.id === id);
+  const rot = id => { let h = 0; for (const c of id) h = (h * 31 + c.charCodeAt(0)) | 0; return (Math.abs(h) % 11) - 5; };
+  const hexPts = (cx, cy, r) => [-90, -30, 30, 90, 150, 210].map(a => {
+    const t = a * Math.PI / 180; return `${(cx + r * Math.cos(t)).toFixed(1)},${(cy + r * Math.sin(t)).toFixed(1)}`;
+  }).join(' ');
+
+  const LOCKED = '#8b919a';
+  function stamp(p, uid, opts = {}) {
+    const v = state.visits[p.id];
+    const s = SUB[p.sub];
+    const isStamped = !!(v || opts.forceColor);
+    const ink = isStamped ? s.ink : LOCKED;
+    const id = 'st-' + uid;
+    const name = p.name.toUpperCase();
+    const fs = Math.min(9, 112 / (name.length * 0.66)).toFixed(2);
+    const dash = isStamped ? '' : ' stroke-dasharray="3 3"';
+    const angle = opts.straight ? 0 : (v ? rot(p.id) : 0);
+    const extraCls = opts.cls ? ' ' + opts.cls : '';
+    const frame = p.custom
+      ? `<polygon points="${hexPts(60, 60, 58)}" stroke-width="3"/><polygon points="${hexPts(60, 60, 53)}" stroke-width="1.2"/>`
+      : `<circle cx="60" cy="60" r="56" stroke-width="3"/><circle cx="60" cy="60" r="51" stroke-width="1.2"/>`;
+    if (ART.has(p.id)) {
+      const bottom = s.n.toUpperCase() + (v && v.date ? ' · ' + stampDate(v.date) : '');
+      const artHref = opts.artHref || `assets/sellos/${p.id}.webp`;
+      const artCls = isStamped ? 'art' : 'art art-off';
+      return `<svg class="stamp${isStamped ? ' is-on' : ''}${extraCls}" viewBox="0 0 120 120" aria-hidden="true" style="--rot:${angle}deg">
+      <defs><path id="${id}t" d="M23 60a37 37 0 0 1 74 0"/><path id="${id}b" d="M16 60a44 44 0 0 0 88 0"/><clipPath id="${id}c"><circle cx="60" cy="60" r="33.5"/></clipPath></defs>
+      <circle cx="60" cy="60" r="56" fill="#ffffff"/>
+      <image class="${artCls}" href="${artHref}" x="24" y="24" width="72" height="72" clip-path="url(#${id}c)" preserveAspectRatio="xMidYMid slice"/>
+      <g fill="none" stroke="${ink}"${dash}><circle cx="60" cy="60" r="56" stroke-width="3"/><circle cx="60" cy="60" r="51" stroke-width="1.2"/><circle cx="60" cy="60" r="34" stroke-width="1.5"/></g>
+      <g fill="${ink}">
+        <text font-size="${fs}" font-weight="600" letter-spacing="0.5"><textPath href="#${id}t" startOffset="50%" text-anchor="middle">${esc(name)}</textPath></text>
+        <text font-size="6.5" font-weight="${isStamped ? 600 : 400}" letter-spacing="1"><textPath href="#${id}b" startOffset="50%" text-anchor="middle">${esc(bottom)}</textPath></text>
+        <circle cx="16" cy="60" r="2"/><circle cx="104" cy="60" r="2"/>
+      </g>
+    </svg>`;
+    }
+    const glyph = (GLYPHS[p.glyph] || GLYPHS.montana).d;
+    return `<svg class="stamp${isStamped ? ' is-on' : ''}${extraCls}" viewBox="0 0 120 120" aria-hidden="true" style="--rot:${angle}deg">
+      <defs><path id="${id}t" d="M23 60a37 37 0 0 1 74 0"/><path id="${id}b" d="M16 60a44 44 0 0 0 88 0"/></defs>
+      <g fill="none" stroke="${ink}"${dash}>${frame}<circle cx="60" cy="60" r="30" stroke-width="1"/></g>
+      <g fill="${ink}">
+        <text font-size="${fs}" font-weight="600" letter-spacing="0.5"><textPath href="#${id}t" startOffset="50%" text-anchor="middle">${esc(name)}</textPath></text>
+        <text font-size="7" letter-spacing="1.2"><textPath href="#${id}b" startOffset="50%" text-anchor="middle">${esc(s.n.toUpperCase())}</textPath></text>
+        <circle cx="16" cy="60" r="2"/><circle cx="104" cy="60" r="2"/>
+        ${v ? `<text x="60" y="83" font-size="7.5" font-weight="600" text-anchor="middle">${stampDate(v.date)}</text>` : ''}
+      </g>
+      <g class="${isStamped ? '' : 'glyph-off'}" transform="translate(46 38) scale(1.1667)" fill="none" stroke="${ink}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="${glyph}"/></g>
+    </svg>`;
+  }
+
+  function medal(s, done) {
+    return `<svg class="medal" viewBox="0 0 40 40" aria-hidden="true">
+      <polygon points="${hexPts(20, 20, 18)}" fill="${done ? s.ink : 'none'}" stroke="${done ? s.ink : LOCKED}" stroke-width="1.5"${done ? '' : ' stroke-dasharray="2 2"'}/>
+      <text x="20" y="24" text-anchor="middle" font-size="11" font-weight="600" font-family="IBM Plex Mono, monospace" fill="${done ? '#ffffff' : '#565c66'}">${s.c}</text>
+    </svg>`;
+  }
+
+  // ---------- render ----------
+  const $ = id => document.getElementById(id);
+  const subsEl = $('subs'), sectionsEl = $('sections'), emptyEl = $('empty');
+
+  function counts() {
+    const per = {};
+    for (const s of SUBS) per[s.k] = s.m.reduce((n, name) => n + (state.visits[slug(name)] ? 1 : 0), 0);
+    const muni = Object.values(per).reduce((a, b) => a + b, 0);
+    const complete = SUBS.filter(s => per[s.k] === s.m.length).length;
+    return { per, muni, complete };
+  }
+
+  function matches(p) {
+    if (ui.sub !== 'todas' && p.sub !== ui.sub) return false;
+    const on = !!state.visits[p.id];
+    if (ui.status === 'visitados' && !on) return false;
+    if (ui.status === 'pendientes' && on) return false;
+    return !ui.q || norm(p.name).includes(norm(ui.q));
+  }
+
+  function tile(p) {
+    const v = state.visits[p.id];
+    const label = `${p.name}, ${SUB[p.sub].n}. ${v ? visitText(v) : 'Pendiente'}`;
+    return `<button type="button" class="badge" data-open="${esc(p.id)}" aria-label="${esc(label)}">
+      ${stamp(p, p.id)}
+      <span class="badge-name od-clamp-2 od-lines-2">${esc(p.name)}</span>
+      <span class="badge-meta${v ? ' on' : ''}">${v ? (stampDate(v.date) || 'Visitado') : (p.custom ? 'Propio · pendiente' : p.extra ? 'Extra · pendiente' : 'Pendiente')}</span>
+    </button>`;
+  }
+
+  function render() {
+    const c = counts();
+    $('stMuni').innerHTML = `${c.muni}<small> /${TOTAL}</small>`;
+    $('stSubs').innerHTML = `${c.complete}<small> /${SUBS.length}</small>`;
+    $('stCustom').textContent = EXTRAS.concat(state.custom).filter(p => state.visits[p.id]).length;
+
+    const allP = c.muni / TOTAL;
+    subsEl.innerHTML =
+      `<button type="button" class="chip chip-all" data-sub="todas" aria-pressed="${ui.sub === 'todas'}">
+        <svg class="medal" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="#16191e" stroke-width="1.5"/><text x="20" y="24" text-anchor="middle" font-size="10" font-weight="600" font-family="IBM Plex Mono, monospace" fill="#16191e">ANT</text></svg>
+        <span class="chip-body"><span class="chip-name">Toda Antioquia</span><span class="chip-count">${c.muni} de ${TOTAL}</span></span>
+        <span class="bar"><i style="--p:${allP}"></i></span>
+      </button>` +
+      SUBS.map(s => {
+        const n = c.per[s.k], done = n === s.m.length;
+        return `<button type="button" class="chip" data-sub="${s.k}" aria-pressed="${ui.sub === s.k}" style="--ink:${s.ink}" aria-label="${esc(s.n)}: ${n} de ${s.m.length}${done ? ', completa' : ''}">
+          ${medal(s, done)}
+          <span class="chip-body"><span class="chip-name">${esc(s.n)}</span><span class="chip-count">${done ? 'Completa · ' : ''}${n} de ${s.m.length}</span></span>
+          <span class="bar"><i style="--p:${n / s.m.length}"></i></span>
+        </button>`;
+      }).join('');
+
+    let shown = 0;
+    sectionsEl.innerHTML = SUBS.map(s => {
+      const items = MUNIS.concat(EXTRAS, state.custom).filter(p => p.sub === s.k).filter(matches);
+      if (!items.length) return '';
+      shown += items.length;
+      return `<section class="section" style="--ink:${s.ink}" aria-labelledby="h-${s.k}">
+        <div class="section-head"><span class="dot"></span><h2 class="section-title" id="h-${s.k}">${esc(s.n)}</h2>
+          <span class="section-count">${c.per[s.k]} de ${s.m.length}</span></div>
+        <div class="grid">${items.map(tile).join('')}</div>
+      </section>`;
+    }).join('');
+
+    emptyEl.hidden = shown > 0;
+    sectionsEl.hidden = shown === 0;
+    if (!shown) $('emptyText').textContent = ui.q
+      ? `Ningún lugar coincide con «${ui.q}» con los filtros actuales.`
+      : ui.status === 'visitados' ? 'Aún no tienes sellos aquí. Cambia a «Todos» y toca un municipio para registrarlo.'
+      : 'Ya tienes todos los sellos de esta selección.';
+    $('resultLine').textContent = shown === 1 ? 'Mostrando 1 lugar' : `Mostrando ${shown} lugares`;
+    $('firstHint').hidden = c.muni > 0 || state.custom.length > 0 || Object.keys(state.visits).length > 0;
+  }
+
+  // ---------- filtros ----------
+  $('q').addEventListener('input', e => { ui.q = e.target.value.trim(); render(); });
+  document.querySelectorAll('input[name="status"]').forEach(r => r.addEventListener('change', e => { ui.status = e.target.value; render(); }));
+  subsEl.addEventListener('click', e => {
+    const b = e.target.closest('[data-sub]'); if (!b) return;
+    ui.sub = b.dataset.sub === ui.sub ? 'todas' : b.dataset.sub;
+    render();
+    subsEl.querySelector(`[data-sub="${ui.sub}"]`)?.focus();
+  });
+  $('clearBtn').addEventListener('click', () => {
+    ui.q = ''; ui.status = 'todos'; ui.sub = 'todas';
+    $('q').value = ''; $('stAll').checked = true;
+    render(); $('q').focus();
+  });
+
+  // ---------- toast ----------
+  let toastTimer;
+  function toast(msg, kind = 'check') {
+    const zone = $('toastZone');
+    zone.innerHTML = `<div class="toast">${icon(kind)}<span>${esc(msg)}</span></div>`;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { zone.firstElementChild?.classList.add('out'); setTimeout(() => { zone.innerHTML = ''; }, 200); }, 2800);
+  }
+
+  // ---------- foco al cerrar ----------
+  let returnId = null;
+  function restoreFocus() {
+    const t = returnId && sectionsEl.querySelector(`[data-open="${CSS.escape(returnId)}"]`);
+    (t || $('newBtn')).focus();
+    returnId = null;
+  }
+  function flash(id) {
+    const t = sectionsEl.querySelector(`[data-open="${CSS.escape(id)}"]`);
+    if (!t) return;
+    t.classList.add('just-stamped');
+    setTimeout(() => t.classList.remove('just-stamped'), 400);
+  }
+  function setErr(input, errEl, msg) {
+    input.classList.toggle('is-invalid', !!msg);
+    input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    if (!errEl) return;
+    errEl.hidden = !msg;
+    errEl.innerHTML = msg ? `${icon('alert')}<span>${esc(msg)}</span>` : '';
+  }
+
+  // ---------- detalle de lugar ----------
+  const pd = $('placeDlg');
+  let current = null, confirmAction = null, dateTouched = false;
+
+  function dateError(val, required) {
+    if (!val) return required ? 'Escribe la fecha de tu visita para poner el sello.' : '';
+    if (val > todayISO()) return 'La fecha no puede ser posterior a hoy. Revisa el día de tu visita.';
+    return '';
+  }
+
+  function fillPlace() {
+    const p = current, s = SUB[p.sub], v = state.visits[p.id];
+    $('pdTitle').textContent = v ? 'Sello puesto' : 'Poner sello';
+    $('pdBadge').innerHTML = stamp(p, p.id + '-d');
+    $('pdName').textContent = p.name;
+    $('pdSub').textContent = s.n + (p.custom ? ' · lugar propio' : p.extra ? ' · lugar extra' : '');
+    $('pdBadge').closest('.place-hero').classList.toggle('has-art', ART.has(p.id));
+    $('pdDot').style.background = s.ink;
+    $('pdState').textContent = v ? visitText(v) + (v.night ? ' · con pernocta' : '') : 'Pendiente';
+    $('pdSave').textContent = v ? 'Guardar cambios' : 'Poner sello';
+    $('pdRemove').hidden = !v;
+    $('pdDelete').hidden = !p.custom;
+  }
+
+  function openPlace(id) {
+    const p = findPlace(id); if (!p) return;
+    current = p; returnId = id; dateTouched = false;
+    const v = state.visits[id];
+    $('pdDate').value = v ? v.date || '' : todayISO();
+    $('pdDate').max = todayISO();
+    $('pdNote').value = v ? v.note || '' : '';
+    $('pdNight').checked = !!(v && v.night);
+    setErr($('pdDate'), $('pdDateErr'), '');
+    $('pdConfirm').hidden = true;
+    fillPlace();
+    pd.showModal();
+    requestAnimationFrame(() => $('pdDate').focus());
+  }
+
+  sectionsEl.addEventListener('click', e => {
+    const b = e.target.closest('[data-open]'); if (b) openPlace(b.dataset.open);
+  });
+
+  $('pdDate').addEventListener('blur', () => { dateTouched = true; setErr($('pdDate'), $('pdDateErr'), dateError($('pdDate').value, false)); });
+  $('pdDate').addEventListener('input', () => { if (dateTouched) setErr($('pdDate'), $('pdDateErr'), dateError($('pdDate').value, false)); });
+
+  function savePlace() {
+    const date = $('pdDate').value;
+    const err = dateError(date, false);
+    setErr($('pdDate'), $('pdDateErr'), err);
+    if (err) { $('pdDate').focus(); return; }
+    const was = !!state.visits[current.id];
+    state.visits[current.id] = { date, note: $('pdNote').value.trim(), night: $('pdNight').checked };
+    persist(); render();
+    const id = current.id, name = current.name;
+    pd.close();
+    if (!was) flash(id);
+    toast(was ? `Cambios guardados: ${name}` : `Sello puesto: ${name}`);
+  }
+  $('pdSave').addEventListener('click', savePlace);
+  pd.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && e.target.matches('input:not([type="checkbox"])')) { e.preventDefault(); savePlace(); }
+  });
+
+  function askConfirm(text, action) {
+    confirmAction = action;
+    $('pdConfirmText').textContent = text;
+    $('pdConfirm').hidden = false;
+    $('pdConfirmNo').focus();
+  }
+  $('pdRemove').addEventListener('click', () => { const p = current; askConfirm(`¿Quitar el sello de ${p.name}? Se borran la fecha y la nota.`, () => {
+    delete state.visits[p.id];
+    persist(); render(); toast(`Sello quitado: ${p.name}`);
+  }); });
+  $('pdDelete').addEventListener('click', () => { const p = current; askConfirm(`¿Eliminar «${p.name}» de tu pasaporte? Esto no se puede deshacer.`, () => {
+    state.custom = state.custom.filter(c => c.id !== p.id);
+    delete state.visits[p.id];
+    persist(); render(); toast(`Lugar eliminado: ${p.name}`);
+  }); });
+  $('pdConfirmNo').addEventListener('click', () => { $('pdConfirm').hidden = true; confirmAction = null; ($('pdRemove').hidden ? $('pdDelete') : $('pdRemove')).focus(); });
+  $('pdConfirmYes').addEventListener('click', () => {
+    const a = confirmAction, id = returnId;
+    confirmAction = null; returnId = null;
+    pd.close(); a && a();
+    returnId = id; restoreFocus();
+  });
+  $('pdCancel').addEventListener('click', () => pd.close());
+  $('pdClose').addEventListener('click', () => pd.close());
+  pd.addEventListener('close', () => { if (returnId !== null) restoreFocus(); current = null; });
+
+  // ---------- nuevo lugar ----------
+  const nd = $('newDlg');
+  let nameTouched = false;
+  $('npSub').innerHTML = SUBS.map(s => `<option value="${s.k}">${esc(s.n)}</option>`).join('');
+  $('npGlyphs').innerHTML = Object.entries(GLYPHS).map(([k, g], i) =>
+    `<div class="glyph-opt"><input type="radio" name="npGlyph" id="g-${k}" value="${k}"${i === 0 ? ' checked' : ''}><label for="g-${k}">${icon(k, g.d)}<span>${g.n}</span></label></div>`).join('');
+
+  const nameError = v => {
+    if (!v) return 'Escribe el nombre del lugar, por ejemplo «Piedra del Peñol».';
+    if (allPlaces().some(p => norm(p.name) === norm(v))) return 'Ya tienes un sello con ese nombre. Usa uno distinto.';
+    return '';
+  };
+
+  $('newBtn').addEventListener('click', () => {
+    nameTouched = false;
+    $('npName').value = ''; $('npDate').value = ''; $('npDate').max = todayISO();
+    $('npSub').value = ui.sub !== 'todas' ? ui.sub : 'oriente';
+    $('g-montana').checked = true;
+    setErr($('npName'), $('npNameErr'), ''); setErr($('npDate'), $('npDateErr'), '');
+    returnId = null;
+    nd.showModal();
+    requestAnimationFrame(() => $('npName').focus());
+  });
+  $('npName').addEventListener('blur', () => { nameTouched = true; setErr($('npName'), $('npNameErr'), nameError($('npName').value.trim())); });
+  $('npName').addEventListener('input', () => { if (nameTouched) setErr($('npName'), $('npNameErr'), nameError($('npName').value.trim())); });
+  $('npDate').addEventListener('blur', () => setErr($('npDate'), $('npDateErr'), dateError($('npDate').value, false)));
+
+  let newReturn = null;
+  function createPlace() {
+    const name = $('npName').value.trim(), date = $('npDate').value;
+    const e1 = nameError(name), e2 = dateError(date, false);
+    setErr($('npName'), $('npNameErr'), e1); setErr($('npDate'), $('npDateErr'), e2);
+    if (e1) { $('npName').focus(); return; }
+    if (e2) { $('npDate').focus(); return; }
+    const p = { id: 'c-' + Date.now().toString(36), name, sub: $('npSub').value, glyph: nd.querySelector('input[name="npGlyph"]:checked').value, custom: true };
+    state.custom.push(p);
+    if (date) state.visits[p.id] = { date, note: '', night: false };
+    // que el nuevo sello quede visible
+    if (ui.sub !== 'todas' && ui.sub !== p.sub) ui.sub = 'todas';
+    if (ui.status === (date ? 'pendientes' : 'visitados')) { ui.status = 'todos'; $('stAll').checked = true; }
+    if (ui.q && !norm(p.name).includes(norm(ui.q))) { ui.q = ''; $('q').value = ''; }
+    persist(); render();
+    newReturn = p.id;
+    nd.close();
+    flash(p.id);
+    toast(`Sello creado: ${name}`);
+  }
+  $('npCreate').addEventListener('click', createPlace);
+  nd.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && e.target.matches('input[type="text"], input:not([type]), input[type="date"]')) { e.preventDefault(); createPlace(); }
+  });
+  $('npCancel').addEventListener('click', () => nd.close());
+  $('npClose').addEventListener('click', () => nd.close());
+  nd.addEventListener('close', () => {
+    const t = newReturn && sectionsEl.querySelector(`[data-open="${CSS.escape(newReturn)}"]`);
+    if (t) t.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    (t || $('newBtn')).focus({ preventScroll: !!t });
+    newReturn = null;
+  });
+
+  // ---------- exportar / importar ----------
+  $('exportBtn').addEventListener('click', () => {
+    const data = { app: 'pasaporte-antioquia', version: 1, exportado: new Date().toISOString(), visits: state.visits, custom: state.custom };
+    try {
+      const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
+      const a = document.createElement('a');
+      a.href = url; a.download = `pasaporte-antioquia-${todayISO()}.json`;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      toast(`Exportados ${Object.keys(state.visits).length} sellos`, 'download');
+    } catch { toast('No se pudo descargar el archivo en este navegador.', 'alert'); }
+  });
+
+  $('importBtn').addEventListener('click', () => $('importFile').click());
+  $('importFile').addEventListener('change', async e => {
+    const file = e.target.files[0]; e.target.value = '';
+    if (!file) return;
+    try {
+      const data = JSON.parse(await file.text());
+      if (!data || data.app !== 'pasaporte-antioquia' || typeof data.visits !== 'object') throw new Error('formato');
+      const ids = new Set(allPlaces().map(p => p.id));
+      for (const p of Array.isArray(data.custom) ? data.custom : []) {
+        if (p && typeof p.id === 'string' && typeof p.name === 'string' && SUB[p.sub] && !ids.has(p.id)) {
+          state.custom.push({ id: p.id, name: p.name.slice(0, 40), sub: p.sub, glyph: GLYPHS[p.glyph] ? p.glyph : 'montana', custom: true });
+          ids.add(p.id);
+        }
+      }
+      let n = 0;
+      for (const [id, v] of Object.entries(data.visits)) {
+        if (ids.has(id) && v && /^(\d{4}-\d{2}-\d{2})?$/.test(v.date || '')) {
+          state.visits[id] = { date: v.date || '', note: String(v.note || '').slice(0, 280), night: !!v.night }; n++;
+        }
+      }
+      persist(); render();
+      toast(n === 1 ? 'Importado 1 sello' : `Importados ${n} sellos`, 'upload');
+    } catch {
+      toast('Ese archivo no es una copia del pasaporte. Usa uno creado con Exportar.', 'alert');
+    }
+    $('importBtn').focus();
+  });
+
+  // ---------- visor ampliado e impresión ----------
+  const zd = $('zoomDlg');
+  let zoomCurrent = null, currentView = 'stamp';
+
+  function getNavList() {
+    const active = allPlaces().filter(matches);
+    return active.length ? active : allPlaces();
+  }
+
+  function getArtDataUrl(id) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        try {
+          const c = document.createElement('canvas');
+          c.width = img.naturalWidth || 1024;
+          c.height = img.naturalHeight || 1024;
+          const cx = c.getContext('2d');
+          cx.drawImage(img, 0, 0);
+          resolve(c.toDataURL('image/png'));
+        } catch (e) { reject(e); }
+      };
+      img.onerror = () => reject(new Error('img-load-error'));
+      img.src = `assets/sellos/${id}.webp`;
+    });
+  }
+
+  function fillZoom(p) {
+    zoomCurrent = p;
+    const s = SUB[p.sub], v = state.visits[p.id];
+    const hasArt = ART.has(p.id);
+
+    $('zdTitle').textContent = p.name;
+    $('zdSub').textContent = `${s.n}${p.custom ? ' · lugar propio' : p.extra ? ' · lugar extra' : ''} · ${v ? visitText(v) : 'Pendiente'}`;
+
+    $('zdTabs').hidden = !hasArt;
+    if (!hasArt && currentView === 'art') {
+      currentView = 'stamp';
+      $('zvStamp').checked = true;
+    }
+
+    renderZoomStage();
+  }
+
+  function renderZoomStage() {
+    const p = zoomCurrent;
+    if (!p) return;
+    const hasArt = ART.has(p.id);
+    const straight = $('zdStraight').checked;
+
+    if (currentView === 'art' && hasArt) {
+      $('zdStampWrap').hidden = true;
+      $('zdArtImg').hidden = false;
+      $('zdArtImg').src = `assets/sellos/${p.id}.webp`;
+      $('zdStraightWrap').hidden = true;
+      $('zdMetaNote').textContent = 'Ilustración serigráfica vintage · 1024 × 1024 px';
+      $('zdDownloadPng').textContent = 'Descargar arte (1024px)';
+      $('zdDownloadSvg').hidden = true;
+    } else {
+      $('zdStampWrap').hidden = false;
+      $('zdArtImg').hidden = true;
+      $('zdStraightWrap').hidden = false;
+      $('zdStampWrap').innerHTML = stamp(p, 'zoom-' + p.id, {
+        straight,
+        forceColor: true,
+        cls: 'stamp-zoom'
+      });
+      $('zdMetaNote').textContent = hasArt
+        ? 'Sello completo vectorial + arte 1024px'
+        : 'Sello completo vectorial (escalable)';
+      $('zdDownloadPng').textContent = 'Descargar PNG (2048px)';
+      $('zdDownloadSvg').hidden = false;
+    }
+  }
+
+  function openZoom(id, view = 'stamp') {
+    const p = findPlace(id);
+    if (!p) return;
+    if (pd.open) pd.close();
+    returnId = id;
+    currentView = (view === 'art' && ART.has(p.id)) ? 'art' : 'stamp';
+    if ($('zvStamp')) $('zvStamp').checked = currentView === 'stamp';
+    if ($('zvArt')) $('zvArt').checked = currentView === 'art';
+    fillZoom(p);
+    zd.showModal();
+    requestAnimationFrame(() => $('zdClose').focus());
+  }
+
+  function stepZoom(delta) {
+    const list = getNavList();
+    if (!list.length || !zoomCurrent) return;
+    const idx = list.findIndex(x => x.id === zoomCurrent.id);
+    const nextIdx = (idx + delta + list.length) % list.length;
+    fillZoom(list[nextIdx]);
+  }
+
+  $('zdPrev').addEventListener('click', () => stepZoom(-1));
+  $('zdNext').addEventListener('click', () => stepZoom(1));
+  $('zdClose').addEventListener('click', () => zd.close());
+  $('zdBack').addEventListener('click', () => {
+    const id = zoomCurrent ? zoomCurrent.id : returnId;
+    zd.close();
+    if (id) openPlace(id);
+  });
+  zd.addEventListener('close', () => {
+    if (returnId !== null) restoreFocus();
+    zoomCurrent = null;
+  });
+  zd.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); stepZoom(-1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); stepZoom(1); }
+  });
+
+  document.querySelectorAll('input[name="zdView"]').forEach(r => {
+    r.addEventListener('change', e => {
+      currentView = e.target.value;
+      renderZoomStage();
+    });
+  });
+  $('zdStraight').addEventListener('change', renderZoomStage);
+
+  // Botones en la ficha de lugar para abrir visor
+  $('pdBadgeBtn').addEventListener('click', () => {
+    if (current) openZoom(current.id);
+  });
+  $('pdZoomBtn').addEventListener('click', () => {
+    if (current) openZoom(current.id);
+  });
+
+  // Doble clic en cualquier sello de la cuadrícula para ampliar directamente
+  sectionsEl.addEventListener('dblclick', e => {
+    const b = e.target.closest('[data-open]');
+    if (b) openZoom(b.dataset.open);
+  });
+
+  // Imprimir sello limpio (10cm centrado, guía de corte y datos)
+  function printCurrentPlace(p) {
+    const s = SUB[p.sub], v = state.visits[p.id];
+    $('prPlace').textContent = p.name.toUpperCase();
+    $('prSub').textContent = `${s.n} · Antioquia, Colombia`;
+    $('prStatus').textContent = v
+      ? (v.date ? `Visitado el ${longDate(v.date)}` : 'Visitado · fecha por registrar') + (v.night ? ' · Con pernocta' : '')
+      : 'Colección Pasaporte · Antioquia';
+    $('prStampWrap').innerHTML = stamp(p, 'pr-' + p.id, { straight: true, forceColor: true });
+    window.print();
+  }
+  $('zdPrint').addEventListener('click', () => {
+    if (zoomCurrent) printCurrentPlace(zoomCurrent);
+  });
+
+  // Exportar PNG de alta resolución (2048x2048 a 300+ DPI)
+  async function exportStampPng(p, straight = true) {
+    toast(`Preparando imagen HD (2048px): ${p.name}…`, 'download');
+    const size = 2048;
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+
+    let artDataUrl = null;
+    if (ART.has(p.id)) {
+      try {
+        artDataUrl = await getArtDataUrl(p.id);
+      } catch (err) {
+        console.warn('No se pudo convertir ilustración a dataURL:', err);
+      }
+    }
+
+    const svgMarkup = stamp(p, 'dl-' + Date.now(), {
+      straight,
+      forceColor: true,
+      artHref: artDataUrl || `assets/sellos/${p.id}.webp`
+    });
+
+    const fullSvg = svgMarkup
+      .replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2048" height="2048" ');
+
+    const blob = new Blob([fullSvg], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+
+    try {
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = () => reject(new Error('svg-render-error'));
+        img.src = url;
+      });
+      ctx.drawImage(img, 0, 0, size, size);
+      URL.revokeObjectURL(url);
+
+      const a = document.createElement('a');
+      a.download = `sello-${p.id}-2048px.png`;
+      a.href = canvas.toDataURL('image/png');
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      toast(`Sello descargado en alta resolución (2048px): ${p.name}`, 'download');
+    } catch (e) {
+      URL.revokeObjectURL(url);
+      exportStampSvg(p, straight);
+    }
+  }
+
+  // Exportar SVG vectorial standalone con arte embebido
+  async function exportStampSvg(p, straight = true) {
+    let artDataUrl = null;
+    if (ART.has(p.id)) {
+      try {
+        artDataUrl = await getArtDataUrl(p.id);
+      } catch (err) {
+        console.warn('SVG sin dataURL embebido:', err);
+      }
+    }
+    const svgMarkup = stamp(p, 'svg-' + Date.now(), {
+      straight,
+      forceColor: true,
+      artHref: artDataUrl || `assets/sellos/${p.id}.webp`
+    });
+    const fullSvg = '<?xml version="1.0" encoding="UTF-8"?>\n' + svgMarkup
+      .replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1024" height="1024" ');
+    const blob = new Blob([fullSvg], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.download = `sello-${p.id}-vector.svg`;
+    a.href = url;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    toast(`SVG vectorial descargado: ${p.name}`, 'download');
+  }
+
+  // Descargar ilustración original uncropped en PNG 1024px
+  async function exportRawArt(p) {
+    try {
+      const dataUrl = await getArtDataUrl(p.id);
+      const a = document.createElement('a');
+      a.download = `ilustracion-${p.id}-1024px.png`;
+      a.href = dataUrl;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      toast(`Ilustración descargada en 1024px: ${p.name}`, 'download');
+    } catch {
+      const a = document.createElement('a');
+      a.download = `ilustracion-${p.id}.webp`;
+      a.href = `assets/sellos/${p.id}.webp`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      toast(`Ilustración descargada: ${p.name}`, 'download');
+    }
+  }
+
+  $('zdDownloadPng').addEventListener('click', () => {
+    if (!zoomCurrent) return;
+    if (currentView === 'art' && ART.has(zoomCurrent.id)) {
+      exportRawArt(zoomCurrent);
+    } else {
+      exportStampPng(zoomCurrent, $('zdStraight').checked);
+    }
+  });
+
+  $('zdDownloadSvg').addEventListener('click', () => {
+    if (zoomCurrent) exportStampSvg(zoomCurrent, $('zdStraight').checked);
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
