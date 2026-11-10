@@ -677,7 +677,6 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     </div>
     <div class="dlg-foot">
       <button type="button" class="btn btn-danger" id="pdRemove">Quitar sello</button>
-      <button type="button" class="btn btn-danger" id="pdDelete">Eliminar lugar</button>
       <span class="spacer"></span>
       <button type="button" class="btn btn-ghost" id="pdCancel">Cancelar</button>
       <button type="button" class="btn btn-primary" id="pdSave">Poner sello</button>
@@ -838,14 +837,12 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   let canStore = true;
   try { localStorage.setItem('__t', '1'); localStorage.removeItem('__t'); } catch { canStore = false; }
 
-  const state = { visits: {}, custom: [], seeded: 0 };
+  const state = { visits: {}, custom: [] };
   if (canStore) {
     try {
       const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
       if (saved && typeof saved === 'object') {
         state.visits = saved.visits && typeof saved.visits === 'object' ? saved.visits : {};
-        state.custom = Array.isArray(saved.custom) ? saved.custom : [];
-        state.seeded = saved.seeded || 0;
       }
     } catch { /* datos corruptos: arranca vacío */ }
   } else {
@@ -854,14 +851,6 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   }
   const persist = () => { if (canStore) try { localStorage.setItem(KEY, JSON.stringify(state)); } catch { /* sin espacio */ } };
 
-  // tus visitas de antes (2026-11-08): solo con el link privado #mis-visitas; quien recibe el link normal empieza vacío
-  const SEED = ['Abejorral', 'Alejandría', 'Amagá', 'Andes', 'Barbosa', 'Bello', 'Belmira', 'Caicedo', 'Caldas', 'Cañasgordas', 'Caramanta', 'El Carmen de Viboral', 'Carolina del Príncipe', 'Ciudad Bolívar', 'Cocorná', 'Concepción', 'Concordia', 'Copacabana', 'Donmatías', 'Ebéjico', 'Entrerríos', 'Envigado', 'Fredonia', 'Girardota', 'Gómez Plata', 'Granada', 'Guadalupe', 'Guarne', 'Guatapé', 'Heliconia', 'Hispania', 'Itagüí', 'Jardín', 'Jericó', 'La Ceja', 'La Estrella', 'La Pintada', 'La Unión', 'Liborina', 'Marinilla', 'Medellín', 'Mutatá', 'Nariño', 'Necoclí', 'Olaya', 'Pueblorrico', 'Puerto Berrío', 'Puerto Triunfo', 'El Retiro', 'Rionegro', 'Salgar', 'San Carlos', 'San Francisco', 'San Jerónimo', 'San Luis', 'San Pedro de los Milagros', 'San Rafael', 'San Roque', 'Santa Bárbara', 'Santa Fe de Antioquia', 'Santa Rosa de Osos', 'Santo Domingo', 'El Santuario', 'San Vicente Ferrer', 'Segovia', 'Sonsón', 'Sopetrán', 'Támesis', 'Tarso', 'Titiribí', 'Urrao', 'Valparaíso', 'Vegachí', 'Venecia', 'Yalí', 'Yolombó'];
-  if (location.hash === '#mis-visitas') {
-    history.replaceState(null, '', location.pathname + location.search);
-    for (const name of SEED) { const id = slug(name); if (!state.visits[id]) state.visits[id] = { date: '', note: '', night: false }; }
-    state.seeded = 1;
-    persist();
-  }
 
   const ui = { q: '', status: 'todos', sub: 'todas' };
 
@@ -1060,7 +1049,6 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     $('pdState').textContent = v ? 'Visitado' : 'Pendiente';
     $('pdSave').textContent = v ? 'Listo' : 'Poner sello';
     $('pdRemove').hidden = !v;
-    $('pdDelete').hidden = !p.custom;
   }
 
   function openPlace(id) {
@@ -1112,12 +1100,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     delete state.visits[p.id];
     persist(); render(); toast(`Sello quitado: ${p.name}`);
   }); });
-  $('pdDelete').addEventListener('click', () => { const p = current; askConfirm(`¿Eliminar «${p.name}» de tu pasaporte? Esto no se puede deshacer.`, () => {
-    state.custom = state.custom.filter(c => c.id !== p.id);
-    delete state.visits[p.id];
-    persist(); render(); toast(`Lugar eliminado: ${p.name}`);
-  }); });
-  $('pdConfirmNo').addEventListener('click', () => { $('pdConfirm').hidden = true; confirmAction = null; ($('pdRemove').hidden ? $('pdDelete') : $('pdRemove')).focus(); });
+  $('pdConfirmNo').addEventListener('click', () => { $('pdConfirm').hidden = true; confirmAction = null; $('pdRemove').focus(); });
   $('pdConfirmYes').addEventListener('click', () => {
     const a = confirmAction, id = returnId;
     confirmAction = null; returnId = null;
@@ -1130,7 +1113,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
   // ---------- exportar / importar ----------
   $('exportBtn').addEventListener('click', () => {
-    const data = { app: 'pasaporte-antioquia', version: 1, exportado: new Date().toISOString(), visits: state.visits, custom: state.custom };
+    const data = { app: 'pasaporte-antioquia', version: 1, exportado: new Date().toISOString(), visits: state.visits };
     try {
       const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
       const a = document.createElement('a');
@@ -1149,12 +1132,6 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
       const data = JSON.parse(await file.text());
       if (!data || data.app !== 'pasaporte-antioquia' || typeof data.visits !== 'object') throw new Error('formato');
       const ids = new Set(allPlaces().map(p => p.id));
-      for (const p of Array.isArray(data.custom) ? data.custom : []) {
-        if (p && typeof p.id === 'string' && typeof p.name === 'string' && SUB[p.sub] && !ids.has(p.id)) {
-          state.custom.push({ id: p.id, name: p.name.slice(0, 40), sub: p.sub, glyph: GLYPHS[p.glyph] ? p.glyph : 'montana', custom: true });
-          ids.add(p.id);
-        }
-      }
       let n = 0;
       for (const [id, v] of Object.entries(data.visits)) {
         if (ids.has(id) && v && /^(\d{4}-\d{2}-\d{2})?$/.test(v.date || '')) {
