@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mis sellos de Antioquia · Pasaporte de viajero</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23f7f0e1' stroke='%2317432a' stroke-width='2'/%3E%3Cpath d='M7 16h18v7a9 9 0 0 1-18 0z' fill='%230f7a3d'/%3E%3Cpath d='M7 16a9 9 0 0 1 18 0z' fill='%23ffffff' stroke='%2317432a' stroke-width='1.5'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -167,7 +168,7 @@ html { accent-color: var(--ant-green); scrollbar-color: var(--ring-strong) var(-
 .map .sb { fill: none; stroke: var(--paper); stroke-width: 2.2; stroke-linejoin: round; pointer-events: none; }
 .map .ol { fill: none; stroke: var(--ant-deep); stroke-width: 1.6; stroke-linejoin: round; pointer-events: none; }
 .map .lb { font: 700 8.5px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; fill: var(--ant-deep); paint-order: stroke; stroke: var(--paper); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
-.hills { position: relative; z-index: 0; display: block; width: min(100%, 1180px); height: auto; margin: clamp(-110px, -7vw, -16px) auto 0; pointer-events: none; user-select: none; }
+.hills { position: relative; z-index: 0; display: block; width: min(100%, 1180px); height: auto; margin: clamp(-44px, -3.5vw, -12px) auto 0; pointer-events: none; user-select: none; }
 @media (min-width: 1180px) { .hills { -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); } }
 
 /* ---------- buttons ---------- */
@@ -227,40 +228,28 @@ html { accent-color: var(--ant-green); scrollbar-color: var(--ring-strong) var(-
 @media (min-width: 768px) { .toolbar-grid { grid-template-columns: minmax(0, 1fr) auto; align-items: end; } }
 .field { display: grid; gap: var(--s1); }
 .label { font-weight: 600; font-size: 14px; }
-.label .req { color: var(--danger); }
-.hint { font-size: 13px; color: var(--muted); }
 .input-wrap { position: relative; }
 .input-wrap .od-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); --od-icon-size: 18px; pointer-events: none; }
-.input, .select, .textarea {
+.input {
   width: 100%; min-height: 48px; padding: 0 var(--s3);
   background: var(--surface); border: 1px solid var(--ring-strong); border-radius: var(--radius-sm);
   transition: border-color var(--t-fast) var(--ease-out), box-shadow var(--t-fast) var(--ease-out);
 }
 .input-search { padding-left: 42px; }
-.textarea { padding: var(--s3); min-height: 96px; resize: vertical; line-height: 1.5; }
-.input:focus, .select:focus, .textarea:focus { outline: none; border-color: var(--focus); box-shadow: 0 0 0 3px rgba(31, 78, 140, .18); }
-.is-invalid { border-color: var(--danger) !important; background: var(--danger-wash); }
-.err { display: flex; gap: var(--s1); align-items: flex-start; color: var(--danger); font-size: 13px; font-weight: 500; --od-icon-size: 16px; }
-.err .od-icon { margin-top: 2px; }
+.input:focus { outline: none; border-color: var(--focus); box-shadow: 0 0 0 3px rgba(15, 122, 61, .18); }
 
-.seg { display: inline-grid; grid-auto-flow: column; border: 1px solid var(--ring-strong); border-radius: var(--radius-sm); overflow: hidden; background: var(--surface); }
+.seg { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; border: 1px solid var(--ring-strong); border-radius: var(--radius-sm); overflow: hidden; background: var(--surface); }
 .seg input { position: absolute; opacity: 0; pointer-events: none; }
 .seg label { display: flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 var(--s4); cursor: pointer; font-weight: 500; font-size: 14px; white-space: nowrap; transition: background-color var(--t-fast) var(--ease-out); }
 .seg label + input + label, .seg input + label ~ label { border-left: 1px solid var(--ring); }
 .seg input:checked + label { background: var(--ant-deep); color: #ffffff; }
 .seg input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: -3px; }
 @media (hover: hover) { .seg input:not(:checked) + label:hover { background: var(--wash); } }
-@media (max-width: 767px) { .seg { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-flow: row; } .seg label { padding: 0 var(--s2); } }
+@media (max-width: 767px) { .seg { display: grid; width: 100%; } .seg label { padding: 0 var(--s2); font-size: 13px; } }
 
 .result-line { margin-top: var(--s3); font-size: 13px; color: var(--muted); }
 
 /* ---------- sections and badges ---------- */
-.notice {
-  display: flex; gap: var(--s3); align-items: flex-start; margin-top: var(--s5);
-  background: var(--surface); border: 1px dashed var(--ring-strong); border-radius: var(--radius); padding: var(--s4);
-  --od-icon-size: 22px;
-}
-.notice strong { display: block; }
 .section { padding-top: var(--s6); scroll-margin-top: 160px; }
 .section-head { display: flex; align-items: center; gap: var(--s3); padding-bottom: var(--s3); border-bottom: 2px solid var(--ink); margin-bottom: var(--s4); }
 .section-title { font: 800 clamp(22px, 3vw, 28px)/1.15 var(--font-display); letter-spacing: -.01em; }
@@ -270,7 +259,7 @@ html { accent-color: var(--ant-green); scrollbar-color: var(--ring-strong) var(-
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: var(--s4) var(--s3); }
 @media (min-width: 768px) { .grid { grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); } }
 .badge {
-  display: grid; grid-template-rows: auto auto auto; justify-items: center; gap: var(--s1);
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto; justify-items: center; gap: var(--s1);
   padding: var(--s2) var(--s1) var(--s3); background: transparent; border: 1px solid transparent; border-radius: var(--radius);
   cursor: pointer; text-align: center; min-width: 0;
   transition: background-color var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out);
@@ -281,7 +270,7 @@ html { accent-color: var(--ant-green); scrollbar-color: var(--ring-strong) var(-
 .badge-zoom::before { content: ""; position: absolute; inset: -8px; } /* área táctil de 44px */
 @media (hover: hover) { .badge-zoom { opacity: .5; transition: opacity var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out); } .tile:hover .badge-zoom, .badge-zoom:focus-visible { opacity: 1; } .badge-zoom:hover { border-color: var(--fg); } }
 .badge-name { font-weight: 600; font-size: 14px; line-height: 1.3; width: 100%; margin-top: var(--s1); }
-.badge-meta { font: 500 12px/1.3 var(--font-mono); color: var(--muted); white-space: nowrap; }
+.badge-meta { font: 500 11.5px/1.25 var(--font-mono); color: var(--muted); max-width: 100%; overflow-wrap: anywhere; }
 .badge-meta.on { color: var(--fg); }
 .badge-meta.todo { color: var(--ink, var(--muted)); }
 .badge-meta.on::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--ink); margin-right: 6px; vertical-align: 1px; }
@@ -291,10 +280,9 @@ html { accent-color: var(--ant-green); scrollbar-color: var(--ring-strong) var(-
 .stamp.is-on { transform: rotate(var(--rot, 0deg)); }
 .stamp .glyph-off { opacity: .55; }
 .stamp .art { transition: filter var(--t-fast) var(--ease-out), opacity var(--t-fast) var(--ease-out); }
-.stamp .art-off { filter: saturate(.4) contrast(.92); opacity: .82; }
-.stamp.is-off > g { opacity: .62; }
+.stamp .art-off { filter: saturate(.68) contrast(.96); opacity: .88; }
+.stamp.is-off > g { opacity: .78; }
 @media (hover: hover) { .badge:hover .art-off { filter: none; opacity: 1; } .badge:hover .stamp.is-off > g { opacity: 1; } }
-.extra-tag { font: 600 10.5px/1.3 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 .just-stamped .stamp { animation: stampIn var(--t-enter) var(--ease-out); }
 @keyframes stampIn { from { opacity: 0; transform: scale(1.25) rotate(var(--rot, 0deg)); } to { opacity: 1; transform: scale(1) rotate(var(--rot, 0deg)); } }
 
@@ -325,75 +313,6 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 .dlg-foot { display: flex; flex-wrap: wrap; gap: var(--s2); padding: var(--s4) var(--s5); border-top: 1px solid var(--ring); }
 .dlg-foot .spacer { flex: 1 1 auto; }
 @media (max-width: 559px) { .dlg-foot { padding-bottom: calc(var(--s4) + env(safe-area-inset-bottom)); } .dlg-foot .btn { flex: 1 1 auto; } .dlg-foot .spacer { display: none; } }
-
-.place-hero { display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: var(--s4); align-items: center; }
-@media (max-width: 380px) { .place-hero { grid-template-columns: 104px minmax(0, 1fr); } }
-.place-hero .stamp { max-width: 128px; }
-@media (min-width: 420px) { .place-hero.has-art { grid-template-columns: 176px minmax(0, 1fr); } .place-hero.has-art .stamp { max-width: 176px; } }
-.place-hero-badge {
-  position: relative;
-  display: block;
-  padding: 0;
-  margin: 0;
-  background: transparent;
-  border: 1px dashed transparent;
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: transform var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out);
-  text-align: center;
-}
-@media (hover: hover) {
-  .place-hero-badge:hover {
-    transform: scale(1.05);
-    border-color: var(--ring-strong);
-  }
-  .place-hero-badge:hover .zoom-badge-hint {
-    background: var(--fg);
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(22, 25, 30, .3);
-  }
-}
-.place-hero-badge:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-.zoom-badge-hint {
-  position: absolute;
-  bottom: -4px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(22, 25, 30, 0.9);
-  color: #ffffff;
-  font: 600 11px/1.2 var(--font-mono);
-  padding: 3px 8px;
-  border-radius: 12px;
-  white-space: nowrap;
-  pointer-events: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  box-shadow: 0 2px 6px rgba(22, 25, 30, .25);
-  transition: background-color var(--t-fast) var(--ease-out);
-}
-.place-name { font: 800 clamp(24px, 4vw, 30px)/1.1 var(--font-display); overflow-wrap: anywhere; }
-.place-sub { display: flex; align-items: center; gap: var(--s2); margin-top: var(--s2); font-size: 14px; color: var(--muted); }
-.place-state { margin-top: var(--s2); font: 600 12px/1.3 var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
-
-.check { display: flex; align-items: center; gap: var(--s3); min-height: 44px; cursor: pointer; font-weight: 500; }
-.check input { width: 20px; height: 20px; accent-color: var(--fg); flex: none; }
-
-.confirm { border: 1px solid #e2b4b0; background: var(--danger-wash); border-radius: var(--radius); padding: var(--s4); display: grid; gap: var(--s3); }
-.confirm p { font-weight: 500; }
-
-.glyphs { border: 0; padding: 0; margin: 0; min-width: 0; }
-.glyphs legend { padding: 0; margin-bottom: var(--s2); }
-.glyph-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: var(--s2); }
-.glyph-opt input { position: absolute; opacity: 0; pointer-events: none; }
-.glyph-opt label {
-  display: grid; justify-items: center; gap: var(--s1); padding: var(--s2) var(--s1); min-height: 64px;
-  border: 1px solid var(--ring); border-radius: var(--radius-sm); cursor: pointer; font-size: 12px; text-align: center;
-  --od-icon-size: 24px; transition: border-color var(--t-fast) var(--ease-out), background-color var(--t-fast) var(--ease-out);
-}
-.glyph-opt input:checked + label { border-color: var(--fg); box-shadow: inset 0 0 0 1px var(--fg); background: var(--wash); }
-.glyph-opt input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: 2px; }
-@media (hover: hover) { .glyph-opt label:hover { border-color: var(--ring-strong); } }
 
 /* ---------- toast ---------- */
 .toast-zone { position: fixed; left: 0; right: 0; bottom: calc(var(--s5) + env(safe-area-inset-bottom)); display: grid; justify-items: center; pointer-events: none; z-index: 50; padding: 0 var(--s4); }
@@ -454,7 +373,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at center, #ffffff 0%, #f7f8fa 65%, #ebedf2 100%);
+  background: radial-gradient(circle at center, var(--surface) 0%, var(--paper) 68%, var(--wash) 100%);
   border: 1px solid var(--ring);
   border-radius: var(--radius);
   padding: var(--s5) var(--s3);
@@ -491,24 +410,12 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: var(--s2) var(--s4);
   font: 500 13px/1.4 var(--font-mono);
   color: var(--muted);
   border-top: 1px solid var(--ring);
   padding-top: var(--s3);
-}
-.zd-controls label {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s2);
-  cursor: pointer;
-  color: var(--fg);
-}
-.zd-controls input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--fg);
 }
 .zd-foot {
   display: flex;
@@ -522,7 +429,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 @media (max-width: 599px) {
   .zd-foot { display: grid; grid-template-columns: 1fr 1fr; }
   .zd-foot .od-cluster { display: contents; }
-  .zd-foot #zdPrint, .zd-foot #zdToggle { grid-column: 1 / -1; }
+  .zd-foot #zdPrint, .zd-foot #zdToggle, .zd-foot #zdDownloadPng:has(+ #zdDownloadSvg[hidden]) { grid-column: 1 / -1; }
   .zd-foot .btn { width: 100%; }
 }
 
@@ -729,24 +636,20 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
       <div class="zd-stage" id="zdStage">
         <div class="zd-stamp-container" id="zdStampWrap"></div>
-        <img id="zdArtImg" class="zd-art-full" alt="Ilustración original" hidden>
+        <img id="zdArtImg" class="zd-art-full" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Ilustración original" hidden>
       </div>
 
       <div class="zd-controls">
-        <label id="zdStraightWrap">
-          <input type="checkbox" id="zdStraight" checked>
-          <span>Enderezar a 0° (ideal para imprimir)</span>
-        </label>
         <span class="zd-meta-note" id="zdMetaNote"></span>
       </div>
     </div>
     <div class="dlg-foot zd-foot">
       <div class="od-cluster od-fill">
-        <button type="button" class="btn btn-primary" id="zdPrint" data-ic="print">Imprimir sello</button>
+        <button type="button" class="btn" id="zdPrint" data-ic="print">Imprimir sello</button>
         <button type="button" class="btn" id="zdDownloadPng" data-ic="download" aria-label="Descargar PNG en alta resolución">PNG</button>
         <button type="button" class="btn" id="zdDownloadSvg" data-ic="download" aria-label="Descargar SVG">SVG</button>
       </div>
-      <button type="button" class="btn" id="zdToggle" aria-pressed="false">Poner sello</button>
+      <button type="button" class="btn btn-primary" id="zdToggle" aria-pressed="false">Poner sello</button>
     </div>
   </div>
 </dialog>
@@ -903,7 +806,11 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     const dash = isStamped ? '' : ' stroke-dasharray="3 3"';
     const angle = opts.straight ? 0 : (v ? rot(p.id) : 0);
     const extraCls = opts.cls ? ' ' + opts.cls : '';
-    const frame = p.custom
+    const isHex = !!(p.extra || p.custom);
+    const backing = isHex
+      ? `<polygon points="${hexPts(60, 60, 58)}" fill="#ffffff"/>`
+      : `<circle cx="60" cy="60" r="56" fill="#ffffff"/>`;
+    const frame = isHex
       ? `<polygon points="${hexPts(60, 60, 58)}" stroke-width="3"/><polygon points="${hexPts(60, 60, 53)}" stroke-width="1.2"/>`
       : `<circle cx="60" cy="60" r="56" stroke-width="3"/><circle cx="60" cy="60" r="51" stroke-width="1.2"/>`;
     if (ART.has(p.id)) {
@@ -913,9 +820,9 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
       const artCls = isStamped ? 'art' : 'art art-off';
       return `<svg class="stamp${isStamped ? ' is-on' : ' is-off'}${extraCls}" viewBox="0 0 120 120" aria-hidden="true" style="--rot:${angle}deg">
       <defs><path id="${id}t" d="M23 60a37 37 0 0 1 74 0"/><path id="${id}b" d="M16 60a44 44 0 0 0 88 0"/><clipPath id="${id}c"><circle cx="60" cy="60" r="33.5"/></clipPath></defs>
-      <circle cx="60" cy="60" r="56" fill="#ffffff"/>
+      ${backing}
       <image class="${artCls}" ${hrefAttr} x="24" y="24" width="72" height="72" clip-path="url(#${id}c)" preserveAspectRatio="xMidYMid slice"/>
-      <g fill="none" stroke="${ink}"${dash}><circle cx="60" cy="60" r="56" stroke-width="3"/><circle cx="60" cy="60" r="51" stroke-width="1.2"/><circle cx="60" cy="60" r="34" stroke-width="1.5"/></g>
+      <g fill="none" stroke="${ink}"${dash}>${frame}<circle cx="60" cy="60" r="34" stroke-width="1.5"/></g>
       <g fill="${ink}">
         <text font-size="${fs}" font-weight="600" letter-spacing="0.5"><textPath href="#${id}t" startOffset="50%" text-anchor="middle">${esc(name)}</textPath></text>
         <text font-size="6.5" font-weight="${isStamped ? 600 : 400}" letter-spacing="1"><textPath href="#${id}b" startOffset="50%" text-anchor="middle">${esc(bottom)}</textPath></text>
@@ -969,7 +876,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     return `<div class="tile"><button type="button" class="badge" data-open="${esc(p.id)}" aria-pressed="${!!v}" aria-label="${esc(label)}">
       ${stamp(p, p.id, { lazy: true })}
       <span class="badge-name od-clamp-2 od-lines-2">${esc(p.name)}</span>
-      <span class="badge-meta${v ? ' on' : ' todo'}">${v ? 'Visitado' : p.extra ? 'Extra · por conocer' : 'Por conocer'}</span>
+      <span class="badge-meta${v ? ' on' : ' todo'}">${v ? (p.extra ? 'Extra · visitado' : 'Visitado') : (p.extra ? 'Extra · por conocer' : 'Por conocer')}</span>
     </button><button type="button" class="badge-zoom" data-detail="${esc(p.id)}" aria-label="Ver sello de ${esc(p.name)}" title="Ver, imprimir o descargar">${icon('zoom')}</button></div>`;
   }
 
@@ -1027,9 +934,12 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
       const items = MUNIS.concat(EXTRAS, state.custom).filter(p => p.sub === s.k).filter(matches);
       if (!items.length) return '';
       shown += items.length;
+      const exAll = EXTRAS.concat(state.custom).filter(p => p.sub === s.k);
+      const exDone = exAll.filter(p => state.visits[p.id]).length;
+      const exTxt = exAll.length ? ` · ${exDone}/${exAll.length} ${exAll.length === 1 ? 'extra' : 'extras'}` : '';
       return `<section class="section" style="--ink:${s.ink}" aria-labelledby="h-${s.k}">
         <div class="section-head"><span class="dot"></span><h2 class="section-title" id="h-${s.k}">${esc(s.n)}</h2>
-          <span class="section-count">${c.per[s.k]} de ${s.m.length}</span></div>
+          <span class="section-count">${c.per[s.k]} de ${s.m.length}${exTxt}</span></div>
         <div class="grid">${items.map(tile).join('')}</div>
       </section>`;
     }).join('');
@@ -1083,13 +993,6 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     t.classList.add('just-stamped');
     setTimeout(() => t.classList.remove('just-stamped'), 400);
   }
-  function setErr(input, errEl, msg) {
-    input.classList.toggle('is-invalid', !!msg);
-    input.setAttribute('aria-invalid', msg ? 'true' : 'false');
-    if (!errEl) return;
-    errEl.hidden = !msg;
-    errEl.innerHTML = msg ? `${icon('alert')}<span>${esc(msg)}</span>` : '';
-  }
 
   // ---------- detalle de lugar ----------
   sectionsEl.addEventListener('click', e => {
@@ -1118,8 +1021,13 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   }
 
   // próximo destino: un municipio por conocer en la subregión más cerca de completarse
+  const STARTERS = ['medellin', 'guatape', 'santa-fe-de-antioquia', 'jardin', 'jerico', 'el-penol', 'rionegro'];
   let nextId = null;
   function pickNext(skip) {
+    if (!Object.keys(state.visits).length) {
+      const starters = STARTERS.filter(id => id !== skip);
+      if (starters.length) return starters[Math.floor(Math.random() * starters.length)];
+    }
     const open = SUBS.filter(s => !subDone(s.k));
     if (!open.length) return null;
     const ratio = s => s.m.filter(n => state.visits[slug(n)]).length / s.m.length;
@@ -1228,22 +1136,19 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     const p = zoomCurrent;
     if (!p) return;
     const hasArt = ART.has(p.id);
-    const straight = $('zdStraight').checked;
 
     if (currentView === 'art' && hasArt) {
       $('zdStampWrap').hidden = true;
       $('zdArtImg').hidden = false;
       $('zdArtImg').src = `assets/sellos/${p.id}.webp`;
-      $('zdStraightWrap').hidden = true;
       $('zdMetaNote').textContent = 'Ilustración serigráfica vintage · 1024 × 1024 px';
       setPngBtn('Arte PNG', 'Descargar ilustración original en 1024 px');
       $('zdDownloadSvg').hidden = true;
     } else {
       $('zdStampWrap').hidden = false;
       $('zdArtImg').hidden = true;
-      $('zdStraightWrap').hidden = false;
       $('zdStampWrap').innerHTML = stamp(p, 'zoom-' + p.id, {
-        straight,
+        straight: true,
         forceColor: true,
         cls: 'stamp-zoom'
       });
@@ -1294,7 +1199,6 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
       renderZoomStage();
     });
   });
-  $('zdStraight').addEventListener('change', renderZoomStage);
 
 
 
@@ -1427,12 +1331,12 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     if (currentView === 'art' && ART.has(zoomCurrent.id)) {
       exportRawArt(zoomCurrent);
     } else {
-      exportStampPng(zoomCurrent, $('zdStraight').checked);
+      exportStampPng(zoomCurrent, true);
     }
   });
 
   $('zdDownloadSvg').addEventListener('click', () => {
-    if (zoomCurrent) exportStampSvg(zoomCurrent, $('zdStraight').checked);
+    if (zoomCurrent) exportStampSvg(zoomCurrent, true);
   });
 
   render();
