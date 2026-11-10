@@ -25,71 +25,64 @@
       "id": "bello",
       "name": "Bello",
       "subregion": "Valle de Aburrá",
-      "subject": "Cerro Quitasol rising above Bello with the Río Medellín winding through the valley, the Iglesia de Nuestra Señora del Rosario with its richly decorated facade, columns and arches, and a textile factory with brick smokestack.",
+      "subject": "A brick textile factory with a tall smokestack stands beside the winding Río Medellín, with the green slopes of Cerro Quitasol rising above the valley town of Bello. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "caldas",
       "name": "Caldas",
       "subregion": "Valle de Aburrá",
-      "subject": "The southern gateway of the Aburrá valley: green mountain heights of Alto de San Miguel and Alto de Minas with morning clouds, the town's church on its main park, handmade clay pottery and obleas filled with arequipe in the foreground.",
+      "subject": "Handmade clay pots and jars sit in the foreground beside obleas filled with golden arequipe, while morning clouds drift over the green mountain heights above the Aburrá valley. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "copacabana",
       "name": "Copacabana",
       "subregion": "Valle de Aburrá",
-      "subject": "The Santuario de la Santa Cruz on a hilltop above Copacabana, the Medellín river flowing through the northern Aburrá valley, green hills and the town church on its main park.",
+      "subject": "The Medellín river winds through the green northern Aburrá valley, its shallow banks lined with smooth stones, while rolling hills rise on both sides beneath a soft, cloud-streaked sky. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "envigado",
       "name": "Envigado",
       "subregion": "Valle de Aburrá",
-      "subject": "The Iglesia de Santa Gertrudis on the main park of Envigado, the Señorial City, with the green slopes of Cerro Astilleros rising behind and the Ayurá stream.",
+      "subject": "A clear mountain stream, the Ayurá, flows over smooth stones beneath the green slopes of Cerro Astilleros, with tall trees leaning over the water on a bright morning. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)",
-      "rehacer": "iglesia genérica repetida"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "girardota",
       "name": "Girardota",
       "subregion": "Valle de Aburrá",
-      "subject": "The large Santuario del Señor Caído of Girardota, a major pilgrimage site, with pilgrims walking on the plaza and the green hills of the northern Aburrá valley behind.",
+      "subject": "The large Santuario del Señor Caído of Girardota, a major pilgrimage site, with pilgrims walking on the plaza and the green hills of the northern Aburrá valley behind. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "itagui",
       "name": "Itagüí",
       "subregion": "Valle de Aburrá",
-      "subject": "The industrial city of Itagüí in the Aburrá valley with factory chimneys and the Medellín river, the Iglesia de Nuestra Señora del Rosario, the Pico Manzanillo ridge behind and an abstract metal sculpture on a plaza.",
+      "subject": "Factory chimneys rise above the industrial city of Itagüí beside the Medellín river, while a large abstract metal sculpture gleams on the plaza and the Manzanillo ridge stands behind the town. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "la-estrella",
       "name": "La Estrella",
       "subregion": "Valle de Aburrá",
-      "subject": "The Municipio Verde: the Basílica Menor de Nuestra Señora del Rosario de Chiquinquirá among green mountains of the El Romeral reserve, with guavas and fresh cheeses in the foreground.",
+      "subject": "The Municipio Verde: the Basílica Menor de Nuestra Señora del Rosario de Chiquinquirá among green mountains of the El Romeral reserve, with guavas and fresh cheeses in the foreground. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "sabaneta",
@@ -121,9 +114,10 @@
       "id": "argelia",
       "name": "Argelia",
       "subregion": "Oriente",
-      "subject": "the main plaza and church of Argelia, Antioquia, Colombia, with the typical landscape of the Oriente subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A mule wearing a colorful saddle carries a bundle of woven fique cord along a rugged green trail, while a cable car glides across the valley overhead. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "el-carmen-de-viboral",
@@ -138,11 +132,10 @@
       "id": "cocorna",
       "name": "Cocorná",
       "subregion": "Oriente",
-      "subject": "a tall waterfall in a lush canyon with a person canyoning down a rope in Cocorná",
+      "subject": "a tall waterfall in a lush canyon with a person canyoning down a rope in Cocorná No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "concepcion",
@@ -157,9 +150,10 @@
       "id": "el-penol",
       "name": "El Peñol",
       "subregion": "Oriente",
-      "subject": "the replica church of the old drowned town of El Peñol on the shore of the reservoir, islands and water",
+      "subject": "Green islands dot the calm blue waters of the El Peñol reservoir, with wooded hillsides rising from the shore and a small boat drifting across the water. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "el-retiro",
@@ -212,21 +206,19 @@
       "id": "la-ceja",
       "name": "La Ceja",
       "subregion": "Oriente",
-      "subject": "rows of flower greenhouses and blooming hydrangeas on the green plateau of La Ceja",
+      "subject": "rows of flower greenhouses and blooming hydrangeas on the green plateau of La Ceja No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "la-union",
       "name": "La Unión",
       "subregion": "Oriente",
-      "subject": "The Emporio Papero: potato fields and dairy cows on cold green slopes of La Union, with the rocky Morro Peñas peak behind and the town church on the central park.",
+      "subject": "Potato fields and dairy cows fill the cold green slopes of La Unión, where the rocky peak of Morro Peñas rises behind the farmland under drifting clouds. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "marinilla",
@@ -315,11 +307,10 @@
       "id": "amaga",
       "name": "Amagá",
       "subregion": "Suroeste",
-      "subject": "A coal-mining and coffee town known as the Golden Gate of the Suroeste: a stone railway viaduct and old rail tunnel on the Ferrocarril de Antioquia line, coal carts at a mine entrance, green hills and the El Salto waterfall.",
+      "subject": "A coal-mining and coffee town known as the Golden Gate of the Suroeste: a stone railway viaduct and old rail tunnel on the Ferrocarril de Antioquia line, coal carts at a mine entrance, green hills and the El Salto waterfall. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)",
-      "rehacer": "iglesia genérica repetida"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "andes",
@@ -334,9 +325,10 @@
       "id": "angelopolis",
       "name": "Angelópolis",
       "subregion": "Suroeste",
-      "subject": "the main plaza and church of Angelópolis, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A craftsman stitches a leather horse saddle beside sacks of coal, with the wooded ridge of Alto del Romeral rising above the green mountain town. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "betania",
@@ -376,12 +368,10 @@
       "id": "concordia",
       "name": "Concordia",
       "subregion": "Suroeste",
-      "subject": "The central plaza of Concordia with the Iglesia de Nuestra Señora de las Mercedes and its front towers, coffee hills around it and the tall Salto de Magallo waterfall plunging into the green Cauca canyon.",
+      "subject": "The tall Salto de Magallo waterfall plunges into the green Cauca canyon, with coffee bushes covering the surrounding hills and a bright sky over the deep gorge. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true,
-      "rehacer": "iglesia genérica repetida"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "fredonia",
@@ -396,11 +386,10 @@
       "id": "hispania",
       "name": "Hispania",
       "subregion": "Suroeste",
-      "subject": "The land of the samanes: giant spreading samán trees shading the main park of Hispania beside the parish church, with sugarcane trapiche, coffee and cattle hills, and a bridge over the Pedral river.",
+      "subject": "Giant samán trees spread their broad crowns over a shady park, while cattle graze on the coffee-covered hills beyond a bridge over the Pedral river. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)",
-      "rehacer": "iglesia genérica repetida"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "jardin",
@@ -422,11 +411,10 @@
       "id": "la-pintada",
       "name": "La Pintada",
       "subregion": "Suroeste",
-      "subject": "The wide Cauca river splitting La Pintada, crossed by an old bridge, with the rocky Farallones promontories behind, citrus and cacao trees, and the single-nave Santa Cecilia church with its bell tower.",
+      "subject": "An old bridge arches over the wide Cauca river, with citrus and cacao trees on the riverbanks and the rocky Farallones promontories rising behind the town. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "montebello",
@@ -440,30 +428,28 @@
       "id": "pueblorrico",
       "name": "Pueblorrico",
       "subregion": "Suroeste",
-      "subject": "The San Antonio de Padua parish church of Pueblorrico with three naves, a tower and a bell tower, the 80-meter El Salto de los Monos waterfall and La Trocha cloud forest on the green hills behind.",
+      "subject": "An 80-meter waterfall plunges through the cloud forest of La Trocha, with dense green hills rising around it and mist drifting through the tall treetops. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "salgar",
       "name": "Salgar",
       "subregion": "Suroeste",
-      "subject": "The yellow two-story Casa de la Cultura of Salgar beside the San Juan Evangelista church with three naves, coffee hills, Cerro Plateado behind and the Charcos de Mulato pools.",
+      "subject": "A two-story yellow cultural center stands on a sunny street, with green coffee hills rising behind it and the Cerro Plateado ridge above the rooftops. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)",
-      "rehacer": "iglesia genérica repetida"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "santa-barbara",
       "name": "Santa Bárbara",
       "subregion": "Suroeste",
-      "subject": "The Balcón de los bellos paisajes: a lookout over distant valleys and the Cauca river toward the snowy Nevado del Ruiz at dawn, with mango trees and the parish church on the central park.",
+      "subject": "The Balcón de los bellos paisajes: a lookout over distant valleys and the Cauca river toward the snowy Nevado del Ruiz at dawn, with mango trees and the parish church on the central park. Draw the church faithfully from the reference photo (its real towers, domes, colors, proportions).",
       "revisar": false,
       "hecho": false,
-      "rehacer": "iglesia genérica repetida"
+      "referencia_foto": "the specific church named in the subject, in Santa Bárbara, Antioquia"
     },
     {
       "id": "tamesis",
@@ -478,23 +464,25 @@
       "id": "tarso",
       "name": "Tarso",
       "subregion": "Suroeste",
-      "subject": "the main plaza and church of Tarso, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "The Iglesia parroquial de San Pablo de Tarso rises with its two towers over a green hillside, while a farmer with a woven basket walks past a rustic trapiche sugarcane mill and brown panela blocks drying in the sun. Draw the church faithfully from the reference photo (its real towers, domes, colors, proportions).",
+      "revisar": false,
+      "hecho": false,
+      "referencia_foto": "the specific church named in the subject, in Tarso, Antioquia"
     },
     {
       "id": "titiribi",
       "name": "Titiribí",
       "subregion": "Suroeste",
-      "subject": "the main plaza and church of Titiribí, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "The Iglesia Nuestra Señora de Los Dolores stands on Titiribí's central plaza beside a hilltop view of the Cauca River valley, with a gold miner's pan resting on a wooden bench and coffee bushes climbing the surrounding slopes. Draw the church faithfully from the reference photo (its real towers, domes, colors, proportions).",
+      "revisar": false,
+      "hecho": false,
+      "referencia_foto": "the specific church named in the subject, in Titiribí, Antioquia"
     },
     {
       "id": "urrao",
       "name": "Urrao",
       "subregion": "Suroeste",
-      "subject": "the Páramo del Sol with tall frailejón plants, high peaks and a cold lagoon above Urrao",
+      "subject": "the Páramo del Sol with tall frailejón plants, high peaks and a cold lagoon above Urrao No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": false
     },
@@ -502,9 +490,10 @@
       "id": "valparaiso",
       "name": "Valparaíso",
       "subregion": "Suroeste",
-      "subject": "the main plaza and church of Valparaíso, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A wooden market stall stacked with brown panela blocks and glass jars of amber gelatina de pata, with a cloudy mountain ridge rising behind under a pale morning sky. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "venecia",
@@ -512,67 +501,71 @@
       "subregion": "Suroeste",
       "subject": "the pyramid-shaped mountain Cerro Tusa rising above green coffee hills near Venecia",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "abriaqui",
       "name": "Abriaquí",
       "subregion": "Occidente",
-      "subject": "the main plaza and church of Abriaquí, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A farmer carries round wheels of campesino cheese past a stack of panela blocks along a green farm path, with rolling hills rising in the distance. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "anza",
       "name": "Anzá",
       "subregion": "Occidente",
-      "subject": "the main plaza and church of Anzá, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A coffee farmer picks red cherries on the small hill of Anzá, where the Mirador del Cauca overlooks the winding Cauca River valley and the green slopes of the Cordillera Central. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "armenia",
       "name": "Armenia",
       "subregion": "Occidente",
-      "subject": "the main plaza and church of Armenia, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A farmer walks along the Cauca riverbank carrying a woven vine basket, while coffee bushes cover the steep hillside above the flowing water under a clear morning sky. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "buritica",
       "name": "Buriticá",
       "subregion": "Occidente",
-      "subject": "the main plaza and church of Buriticá, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "Clay pots dry in rows along a stone wall beside the Quebrada La Clara, with green hillsides rising above the gold-mining town in the warm sun. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "caicedo",
       "name": "Caicedo",
       "subregion": "Occidente",
-      "subject": "A mountain town of the Occidente water reserve with weathered rock formations like the Capilla de Piedra among green hills, woven fique baskets and clay pots in the foreground, misty cloud forest behind.",
+      "subject": "A mountain town of the Occidente water reserve with weathered rock formations like the Capilla de Piedra among green hills, woven fique baskets and clay pots in the foreground, misty cloud forest behind. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "canasgordas",
       "name": "Cañasgordas",
       "subregion": "Occidente",
-      "subject": "The Santuario del Santo Cristo church of Cañasgordas, remodeled in Romanesque style with half-orange domes and a facade with a clock and bells, with panela blocks, coffee and woven baskets in the foreground.",
+      "subject": "Woven baskets, sacks of coffee and stacked panela blocks sit together on a rustic wooden table in warm afternoon light, with green coffee hills rising far beyond the farmyard fence. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "dabeiba",
       "name": "Dabeiba",
       "subregion": "Occidente",
-      "subject": "the main plaza and church of Dabeiba, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "The Santuario Santa Laura Montoya of Dabeiba anchors a river-port town on the Río Murindó, while a mule loaded with maize sacks climbs toward the sheer walls of the Cañón La Llorona. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "ebejico",
@@ -587,27 +580,28 @@
       "id": "frontino",
       "name": "Frontino",
       "subregion": "Occidente",
-      "subject": "the main plaza and church of Frontino, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "The Basílica Menor de Nuestra Señora del Carmen of Frontino rises above a mountain town, while a worker stirs a copper pan of golden panela beside a sack of gold ore and the peak of Cerro Plateado. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "giraldo",
       "name": "Giraldo",
       "subregion": "Occidente",
-      "subject": "the main plaza and church of Giraldo, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "Coffee and sugarcane fields cover the rolling hills of Giraldo, where the Río Tunusco runs through a green valley below and anís stalks sway along the roadside. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "heliconia",
       "name": "Heliconia",
       "subregion": "Occidente",
-      "subject": "The Iglesia de San Rafael of Heliconia in the mountains, with the Salinas de Guaca salt springs, the La Abuelita waterfalls and fields of coffee, sugar cane and plantain.",
+      "subject": "Green fields of coffee, sugar cane and plantain climb the steep mountains of Heliconia, where the La Abuelita waterfalls tumble down rocky slopes into a deep valley. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)",
-      "rehacer": "iglesia genérica repetida"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "liborina",
@@ -631,27 +625,28 @@
       "id": "peque",
       "name": "Peque",
       "subregion": "Occidente",
-      "subject": "the main plaza and church of Peque, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "Cattle graze on green hillsides above the Cauca river, where its waters plunge over the Salto de La Escopeta and the Paramillo mountains rise beyond. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "sabanalarga",
       "name": "Sabanalarga",
       "subregion": "Occidente",
-      "subject": "the main plaza and church of Sabanalarga, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A wooden cart piled with coffee cherries and sacks of beans stands on a town street, with the Cauca river shining in the valley beyond the green hills. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "san-jeronimo",
       "name": "San Jerónimo",
       "subregion": "Occidente",
-      "subject": "The Land of Cacao: cacao pods on the branch, the Iglesia de Nuestra Señora de la Candelaria on the plaza, the Aurra river and a waterfall among warm green hills near the Occidente tunnel.",
+      "subject": "Ripe cacao pods hang from a green branch in the foreground, their yellow husks catching warm light, while rolling green hills rise above the town in soft tropical haze. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)",
-      "rehacer": "iglesia genérica repetida"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "santa-fe-de-antioquia",
@@ -665,52 +660,55 @@
       "id": "sopetran",
       "name": "Sopetrán",
       "subregion": "Occidente",
-      "subject": "A small white colonial chapel of San Nicolás dating from 1622 beside bahareque houses and stone streets, a large ceiba tree on the main park, the Cauca river and the La Nevera waterfall.",
+      "subject": "A giant ceiba tree shades a town park beside old bahareque houses on a stone street, while the La Nevera waterfall plunges through green hills toward the wide Cauca river below. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false,
-      "rehacer": "iglesia genérica repetida"
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "uramita",
       "name": "Uramita",
       "subregion": "Occidente",
-      "subject": "the main plaza and church of Uramita, Antioquia, Colombia, with the typical landscape of the Occidente subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "Waterfalls of the Río Sucio cascade into natural pools surrounded by green forest, while the Río Uramita flows past the town below under a bright sky. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "angostura",
       "name": "Angostura",
       "subregion": "Norte",
-      "subject": "the main plaza and church of Angostura, Antioquia, Colombia, with the typical landscape of the Norte subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A miner pans gold in a wooden batea along the Río Dolores, with sugarcane stalks leaning against a copper panela pan on the bank and green hills rising beyond. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "belmira",
       "name": "Belmira",
       "subregion": "Norte",
-      "subject": "the Páramo de Belmira with frailejón plants, cold lagoons and mist",
+      "subject": "the Páramo de Belmira with frailejón plants, cold lagoons and mist No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "briceno",
       "name": "Briceño",
       "subregion": "Norte",
-      "subject": "the main plaza and church of Briceño, Antioquia, Colombia, with the typical landscape of the Norte subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "Pools of the Río Espíritu Santo shimmer beside a blackberry farmer's crates of mora, while the mountaintop Lago de las Auras glows above a green Briceño valley under passing clouds. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "campamento",
       "name": "Campamento",
       "subregion": "Norte",
-      "subject": "the main plaza and church of Campamento, Antioquia, Colombia, with the typical landscape of the Norte subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A worker pours hot panela syrup into rows of molds beside a tall obelisk, with sugarcane fields and the green Cordillera Central mountains rising behind. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "carolina-del-principe",
@@ -725,11 +723,10 @@
       "id": "donmatias",
       "name": "Donmatías",
       "subregion": "Norte",
-      "subject": "a sewing machine and colorful fabric rolls of the textile workshops of Donmatías, green hills behind",
+      "subject": "a sewing machine and colorful fabric rolls of the textile workshops of Donmatías, green hills behind No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "entrerrios",
@@ -744,119 +741,127 @@
       "id": "gomez-plata",
       "name": "Gómez Plata",
       "subregion": "Norte",
-      "subject": "The Salto de Guadalupe waterfall on the Guadalupe river among green hills with sugarcane and coffee fields, the Cerro Mocorongo behind and the church of Nuestra Señora del Carmen below.",
+      "subject": "The Salto de Guadalupe waterfall pours over rocks into the Guadalupe river, with green hills of sugarcane and coffee fields rising behind and the Cerro Mocorongo ridge in the distance. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "guadalupe",
       "name": "Guadalupe",
       "subregion": "Norte",
-      "subject": "The parish church of Nuestra Señora de Guadalupe over a mountain town called Light among Mountains, with the Troneras dam and river pools of the Charcos del Cañal among green hills.",
+      "subject": "The Troneras dam holds back a calm reservoir among green mountains, while clear river pools of the Charcos del Cañal sparkle in the valley below. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "ChatGPT (chatgpt.com)",
-      "rehacer": "iglesia genérica repetida"
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "ituango",
       "name": "Ituango",
       "subregion": "Norte",
-      "subject": "the huge Hidroituango dam wall and reservoir in the deep Cauca canyon",
+      "subject": "the huge Hidroituango dam wall and reservoir in the deep Cauca canyon No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "san-andres-de-cuerquia",
       "name": "San Andrés de Cuerquia",
       "subregion": "Norte",
-      "subject": "the main plaza and church of San Andrés de Cuerquia, Antioquia, Colombia, with the typical landscape of the Norte subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "The Santuario del Santo Cristo of San Andrés de Cuerquia, built in the 1950s, stands as the town's main attraction, while coffee beans spill from a sack beside a river and a waterfall plunges in the distance. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "san-jose-de-la-montana",
       "name": "San José de la Montaña",
       "subregion": "Norte",
-      "subject": "the main plaza and church of San José de la Montaña, Antioquia, Colombia, with the typical landscape of the Norte subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A fisherman lifts a shimmering trout from clear water at the edge of green pastures, while the Lagos de Congo glint in the páramo above grazing cows. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "san-pedro-de-los-milagros",
       "name": "San Pedro de los Milagros",
       "subregion": "Norte",
-      "subject": "the basilica of the Señor de los Milagros and dairy cows on green pastures",
+      "subject": "The Basílica del Señor de los Milagros rises above rolling green pastures where dairy cows graze on the hillside, with misty mountains fading into the distance behind the town. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false,
-      "rehacer": "iglesia genérica repetida"
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "santa-rosa-de-osos",
       "name": "Santa Rosa de Osos",
       "subregion": "Norte",
-      "subject": "dairy cows on green cold highlands and the cathedral of Santa Rosa de Osos",
+      "subject": "The Catedral Nuestra Señora del Rosario de Chiquinquirá rises above cold green hills, where dairy cows graze on rolling pastures beneath a pale, misty Antioquian sky. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false,
-      "rehacer": "iglesia genérica repetida"
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "toledo",
       "name": "Toledo",
       "subregion": "Norte",
-      "subject": "the main plaza and church of Toledo, Antioquia, Colombia, with the typical landscape of the Norte subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A dairy farmer milks a cow in the early light, with green hills rolling toward the Cauca River and a plate of arepas de chócolo with quesito waiting nearby. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "valdivia",
       "name": "Valdivia",
       "subregion": "Norte",
-      "subject": "the main plaza and church of Valdivia, Antioquia, Colombia, with the typical landscape of the Norte subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A woodcarver shapes a wooden figure with a carving knife, with a cacao pod and a yuca root resting beside him on a bench as mountain fog drifts through the green hills. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "yarumal",
       "name": "Yarumal",
       "subregion": "Norte",
-      "subject": "the main plaza and church of Yarumal, Antioquia, Colombia, with the typical landscape of the Norte subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "The Basílica Menor de Nuestra Señora de la Merced of Yarumal rises above the highland town, while blue hydrangeas bloom beside a yarumo tree and cattle graze on the distant Llanos de Cuivá. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "amalfi",
       "name": "Amalfi",
       "subregion": "Nordeste",
-      "subject": "the main plaza and church of Amalfi, Antioquia, Colombia, with the typical landscape of the Nordeste subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A farmer stirs boiling cane juice in a large copper pan over a fire, with the deep canyon of the Río Porce falling away below the green hills. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "anori",
       "name": "Anorí",
       "subregion": "Nordeste",
-      "subject": "the main plaza and church of Anorí, Antioquia, Colombia, with the typical landscape of the Nordeste subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A fisherman casts his line into the Río Anorí below the roaring Salto de Builes, with green mountains rising around the river and a basket of cacao pods waiting on the rocks. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "cisneros",
       "name": "Cisneros",
       "subregion": "Nordeste",
-      "subject": "the main plaza and church of Cisneros, Antioquia, Colombia, with the typical landscape of the Nordeste subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A historic locomotive stands on the main avenue of Cisneros beside its railway station, a national monument, while sugarcane stalks and panela cakes wait by a trapiche and the Alto de Versalles watches over the town. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "remedios",
       "name": "Remedios",
       "subregion": "Nordeste",
-      "subject": "artisanal gold panning in a river and a gold nugget, jungle hills of Remedios",
+      "subject": "artisanal gold panning in a river and a gold nugget, jungle hills of Remedios No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "san-roque",
@@ -871,10 +876,10 @@
       "id": "santo-domingo",
       "name": "Santo Domingo",
       "subregion": "Nordeste",
-      "subject": "The well-preserved central square of Santo Domingo with its old houses, the Iglesia de Santo Domingo de Guzmán and Capilla del Sagrado Corazón, a 50-meter waterfall and mountains encircled by the Nus and Nare rivers.",
+      "subject": "La Chorrera, a 50-meter waterfall, pours down a rocky cliff in the mountains of Santo Domingo, with the Nus river winding through the green Andean valley below. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false,
-      "rehacer": "iglesia genérica repetida"
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "segovia",
@@ -889,107 +894,118 @@
       "id": "vegachi",
       "name": "Vegachí",
       "subregion": "Nordeste",
-      "subject": "the main plaza and church of Vegachí, Antioquia, Colombia, with the typical landscape of the Nordeste subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "Waterfalls of the Quebrada El Pescado tumble over stone ledges in a green valley, while a bundle of sugarcane, a jar of golden honey, and a wrapped bocadillo sweet sit on a wooden table. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "yali",
       "name": "Yalí",
       "subregion": "Nordeste",
-      "subject": "the main plaza and church of Yalí, Antioquia, Colombia, with the typical landscape of the Nordeste subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "Cerro La Tetona rises above the sugarcane fields of Yalí, its green summit catching morning mist, while a farmer loads panela cakes onto a mule near the Río San Bartolomé. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "yolombo",
       "name": "Yolombó",
       "subregion": "Nordeste",
-      "subject": "the main plaza and church of Yolombó, Antioquia, Colombia, with the typical landscape of the Nordeste subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A rustic wooden trapiche sugarcane mill crushes green cane while stacked brown panela blocks dry in the foreground, with the distant peak of Cerro Cancharazo rising beyond the rolling hills. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "caucasia",
       "name": "Caucasia",
       "subregion": "Bajo Cauca",
-      "subject": "the wide Cauca river with a long bridge and wooden canoes at Caucasia, tropical lowlands",
+      "subject": "the wide Cauca river with a long bridge and wooden canoes at Caucasia, tropical lowlands No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "caceres",
       "name": "Cáceres",
       "subregion": "Bajo Cauca",
-      "subject": "the main plaza and church of Cáceres, Antioquia, Colombia, with the typical landscape of the Bajo Cauca subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A rancher herds cattle across green pastures and rice fields beside the wide Río Cauca, with wetlands glinting in the morning sun beneath a big tropical sky. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "el-bagre",
       "name": "El Bagre",
       "subregion": "Bajo Cauca",
-      "subject": "the main plaza and church of El Bagre, Antioquia, Colombia, with the typical landscape of the Bajo Cauca subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A miner swirls gravel in a wooden batea pan on the bank of the Nechí river, beside a fisherman's wooden canoe while the Salto El Perico waterfall plunges nearby. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "nechi",
       "name": "Nechí",
       "subregion": "Bajo Cauca",
-      "subject": "the main plaza and church of Nechí, Antioquia, Colombia, with the typical landscape of the Bajo Cauca subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A farmer lifts a heap of purple yam from the soil while a boy pulls a fishing net from the waters where the Cauca and Nechí rivers meet. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "taraza",
       "name": "Tarazá",
       "subregion": "Bajo Cauca",
-      "subject": "the main plaza and church of Tarazá, Antioquia, Colombia, with the typical landscape of the Bajo Cauca subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A basket overflows with ripe mangoes and cacao pods on a sandy river beach, with the Río Tarazá flowing past pebbles and green riverbank trees behind. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "zaragoza",
       "name": "Zaragoza",
       "subregion": "Bajo Cauca",
-      "subject": "the main plaza and church of Zaragoza, Antioquia, Colombia, with the typical landscape of the Bajo Cauca subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "Pilgrims carry an image of the Santo Cristo de Zaragoza in a festival procession, while a goldsmith shapes a gold ornament beside the confluence of the Nechí and Porce rivers. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "puerto-berrio",
       "name": "Puerto Berrío",
       "subregion": "Magdalena Medio",
-      "subject": "an old steel railway bridge and a train over the Magdalena river at Puerto Berrío",
+      "subject": "an old steel railway bridge and a train over the Magdalena river at Puerto Berrío No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
       "hecho": true,
-      "motor": "Gemini (gemini.google.com)",
-      "revisar_estilo": true
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "caracoli",
       "name": "Caracolí",
       "subregion": "Magdalena Medio",
-      "subject": "the main plaza and church of Caracolí, Antioquia, Colombia, with the typical landscape of the Magdalena Medio subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "The Caracolí tree, roughly 80 meters tall and over two centuries old, towers above the humid forest hills of Caracolí, while coffee cherries and gold panning tools rest beside the Río Nus. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "maceo",
       "name": "Maceo",
       "subregion": "Magdalena Medio",
-      "subject": "the main plaza and church of Maceo, Antioquia, Colombia, with the typical landscape of the Magdalena Medio subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "The Alicante river cuts a deep green canyon through steep forested hills, its rocky walls shadowed by tall trees as mist drifts over the cacao-growing countryside. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "puerto-nare",
       "name": "Puerto Nare",
       "subregion": "Magdalena Medio",
-      "subject": "the main plaza and church of Puerto Nare, Antioquia, Colombia, with the typical landscape of the Magdalena Medio subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "Fishermen haul nets from wooden canoes on the broad Magdalena River, while sacks of cement are stacked along the riverside promenade in the warm morning light. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "puerto-triunfo",
@@ -1004,9 +1020,10 @@
       "id": "yondo",
       "name": "Yondó",
       "subregion": "Magdalena Medio",
-      "subject": "the main plaza and church of Yondó, Antioquia, Colombia, with the typical landscape of the Magdalena Medio subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "The Puente Guillermo Gaviria Correa of Yondó, a one-kilometer bridge over the Magdalena River, stretches toward Barrancabermeja while fishermen cast nets and yuca and corn sit in baskets in the foreground. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "apartado",
@@ -1102,27 +1119,30 @@
       "name": "Cañón del Río Claro",
       "subregion": "Magdalena Medio",
       "extra": true,
-      "subject": "a white marble canyon with a turquoise river, caves and jungle at Cañón del Río Claro",
+      "subject": "a white marble canyon with a turquoise river, caves and jungle at Cañón del Río Claro No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "hacienda-napoles",
       "name": "Hacienda Nápoles",
       "subregion": "Magdalena Medio",
       "extra": true,
-      "subject": "hippos in a lagoon and giant dinosaur sculptures in a tropical park, Hacienda Nápoles",
+      "subject": "hippos in a lagoon and giant dinosaur sculptures in a tropical park, Hacienda Nápoles No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "doradal",
       "name": "Doradal",
       "subregion": "Magdalena Medio",
       "extra": true,
-      "subject": "the town of Doradal, Antioquia, Colombia, in the tropical Magdalena Medio lowlands",
-      "revisar": true,
-      "hecho": false
+      "subject": "White-walled houses with clay tile roofs and hanging gardens climb above the broad Magdalena River at Doradal, while a boatman steers a wooden canoe past a waterfront promenade. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "cerro-tusa",
