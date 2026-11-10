@@ -123,7 +123,6 @@ h1, h2, h3, p { margin: 0; }
     var(--paper);
   border-bottom: 1px solid #e6dcc6;
 }
-.top::before { content: ""; position: absolute; inset: 0 0 auto; height: 6px; background: linear-gradient(#fff 0 50%, var(--ant-green) 50%); box-shadow: 0 1px 0 #e6dcc6; }
 .top-grid { position: relative; z-index: 1; display: grid; gap: var(--s4); align-items: center; }
 @media (min-width: 900px) { .top-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 470px); gap: var(--s6); } }
 .eyebrow { display: inline-flex; align-items: center; gap: var(--s2); font: 600 12px/1.4 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ant-deep); }
@@ -154,11 +153,8 @@ h1, h2, h3, p { margin: 0; }
 .map .sb { fill: none; stroke: var(--paper); stroke-width: 2.2; stroke-linejoin: round; pointer-events: none; }
 .map .ol { fill: none; stroke: var(--ant-deep); stroke-width: 1.6; stroke-linejoin: round; pointer-events: none; }
 .map .lb { font: 700 8.5px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; fill: var(--ant-deep); paint-order: stroke; stroke: var(--paper); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
-.map-flag { position: absolute; top: -2%; right: 0; width: 26%; max-width: 120px; transform-origin: 6% 100%; animation: flagIn 600ms var(--ease-out) both; }
-@keyframes flagIn { from { opacity: 0; transform: rotate(-6deg) translateY(6px); } }
-.map-flag .wave { animation: flagWave 3.6s ease-in-out infinite alternate; transform-origin: left center; }
-@keyframes flagWave { to { transform: skewY(-3deg) scaleX(.97); } }
-.hills { position: relative; display: block; width: 100%; height: clamp(36px, 6vw, 70px); margin-top: var(--s4); }
+.hills { position: relative; z-index: 0; display: block; width: min(100%, 1180px); height: auto; margin: clamp(-110px, -7vw, -16px) auto 0; pointer-events: none; user-select: none; }
+@media (min-width: 1180px) { .hills { -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); } }
 
 /* ---------- buttons ---------- */
 .btn {
@@ -627,20 +623,9 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     </div>
     <figure class="top-map">
       <svg class="map" id="map" role="img" aria-label="Mapa de Antioquia"></svg>
-      <svg class="map-flag" viewBox="0 0 120 96" aria-hidden="true">
-        <rect x="4" y="4" width="3" height="90" rx="1.5" fill="#5b4a33"/><circle cx="5.5" cy="4" r="3.2" fill="#c9a24a"/>
-        <g class="wave">
-          <path d="M7 8 C35 0 55 18 84 10 S110 6 116 8 V30 C98 26 86 36 64 32 S28 26 7 32 Z" fill="#fff" stroke="#d9d2c0" stroke-width=".8"/>
-          <path d="M7 32 C28 26 42 38 64 32 S98 26 116 30 V52 C98 48 86 58 64 54 S28 48 7 56 Z" fill="#0f7a3d"/>
-        </g>
-      </svg>
     </figure>
   </div>
-  <svg class="hills" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 44 C140 10 260 30 380 22 S620 0 760 26 S1020 14 1200 30 V70 H0 Z" fill="#8fb98a" opacity=".55"/>
-    <path d="M0 54 C160 30 300 50 460 38 S760 24 900 44 S1100 40 1200 46 V70 H0 Z" fill="#4f8f5a" opacity=".7"/>
-    <path d="M0 62 C200 50 360 64 560 56 S900 52 1200 60 V70 H0 Z" fill="#17432a"/>
-  </svg>
+  <img class="hills" src="assets/paisaje.webp" alt="" width="1600" height="521" decoding="async">
 </header>
 
 <main class="wrap">
