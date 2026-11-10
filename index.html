@@ -584,7 +584,6 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
       <h1 class="title">Mis sellos de Antioquia</h1>
       <p class="lede">Un sello por cada lugar que visites. Toca un sello para marcarlo como visitado; tócalo otra vez para quitarlo.</p>
       <div class="actions od-cluster">
-        <button type="button" class="btn btn-primary" id="newBtn" data-ic="plus">Nuevo lugar</button>
         <button type="button" class="btn" id="exportBtn" data-ic="download">Exportar</button>
         <button type="button" class="btn" id="importBtn" data-ic="upload">Importar</button>
         <input type="file" id="importFile" accept="application/json,.json" hidden>
@@ -682,38 +681,6 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
       <span class="spacer"></span>
       <button type="button" class="btn btn-ghost" id="pdCancel">Cancelar</button>
       <button type="button" class="btn btn-primary" id="pdSave">Poner sello</button>
-    </div>
-  </div>
-</dialog>
-
-<!-- nuevo lugar propio -->
-<dialog id="newDlg" aria-labelledby="npTitle">
-  <div class="dlg">
-    <div class="dlg-head">
-      <h2 class="od-fill" id="npTitle">Nuevo lugar propio</h2>
-      <button type="button" class="icon-btn" id="npClose" aria-label="Cerrar" data-ic="close"></button>
-    </div>
-    <div class="dlg-body">
-      <p class="hint">Para sitios que no son municipios: una piedra, un páramo, una cascada, una vereda.</p>
-      <div class="field">
-        <label class="label" for="npName">Nombre <span class="req" aria-hidden="true">*</span></label>
-        <input class="input" id="npName" maxlength="40" required autocomplete="off" aria-describedby="npNameErr">
-        <p class="err" id="npNameErr" hidden></p>
-      </div>
-      <div class="field">
-        <label class="label" for="npSub">Subregión</label>
-        <select class="select" id="npSub"></select>
-      </div>
-      <fieldset class="glyphs">
-        <legend class="label">Figura del sello</legend>
-        <div class="glyph-grid" id="npGlyphs"></div>
-      </fieldset>
-      <label class="check"><input type="checkbox" id="npVisited"> Ya lo visité</label>
-    </div>
-    <div class="dlg-foot">
-      <span class="spacer"></span>
-      <button type="button" class="btn btn-ghost" id="npCancel">Cancelar</button>
-      <button type="button" class="btn btn-primary" id="npCreate">Crear sello</button>
     </div>
   </div>
 </dialog>
@@ -887,9 +854,10 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   }
   const persist = () => { if (canStore) try { localStorage.setItem(KEY, JSON.stringify(state)); } catch { /* sin espacio */ } };
 
-  // visitas que ya traías (2026-11-08), sin fecha; se suman una sola vez sin pisar lo guardado
+  // tus visitas de antes (2026-11-08): solo con el link privado #mis-visitas; quien recibe el link normal empieza vacío
   const SEED = ['Abejorral', 'Alejandría', 'Amagá', 'Andes', 'Barbosa', 'Bello', 'Belmira', 'Caicedo', 'Caldas', 'Cañasgordas', 'Caramanta', 'El Carmen de Viboral', 'Carolina del Príncipe', 'Ciudad Bolívar', 'Cocorná', 'Concepción', 'Concordia', 'Copacabana', 'Donmatías', 'Ebéjico', 'Entrerríos', 'Envigado', 'Fredonia', 'Girardota', 'Gómez Plata', 'Granada', 'Guadalupe', 'Guarne', 'Guatapé', 'Heliconia', 'Hispania', 'Itagüí', 'Jardín', 'Jericó', 'La Ceja', 'La Estrella', 'La Pintada', 'La Unión', 'Liborina', 'Marinilla', 'Medellín', 'Mutatá', 'Nariño', 'Necoclí', 'Olaya', 'Pueblorrico', 'Puerto Berrío', 'Puerto Triunfo', 'El Retiro', 'Rionegro', 'Salgar', 'San Carlos', 'San Francisco', 'San Jerónimo', 'San Luis', 'San Pedro de los Milagros', 'San Rafael', 'San Roque', 'Santa Bárbara', 'Santa Fe de Antioquia', 'Santa Rosa de Osos', 'Santo Domingo', 'El Santuario', 'San Vicente Ferrer', 'Segovia', 'Sonsón', 'Sopetrán', 'Támesis', 'Tarso', 'Titiribí', 'Urrao', 'Valparaíso', 'Vegachí', 'Venecia', 'Yalí', 'Yolombó'];
-  if (!state.seeded) {
+  if (location.hash === '#mis-visitas') {
+    history.replaceState(null, '', location.pathname + location.search);
     for (const name of SEED) { const id = slug(name); if (!state.visits[id]) state.visits[id] = { date: '', note: '', night: false }; }
     state.seeded = 1;
     persist();
@@ -1060,7 +1028,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   let returnId = null;
   function restoreFocus() {
     const t = returnId && sectionsEl.querySelector(`[data-open="${CSS.escape(returnId)}"]`);
-    (t || $('newBtn')).focus();
+    (t || $('exportBtn')).focus();
     returnId = null;
   }
   function flash(id) {
@@ -1159,64 +1127,6 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   $('pdCancel').addEventListener('click', () => pd.close());
   $('pdClose').addEventListener('click', () => pd.close());
   pd.addEventListener('close', () => { if (returnId !== null) restoreFocus(); current = null; });
-
-  // ---------- nuevo lugar ----------
-  const nd = $('newDlg');
-  let nameTouched = false;
-  $('npSub').innerHTML = SUBS.map(s => `<option value="${s.k}">${esc(s.n)}</option>`).join('');
-  $('npGlyphs').innerHTML = Object.entries(GLYPHS).map(([k, g], i) =>
-    `<div class="glyph-opt"><input type="radio" name="npGlyph" id="g-${k}" value="${k}"${i === 0 ? ' checked' : ''}><label for="g-${k}">${icon(k, g.d)}<span>${g.n}</span></label></div>`).join('');
-
-  const nameError = v => {
-    if (!v) return 'Escribe el nombre del lugar, por ejemplo «Piedra del Peñol».';
-    if (allPlaces().some(p => norm(p.name) === norm(v))) return 'Ya tienes un sello con ese nombre. Usa uno distinto.';
-    return '';
-  };
-
-  $('newBtn').addEventListener('click', () => {
-    nameTouched = false;
-    $('npName').value = ''; $('npVisited').checked = true;
-    $('npSub').value = ui.sub !== 'todas' ? ui.sub : 'oriente';
-    $('g-montana').checked = true;
-    setErr($('npName'), $('npNameErr'), '');
-    returnId = null;
-    nd.showModal();
-    requestAnimationFrame(() => $('npName').focus());
-  });
-  $('npName').addEventListener('blur', () => { nameTouched = true; setErr($('npName'), $('npNameErr'), nameError($('npName').value.trim())); });
-  $('npName').addEventListener('input', () => { if (nameTouched) setErr($('npName'), $('npNameErr'), nameError($('npName').value.trim())); });
-
-  let newReturn = null;
-  function createPlace() {
-    const name = $('npName').value.trim(), visited = $('npVisited').checked;
-    const e1 = nameError(name);
-    setErr($('npName'), $('npNameErr'), e1);
-    if (e1) { $('npName').focus(); return; }
-    const p = { id: 'c-' + Date.now().toString(36), name, sub: $('npSub').value, glyph: nd.querySelector('input[name="npGlyph"]:checked').value, custom: true };
-    state.custom.push(p);
-    if (visited) state.visits[p.id] = { date: '', note: '', night: false };
-    // que el nuevo sello quede visible
-    if (ui.sub !== 'todas' && ui.sub !== p.sub) ui.sub = 'todas';
-    if (ui.status === (visited ? 'pendientes' : 'visitados')) { ui.status = 'todos'; $('stAll').checked = true; }
-    if (ui.q && !norm(p.name).includes(norm(ui.q))) { ui.q = ''; $('q').value = ''; }
-    persist(); render();
-    newReturn = p.id;
-    nd.close();
-    flash(p.id);
-    toast(`Sello creado: ${name}`);
-  }
-  $('npCreate').addEventListener('click', createPlace);
-  nd.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && e.target.matches('input[type="text"], input:not([type])')) { e.preventDefault(); createPlace(); }
-  });
-  $('npCancel').addEventListener('click', () => nd.close());
-  $('npClose').addEventListener('click', () => nd.close());
-  nd.addEventListener('close', () => {
-    const t = newReturn && sectionsEl.querySelector(`[data-open="${CSS.escape(newReturn)}"]`);
-    if (t) t.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-    (t || $('newBtn')).focus({ preventScroll: !!t });
-    newReturn = null;
-  });
 
   // ---------- exportar / importar ----------
   $('exportBtn').addEventListener('click', () => {
