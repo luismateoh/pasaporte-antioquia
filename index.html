@@ -139,13 +139,23 @@ html { accent-color: var(--ant-green); scrollbar-color: var(--ring-strong) var(-
 .progress { margin-top: var(--s5); max-width: 440px; }
 .progress-head { display: flex; align-items: baseline; gap: var(--s2); }
 .stat-num { font: 800 clamp(34px, 5vw, 46px)/1 var(--font-display); white-space: nowrap; color: var(--ant-deep); }
-.stat-num small { font-size: .5em; font-weight: 600; color: #6b675b; }
+.stat-num small { font-size: 20px; font-weight: 600; color: #6b675b; }
 .progress-cap { font-weight: 600; color: var(--ant-deep); }
 .progress-pct { margin-left: auto; font: 600 13px/1 var(--font-mono); color: var(--ant-deep); }
 .progress-bar { margin-top: var(--s2); height: 10px; border-radius: 99px; background: rgba(23, 67, 42, .12); overflow: hidden; }
 .progress-bar > i { display: block; height: 100%; border-radius: inherit; background: var(--ant-green); transform-origin: left; transform: scaleX(var(--p, 0)); transition: transform var(--t-enter) var(--ease-out); }
 .progress-meta { margin-top: var(--s2); font-size: 14px; color: var(--ant-deep); }
 .progress-meta b { font-weight: 700; color: var(--ant-deep); }
+.top-actions { margin-top: var(--s4); display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); }
+.rank-pill {
+  display: inline-flex; align-items: center; gap: var(--s2); min-height: 44px; padding: var(--s2) var(--s3);
+  background: var(--surface); border: 1px solid var(--ring-strong); border-radius: var(--radius-sm);
+  color: var(--ant-deep); font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer;
+  transition: background-color var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out);
+  --od-icon-size: 18px;
+}
+@media (hover: hover) { .rank-pill:hover { background: var(--wash); border-color: var(--ant-deep); } }
+.rank-pill span { font: 600 12.5px/1.2 var(--font-mono); color: var(--muted); padding-left: var(--s2); border-left: 1px solid var(--ring); }
 .next { margin-top: var(--s5); max-width: 440px; display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: var(--s4); align-items: center;
   padding: var(--s3) var(--s4) var(--s3) var(--s3); background: var(--surface); border: 1px solid var(--ring); border-radius: var(--radius);
   box-shadow: 0 6px 18px -12px rgba(23, 67, 42, .35); }
@@ -191,6 +201,32 @@ html { accent-color: var(--ant-green); scrollbar-color: var(--ring-strong) var(-
   .btn-danger:hover { background: var(--danger-wash); border-color: var(--danger); }
   .btn-ghost:hover { background: var(--wash); border-color: transparent; }
 }
+
+/* ---------- logros del viajero ---------- */
+.ach-block { margin-bottom: var(--s6); scroll-margin-top: 24px; }
+.ach-next-hint { font-size: 13px; color: var(--muted); }
+.ach-next-hint b { color: var(--ant-deep); font-weight: 600; }
+.ach-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--s2); }
+@media (max-width: 767px) {
+  .ach-grid { display: flex; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none;
+              margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter) var(--s1); scroll-padding-inline: var(--gutter); }
+  .ach-grid::-webkit-scrollbar { display: none; }
+  .ach-grid > * { flex: 0 0 216px; scroll-snap-align: start; }
+}
+.ach {
+  display: grid; grid-template-columns: 44px minmax(0, 1fr); align-items: center; column-gap: var(--s3); row-gap: var(--s2);
+  padding: var(--s3); background: var(--surface); border: 1px solid var(--ring); border-radius: var(--radius);
+  transition: border-color var(--t-fast) var(--ease-out), background-color var(--t-fast) var(--ease-out);
+}
+.ach.is-done { border-color: var(--ink, var(--ant-green)); background: #fffdf7; }
+.ach.is-off { opacity: .78; }
+.ach-seal { width: 44px; height: 44px; display: block; }
+.ach-body { display: grid; gap: 2px; min-width: 0; }
+.ach-top { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s2); }
+.ach-name { font-weight: 600; font-size: 14px; line-height: 1.25; color: var(--fg); }
+.ach-frac { font: 600 12px/1.2 var(--font-mono); color: var(--muted); white-space: nowrap; }
+.ach.is-done .ach-frac { color: var(--ink, var(--ant-green)); }
+.ach-desc { font-size: 12.5px; line-height: 1.35; color: var(--muted); }
 
 /* ---------- subregion chips ---------- */
 .subs-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); margin-bottom: var(--s3); }
@@ -433,6 +469,48 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   .zd-foot .btn { width: 100%; }
 }
 
+/* ---------- estudio para compartir ---------- */
+#shareDlg {
+  width: min(760px, calc(100vw - 24px));
+  max-height: calc(100dvh - 24px);
+}
+@media (max-width: 559px) {
+  #shareDlg { width: 100vw; max-width: 100vw; margin: auto 0 0; border-radius: 12px 12px 0 0; max-height: 96dvh; }
+}
+.sh-opts {
+  width: 100%;
+  display: grid;
+  gap: var(--s3);
+}
+@media (min-width: 640px) {
+  .sh-opts { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; }
+  .sh-opts .sh-field-full { grid-column: 1 / -1; }
+}
+.sh-stage {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, var(--surface) 0%, var(--paper) 68%, var(--wash) 100%);
+  border: 1px solid var(--ring);
+  border-radius: var(--radius);
+  padding: var(--s4);
+}
+.sh-canvas {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(100%, 380px);
+  max-height: 54dvh;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 16px 36px -8px rgba(22, 25, 30, .28);
+  border: 1px solid var(--ring-strong);
+  background: var(--paper);
+}
+@media (max-width: 599px) {
+  .zd-foot #shShareBtn { grid-column: 1 / -1; }
+}
+
 /* ---------- impresión ---------- */
 .print-sheet-box { display: none; }
 @media print {
@@ -544,6 +622,10 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
         <div class="progress-head"><span class="stat-num" id="stMuni">0<small> /125</small></span><span class="progress-cap">municipios</span><span class="progress-pct" id="stPct">0 %</span></div>
         <div class="progress-bar" aria-hidden="true"><i id="stBar"></i></div>
         <p class="progress-meta"><b id="stSubs">0</b> de 9 subregiones completas · <b id="stCustom">0</b> lugares extra</p>
+        <div class="top-actions">
+          <button type="button" class="btn btn-primary" id="shareBtn" data-ic="share">Compartir pasaporte</button>
+          <a class="rank-pill" href="#achBlock" id="rankPill" data-ic="award"><b id="stRank">Pasaporte por estrenar</b><span id="stAch">0 / 12 logros</span></a>
+        </div>
       </div>
       <div class="next" id="next" hidden>
         <div class="next-stamp" id="nextStamp" aria-hidden="true"></div>
@@ -566,6 +648,14 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 </header>
 
 <main class="wrap">
+  <div class="ach-block" id="achBlock">
+    <div class="subs-head">
+      <h2 class="h-sm" id="achTitle">Logros del viajero</h2>
+      <p class="ach-next-hint" id="achHint"></p>
+    </div>
+    <div class="ach-grid" id="achs" role="list" aria-labelledby="achTitle"></div>
+  </div>
+
   <div class="subs-head">
     <h2 class="h-sm" id="subsTitle">Subregiones</h2>
   </div>
@@ -650,6 +740,56 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
         <button type="button" class="btn" id="zdDownloadSvg" data-ic="download" aria-label="Descargar SVG">SVG</button>
       </div>
       <button type="button" class="btn btn-primary" id="zdToggle" aria-pressed="false">Poner sello</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- estudio para compartir en historia o publicación -->
+<dialog id="shareDlg" aria-labelledby="shTitle">
+  <div class="dlg zd-dlg">
+    <div class="dlg-head">
+      <div class="od-fill">
+        <h2 id="shTitle">Compartir mi pasaporte</h2>
+        <p class="zd-sub" id="shSub">Crea una imagen lista para Historia de Instagram, WhatsApp o X</p>
+      </div>
+      <button type="button" class="icon-btn" id="shClose" aria-label="Cerrar ventana de compartir" data-ic="close"></button>
+    </div>
+    <div class="dlg-body zd-body">
+      <div class="sh-opts">
+        <div class="field">
+          <span class="label" id="shModeLbl">Diseño</span>
+          <div class="seg" role="radiogroup" aria-labelledby="shModeLbl">
+            <input type="radio" name="shMode" id="smPassport" value="passport" checked>
+            <label for="smPassport">Pasaporte + Mapa</label>
+            <input type="radio" name="shMode" id="smCollage" value="collage">
+            <label for="smCollage">Collage de sellos</label>
+          </div>
+        </div>
+        <div class="field">
+          <span class="label" id="shFmtLbl">Formato</span>
+          <div class="seg" role="radiogroup" aria-labelledby="shFmtLbl">
+            <input type="radio" name="shFmt" id="sfStory" value="story" checked>
+            <label for="sfStory">Historia (9:16)</label>
+            <input type="radio" name="shFmt" id="sfSquare" value="square">
+            <label for="sfSquare">Cuadrado (1:1)</label>
+          </div>
+        </div>
+        <div class="field sh-field-full">
+          <label class="label" for="shName">Tu nombre o apodo (opcional)</label>
+          <input class="input" id="shName" type="text" maxlength="28" autocomplete="off" placeholder="Ej. Luis, Rodada Antioquia, Familia Mateo…">
+        </div>
+      </div>
+
+      <div class="sh-stage">
+        <canvas id="shCanvas" class="sh-canvas" width="1080" height="1920"></canvas>
+      </div>
+    </div>
+    <div class="dlg-foot zd-foot">
+      <div class="od-cluster od-fill">
+        <button type="button" class="btn" id="shDownloadBtn" data-ic="download">Descargar PNG</button>
+        <button type="button" class="btn" id="shCopyBtn" data-ic="copy">Copiar resumen</button>
+      </div>
+      <button type="button" class="btn btn-primary" id="shShareBtn" data-ic="share">Compartir imagen</button>
     </div>
   </div>
 </dialog>
@@ -747,6 +887,9 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     stamp: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z',
     zoom: 'M15 15l6 6M10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14Zm-3-7h6M10 7v6',
     print: 'M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6v-7Z',
+    share: 'M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7M16 6l-4-4-4 4M12 2v13',
+    award: 'M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12ZM8.5 14l-1.5 8 5-3 5 3-1.5-8',
+    copy: 'M9 9h10v11H9zM5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1',
     chevronLeft: 'M15 19l-7-7 7-7',
     chevronRight: 'M9 5l7 7-7 7',
   };
@@ -759,12 +902,13 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   let canStore = true;
   try { localStorage.setItem('__t', '1'); localStorage.removeItem('__t'); } catch { canStore = false; }
 
-  const state = { visits: {}, custom: [] };
+  const state = { visits: {}, custom: [], traveler: '' };
   if (canStore) {
     try {
       const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
       if (saved && typeof saved === 'object') {
         state.visits = saved.visits && typeof saved.visits === 'object' ? saved.visits : {};
+        state.traveler = typeof saved.traveler === 'string' ? saved.traveler.slice(0, 28) : '';
       }
     } catch { /* datos corruptos: arranca vacío */ }
   } else {
@@ -852,14 +996,70 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
   // ---------- render ----------
   const $ = id => document.getElementById(id);
-  const subsEl = $('subs'), sectionsEl = $('sections'), emptyEl = $('empty');
+  const subsEl = $('subs'), sectionsEl = $('sections'), emptyEl = $('empty'), achsEl = $('achs');
+
+  const ACHS = [
+    { id: 'primer-sello', n: 'Primer sello', d: 'Tu primer municipio en el pasaporte', ink: '#0f7a3d', g: 'sol', cur: c => Math.min(c.muni, 1), max: 1 },
+    { id: 'puebliador', n: 'Puebliador', d: '10 municipios de Antioquia visitados', ink: '#1d6b4f', g: 'cafe', cur: c => Math.min(c.muni, 10), max: 10 },
+    { id: 'trochero', n: 'Trochero', d: '25 municipios (una quinta parte)', ink: '#7a3b1d', g: 'montana', cur: c => Math.min(c.muni, 25), max: 25 },
+    { id: 'baquiano', n: 'Baquiano', d: '50 municipios por las rutas paisas', ink: '#ad3e2b', g: 'puente', cur: c => Math.min(c.muni, 50), max: 50 },
+    { id: 'arriero', n: 'Arriero mayor', d: '75 municipios (60 % del mapa)', ink: '#7f6200', g: 'oro', cur: c => Math.min(c.muni, 75), max: 75 },
+    { id: 'centenario', n: 'Centenario', d: '100 municipios sellados', ink: '#1f4e8c', g: 'iglesia', cur: c => Math.min(c.muni, 100), max: 100 },
+    { id: 'antioqueno', n: 'Antioquia completa', d: 'Los 125 municipios de Antioquia', ink: '#17432a', g: 'piedra', cur: c => Math.min(c.muni, 125), max: 125 },
+    { id: 'primera-sub', n: 'Primera comarca', d: '1 subregión completa al 100 %', ink: '#2c5866', g: 'bosque', cur: c => Math.min(c.complete, 1), max: 1 },
+    { id: 'tres-subs', n: 'Tres subregiones', d: '3 de las 9 subregiones completas', ink: '#55459a', g: 'rio', cur: c => Math.min(c.complete, 3), max: 3 },
+    { id: 'cinco-subs', n: 'Cinco comarcas', d: '5 de las 9 subregiones completas', ink: '#006b85', g: 'lago', cur: c => Math.min(c.complete, 5), max: 5 },
+    { id: 'mar-cordillera', n: 'De mar a cordillera', d: 'Sellos en Urabá, Oriente y Suroeste', ink: '#006b85', g: 'mar', cur: c => (c.per.uraba > 0 ? 1 : 0) + (c.per.oriente > 0 ? 1 : 0) + (c.per.suroeste > 0 ? 1 : 0), max: 3 },
+    { id: 'joyas-extra', n: 'Joyas fuera de mapa', d: 'Los 8 lugares extra del pasaporte', ink: '#8a2d57', g: 'palma', cur: c => Math.min(c.extras, EXTRAS.length), max: EXTRAS.length },
+  ];
+
+  function evalAchs(c) {
+    return ACHS.map(a => {
+      const cur = a.cur(c);
+      return { ...a, val: cur, done: cur >= a.max, prog: Math.min(1, cur / a.max) };
+    });
+  }
+
+  function rankTitle(c) {
+    if (c.muni >= 125) return 'Antioquia completa';
+    if (c.muni >= 100) return 'Centenario';
+    if (c.muni >= 75) return 'Arriero mayor';
+    if (c.muni >= 50) return 'Baquiano';
+    if (c.muni >= 25) return 'Trochero';
+    if (c.muni >= 10) return 'Puebliador';
+    if (c.muni >= 1) return 'Primer sello';
+    return 'Pasaporte por estrenar';
+  }
+
+  const starPts = (cx, cy, rOut, rIn, n = 12) => {
+    const pts = [];
+    for (let i = 0; i < n * 2; i++) {
+      const r = i % 2 === 0 ? rOut : rIn;
+      const a = (i * Math.PI / n) - Math.PI / 2;
+      pts.push(`${(cx + r * Math.cos(a)).toFixed(1)},${(cy + r * Math.sin(a)).toFixed(1)}`);
+    }
+    return pts.join(' ');
+  };
+
+  function achSeal(a) {
+    const stroke = a.done ? a.ink : LOCKED;
+    const fill = a.done ? a.ink : 'none';
+    const fg = a.done ? '#ffffff' : '#5d594e';
+    const glyph = (GLYPHS[a.g] || GLYPHS.sol).d;
+    return `<svg class="ach-seal" viewBox="0 0 44 44" aria-hidden="true">
+      <polygon points="${starPts(22, 22, 20, 17, 12)}" fill="${fill}" stroke="${stroke}" stroke-width="1.5"${a.done ? '' : ' stroke-dasharray="2 2"'}/>
+      <circle cx="22" cy="22" r="14" fill="none" stroke="${a.done ? 'rgba(255,255,255,.55)' : stroke}" stroke-width="1"/>
+      <g transform="translate(12.4 12.4) scale(0.8)" fill="none" stroke="${fg}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${glyph}"/></g>
+    </svg>`;
+  }
 
   function counts() {
     const per = {};
     for (const s of SUBS) per[s.k] = s.m.reduce((n, name) => n + (state.visits[slug(name)] ? 1 : 0), 0);
     const muni = Object.values(per).reduce((a, b) => a + b, 0);
     const complete = SUBS.filter(s => per[s.k] === s.m.length).length;
-    return { per, muni, complete };
+    const extras = EXTRAS.concat(state.custom).filter(p => state.visits[p.id]).length;
+    return { per, muni, complete, extras };
   }
 
   function matches(p) {
@@ -910,7 +1110,26 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     $('stPct').textContent = Math.round(c.muni / TOTAL * 100) + ' %';
     $('stBar').style.setProperty('--p', c.muni / TOTAL);
     paintMap(c);
-    $('stCustom').textContent = EXTRAS.concat(state.custom).filter(p => state.visits[p.id]).length;
+    $('stCustom').textContent = c.extras;
+
+    const achs = evalAchs(c);
+    const achDone = achs.filter(a => a.done).length;
+    $('stRank').textContent = rankTitle(c);
+    $('stAch').textContent = `${achDone} / ${ACHS.length} logros`;
+
+    const nextAch = achs.find(a => !a.done);
+    $('achHint').innerHTML = nextAch
+      ? `Siguiente: <b>${esc(nextAch.n)}</b> (${nextAch.val}/${nextAch.max})`
+      : `<b>¡Completaste los ${ACHS.length} logros del pasaporte!</b>`;
+
+    achsEl.innerHTML = achs.map(a => `<div class="ach ${a.done ? 'is-done' : 'is-off'}" role="listitem" style="--ink:${a.ink}">
+      ${achSeal(a)}
+      <div class="ach-body">
+        <div class="ach-top"><span class="ach-name">${esc(a.n)}</span><span class="ach-frac">${a.val}/${a.max}</span></div>
+        <span class="ach-desc">${esc(a.d)}</span>
+      </div>
+      <span class="bar"><i style="--p:${a.prog}"></i></span>
+    </div>`).join('');
 
     const allP = c.muni / TOTAL;
     subsEl.innerHTML =
@@ -1006,14 +1225,22 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   function toggleVisit(id) {
     const p = findPlace(id); if (!p) return;
     const was = !!state.visits[id], wasDone = subDone(p.sub);
+    const prevAch = new Set(evalAchs(counts()).filter(a => a.done).map(a => a.id));
     if (was) delete state.visits[id]; else state.visits[id] = { date: '', note: '', night: false };
     persist(); render();
     if (!zd.open) sectionsEl.querySelector(`[data-open="${CSS.escape(id)}"]`)?.focus();
     if (was) return toast(`Sello quitado: ${p.name}`, 'check', { label: 'Deshacer', run: () => toggleVisit(id) });
     flash(id);
     const s = SUB[p.sub];
-    if (!wasDone && subDone(p.sub)) { celebrate(p.sub); toast(`¡Completaste ${s.n}! ${s.m.length} de ${s.m.length} municipios`, 'stamp'); }
-    else toast(`Sello puesto: ${p.name}`);
+    const newAchs = evalAchs(counts()).filter(a => a.done && !prevAch.has(a.id));
+    if (!wasDone && subDone(p.sub)) {
+      celebrate(p.sub);
+      toast(`¡Completaste ${s.n}! ${s.m.length} de ${s.m.length} municipios`, 'stamp', { label: 'Compartir', run: () => openShare() });
+    } else if (newAchs.length) {
+      toast(`¡Logro desbloqueado: ${newAchs[0].n}!`, 'award', { label: 'Compartir', run: () => openShare() });
+    } else {
+      toast(`Sello puesto: ${p.name}`);
+    }
   }
   function celebrate(k) {
     const h = sectionsEl.querySelector(`#h-${k}`)?.closest('.section');
@@ -1052,7 +1279,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
   // ---------- exportar / importar ----------
   $('exportBtn').addEventListener('click', () => {
-    const data = { app: 'pasaporte-antioquia', version: 1, exportado: new Date().toISOString(), visits: state.visits };
+    const data = { app: 'pasaporte-antioquia', version: 1, exportado: new Date().toISOString(), traveler: state.traveler || '', visits: state.visits };
     try {
       const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
       const a = document.createElement('a');
@@ -1077,6 +1304,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
           state.visits[id] = { date: v.date || '', note: String(v.note || '').slice(0, 280), night: !!v.night }; n++;
         }
       }
+      if (typeof data.traveler === 'string') state.traveler = data.traveler.slice(0, 28);
       persist(); render();
       toast(n === 1 ? 'Importado 1 sello' : `Importados ${n} sellos`, 'upload');
     } catch {
@@ -1337,6 +1565,606 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
   $('zdDownloadSvg').addEventListener('click', () => {
     if (zoomCurrent) exportStampSvg(zoomCurrent, true);
+  });
+
+  // ---------- estudio para compartir (Historia 9:16 y Cuadrado 1:1) ----------
+  const shDlg = $('shareDlg'), shCanvas = $('shCanvas');
+  let shMode = 'passport', shFmt = 'story';
+  const miniCache = new Map();
+
+  function loadMiniImg(id) {
+    if (miniCache.has(id)) return miniCache.get(id);
+    const p = new Promise(resolve => {
+      const im = new Image();
+      im.crossOrigin = 'anonymous';
+      im.onload = () => resolve(im);
+      im.onerror = () => resolve(null);
+      im.src = `assets/sellos-mini/${id}.webp`;
+    });
+    miniCache.set(id, p);
+    return p;
+  }
+
+  function roundRectPath(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.roundRect(x, y, w, h, r);
+  }
+
+  function drawHexPath(ctx, cx, cy, r) {
+    ctx.beginPath();
+    [-90, -30, 30, 90, 150, 210].forEach((deg, i) => {
+      const a = deg * Math.PI / 180;
+      const x = cx + r * Math.cos(a), y = cy + r * Math.sin(a);
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    });
+    ctx.closePath();
+  }
+
+  function drawStarPath(ctx, cx, cy, rOut, rIn, n = 12) {
+    ctx.beginPath();
+    for (let i = 0; i < n * 2; i++) {
+      const r = i % 2 === 0 ? rOut : rIn;
+      const a = (i * Math.PI / n) - Math.PI / 2;
+      const x = cx + r * Math.cos(a), y = cy + r * Math.sin(a);
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+  }
+
+  function drawArcText(ctx, str, cx, cy, rad, isBottom, fontSize, weight = 600) {
+    ctx.save();
+    ctx.font = `${weight} ${fontSize}px "IBM Plex Mono", monospace`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    const chars = [...str];
+    const step = (fontSize * 0.66) / rad;
+    const total = (chars.length - 1) * step;
+    for (let i = 0; i < chars.length; i++) {
+      ctx.save();
+      if (!isBottom) {
+        const a = -Math.PI / 2 - total / 2 + i * step;
+        ctx.translate(cx + rad * Math.cos(a), cy + rad * Math.sin(a));
+        ctx.rotate(a + Math.PI / 2);
+      } else {
+        const a = Math.PI / 2 + total / 2 - i * step;
+        ctx.translate(cx + rad * Math.cos(a), cy + rad * Math.sin(a));
+        ctx.rotate(a - Math.PI / 2);
+      }
+      ctx.fillText(chars[i], 0, 0);
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+
+  function drawCanvasStamp(ctx, p, cx, cy, R, img, isVisited) {
+    const s = SUB[p.sub], ink = s.ink, isHex = !!(p.extra || p.custom);
+    const scale = R / 60;
+    ctx.save();
+    ctx.translate(cx, cy);
+    if (isVisited) ctx.rotate((rot(p.id) * Math.PI) / 180);
+
+    // Sombra y base de papel blanco
+    ctx.save();
+    ctx.shadowColor = 'rgba(22, 25, 30, 0.16)';
+    ctx.shadowBlur = 14 * scale;
+    ctx.shadowOffsetY = 5 * scale;
+    ctx.fillStyle = '#ffffff';
+    if (isHex) drawHexPath(ctx, 0, 0, 58 * scale);
+    else { ctx.beginPath(); ctx.arc(0, 0, 56 * scale, 0, Math.PI * 2); }
+    ctx.fill();
+    ctx.restore();
+
+    // Ilustración recortada en círculo central
+    if (img) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(0, 0, 33.5 * scale, 0, Math.PI * 2);
+      ctx.clip();
+      if (!isVisited) ctx.globalAlpha = 0.78;
+      ctx.drawImage(img, -36 * scale, -36 * scale, 72 * scale, 72 * scale);
+      ctx.restore();
+    }
+
+    // Marcos del sello
+    ctx.save();
+    ctx.strokeStyle = ink;
+    if (!isVisited) ctx.setLineDash([3 * scale, 3 * scale]);
+    ctx.lineWidth = 3 * scale;
+    if (isHex) drawHexPath(ctx, 0, 0, 58 * scale);
+    else { ctx.beginPath(); ctx.arc(0, 0, 56 * scale, 0, Math.PI * 2); }
+    ctx.stroke();
+
+    ctx.lineWidth = 1.2 * scale;
+    if (isHex) drawHexPath(ctx, 0, 0, 53 * scale);
+    else { ctx.beginPath(); ctx.arc(0, 0, 51 * scale, 0, Math.PI * 2); }
+    ctx.stroke();
+
+    ctx.lineWidth = 1.5 * scale;
+    ctx.beginPath(); ctx.arc(0, 0, 34 * scale, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
+
+    // Texto curvado y puntos laterales
+    const name = p.name.toUpperCase();
+    const fsTop = Math.min(9, 112 / (name.length * 0.66)) * scale;
+    ctx.fillStyle = ink;
+    drawArcText(ctx, name, 0, 0, 41 * scale, false, fsTop, 600);
+    drawArcText(ctx, s.n.toUpperCase(), 0, 0, 41.5 * scale, true, 6.4 * scale, 600);
+
+    ctx.beginPath();
+    ctx.arc(-44 * scale, 0, 2 * scale, 0, Math.PI * 2);
+    ctx.arc(44 * scale, 0, 2 * scale, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawCanvasMap(ctx, boxX, boxY, boxW, boxH) {
+    const pad = 12;
+    const sc = Math.min((boxW - pad * 2) / MAPA.w, (boxH - pad * 2) / MAPA.h);
+    const ox = boxX + (boxW - MAPA.w * sc) / 2;
+    const oy = boxY + (boxH - MAPA.h * sc) / 2;
+
+    ctx.save();
+    ctx.translate(ox, oy);
+    ctx.scale(sc, sc);
+
+    for (const p of MUNIS) {
+      const path = new Path2D(MAPA.m[p.id]);
+      const on = !!state.visits[p.id];
+      ctx.fillStyle = SUB[p.sub].ink;
+      ctx.globalAlpha = on ? 1 : 0.2;
+      ctx.fill(path);
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = '#f7f0e1';
+      ctx.lineWidth = 0.65;
+      ctx.stroke(path);
+    }
+
+    ctx.strokeStyle = '#f7f0e1';
+    ctx.lineWidth = 2.2;
+    ctx.lineJoin = 'round';
+    for (const s of SUBS) ctx.stroke(new Path2D(MAPA.s[s.k]));
+
+    ctx.strokeStyle = '#17432a';
+    ctx.lineWidth = 1.7;
+    ctx.stroke(new Path2D(MAPA.o));
+
+    ctx.font = '700 8.5px "IBM Plex Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.lineJoin = 'round';
+    for (const s of SUBS) {
+      const [lx, ly] = MAPA.l[s.k];
+      const words = s.n.toUpperCase().split(' ');
+      const multi = words.length > 2 || s.k === 'magdalena' || s.k === 'bajocauca';
+      ctx.strokeStyle = '#f7f0e1';
+      ctx.lineWidth = 3.2;
+      ctx.fillStyle = '#17432a';
+      if (multi) {
+        words.forEach((w, i) => {
+          const wy = ly + (i - (words.length - 1) / 2) * 9.5;
+          ctx.strokeText(w, lx, wy);
+          ctx.fillText(w, lx, wy);
+        });
+      } else {
+        ctx.strokeText(s.n.toUpperCase(), lx, ly + 2);
+        ctx.fillText(s.n.toUpperCase(), lx, ly + 2);
+      }
+    }
+    ctx.restore();
+  }
+
+  function drawPassportBackdrop(ctx, W, H, c, achs) {
+    ctx.fillStyle = '#f7f0e1';
+    ctx.fillRect(0, 0, W, H);
+
+    // Líneas guilloché sutiles de papel oficial
+    ctx.save();
+    ctx.strokeStyle = 'rgba(23, 67, 42, 0.045)';
+    ctx.lineWidth = 1.5;
+    for (let r = 80; r < W * 1.1; r += 26) {
+      ctx.beginPath(); ctx.arc(W * 0.15, H * 0.92, r, 0, Math.PI * 2); ctx.stroke();
+    }
+    ctx.strokeStyle = 'rgba(122, 59, 29, 0.04)';
+    for (let r = 80; r < W * 0.95; r += 30) {
+      ctx.beginPath(); ctx.arc(W * 0.88, H * 0.08, r, 0, Math.PI * 2); ctx.stroke();
+    }
+    ctx.restore();
+
+    // Doble marco de libreta de pasaporte
+    ctx.strokeStyle = '#c5b796';
+    ctx.lineWidth = 3;
+    roundRectPath(ctx, 32, 32, W - 64, H - 64, 16);
+    ctx.stroke();
+
+    ctx.strokeStyle = '#e2d7bf';
+    ctx.lineWidth = 1.5;
+    roundRectPath(ctx, 44, 44, W - 88, H - 88, 10);
+    ctx.stroke();
+
+    // Bandera de Antioquia + encabezado
+    const padX = 76;
+    const flagY = 76;
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(padX, flagY, 34, 11);
+    ctx.fillStyle = '#0f7a3d';
+    ctx.fillRect(padX, flagY + 11, 34, 11);
+    ctx.strokeStyle = 'rgba(23, 67, 42, 0.45)';
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(padX, flagY, 34, 22);
+
+    ctx.fillStyle = '#17432a';
+    ctx.font = '600 20px "IBM Plex Mono", monospace';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('PASAPORTE DE VIAJERO · ANTIOQUIA', padX + 48, flagY + 11);
+
+    // Rango e insignias a la derecha
+    const rank = rankTitle(c).toUpperCase();
+    ctx.font = '600 18px "IBM Plex Mono", monospace';
+    const rankTxt = `RANGO: ${rank}`;
+    const rw = ctx.measureText(rankTxt).width + 36;
+    ctx.fillStyle = '#fffcf4';
+    ctx.strokeStyle = '#c5b796';
+    ctx.lineWidth = 1.5;
+    roundRectPath(ctx, W - padX - rw, flagY - 8, rw, 38, 8);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = '#0f7a3d';
+    ctx.textAlign = 'center';
+    ctx.fillText(rankTxt, W - padX - rw / 2, flagY + 11);
+
+    // Título principal con nombre opcional
+    const cleanName = (state.traveler || '').trim();
+    const mainTitle = cleanName ? `Pasaporte de ${cleanName}` : 'Mis sellos de Antioquia';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillStyle = '#17432a';
+    const titleFs = mainTitle.length > 22 ? 52 : 62;
+    ctx.font = `800 ${titleFs}px "Bricolage Grotesque", sans-serif`;
+    ctx.fillText(mainTitle, padX, 164);
+
+    // Subrayado verde de acento
+    const tw = Math.min(W - padX * 2, ctx.measureText(mainTitle).width);
+    ctx.fillStyle = 'rgba(15, 122, 61, 0.82)';
+    roundRectPath(ctx, padX + 2, 174, Math.min(280, tw * 0.45), 8, 4);
+    ctx.fill();
+
+    // Pie de página oficial
+    const achDone = achs.filter(a => a.done).length;
+    ctx.fillStyle = '#5d594e';
+    ctx.font = '600 18px "IBM Plex Mono", monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText(`${achDone} DE ${ACHS.length} LOGROS DESBLOQUEADOS`, padX, H - 68);
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#17432a';
+    ctx.fillText('luismateoh.github.io/pasaporte-antioquia', W - padX, H - 68);
+  }
+
+  function drawAchMedalsRow(ctx, achs, x, y, w, h) {
+    ctx.fillStyle = '#fffcf4';
+    ctx.strokeStyle = '#e2d7bf';
+    ctx.lineWidth = 1.5;
+    roundRectPath(ctx, x, y, w, h, 12);
+    ctx.fill();
+    ctx.stroke();
+
+    const unlocked = achs.filter(a => a.done);
+    const pending = achs.filter(a => !a.done);
+    const list = unlocked.concat(pending).slice(0, 6);
+    ctx.fillStyle = '#5d594e';
+    ctx.font = '600 16px "IBM Plex Mono", monospace';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    const hdr = `INSIGNIAS DEL VIAJERO · ${unlocked.length} DE ${ACHS.length} DESBLOQUEADAS`;
+    ctx.fillText(hdr, x + 24, y + 28);
+
+    const slotW = (w - 40) / list.length;
+    list.forEach((a, i) => {
+      const cx = x + 20 + slotW * (i + 0.5);
+      const cy = y + 84;
+      ctx.save();
+      drawStarPath(ctx, cx, cy, 26, 22, 12);
+      ctx.fillStyle = a.done ? a.ink : '#ece3cf';
+      ctx.fill();
+      ctx.strokeStyle = a.done ? a.ink : '#8b919a';
+      ctx.lineWidth = 1.8;
+      ctx.stroke();
+
+      ctx.save();
+      ctx.translate(cx - 12, cy - 12);
+      ctx.strokeStyle = a.done ? '#ffffff' : '#5d594e';
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.stroke(new Path2D((GLYPHS[a.g] || GLYPHS.sol).d));
+      ctx.restore();
+
+      ctx.fillStyle = a.done ? '#1b231d' : '#5d594e';
+      ctx.font = '600 14px "Instrument Sans", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(a.n, cx, cy + 44);
+      ctx.restore();
+    });
+  }
+
+  async function renderShareCanvas() {
+    const W = 1080, H = shFmt === 'story' ? 1920 : 1080;
+    if (shCanvas.width !== W) shCanvas.width = W;
+    if (shCanvas.height !== H) shCanvas.height = H;
+    const ctx = shCanvas.getContext('2d');
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+
+    const c = counts();
+    const achs = evalAchs(c);
+    const visited = MUNIS.concat(EXTRAS).filter(p => state.visits[p.id]);
+    const sampleIds = visited.length
+      ? visited.map(p => p.id)
+      : ['medellin', 'guatape', 'jardin', 'santa-fe-de-antioquia', 'jerico', 'el-penol', 'canon-del-rio-claro', 'plaza-botero', 'rionegro', 'urrao', 'arboletes', 'cerro-tusa'];
+    const placeList = sampleIds.map(findPlace).filter(Boolean);
+
+    // Pre-cargar miniaturas necesarias
+    const imgEntries = await Promise.all(placeList.slice(0, 36).map(async p => [p.id, await loadMiniImg(p.id)]));
+    const imgs = Object.fromEntries(imgEntries);
+
+    drawPassportBackdrop(ctx, W, H, c, achs);
+    const padX = 76, innerW = W - padX * 2;
+    const pct = Math.round((c.muni / TOTAL) * 100);
+
+    if (shMode === 'passport') {
+      if (shFmt === 'story') {
+        // Tarjeta de resumen estadístico
+        const statY = 206, statH = 148;
+        ctx.fillStyle = '#fffcf4';
+        ctx.strokeStyle = '#e2d7bf';
+        ctx.lineWidth = 1.5;
+        roundRectPath(ctx, padX, statY, innerW, statH, 12);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#17432a';
+        ctx.font = '800 64px "Bricolage Grotesque", sans-serif';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'alphabetic';
+        ctx.fillText(`${c.muni}`, padX + 28, statY + 76);
+        const numW = ctx.measureText(`${c.muni}`).width;
+        ctx.fillStyle = '#5d594e';
+        ctx.font = '600 28px "Bricolage Grotesque", sans-serif';
+        ctx.fillText(`/ ${TOTAL} municipios`, padX + 36 + numW, statY + 72);
+
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#0f7a3d';
+        ctx.font = '700 32px "IBM Plex Mono", monospace';
+        ctx.fillText(`${pct} %`, padX + innerW - 28, statY + 68);
+
+        // Barra de progreso
+        const barX = padX + 28, barY = statY + 94, barW = innerW - 56;
+        ctx.fillStyle = 'rgba(23, 67, 42, 0.12)';
+        roundRectPath(ctx, barX, barY, barW, 14, 7);
+        ctx.fill();
+        if (c.muni > 0) {
+          ctx.fillStyle = '#0f7a3d';
+          roundRectPath(ctx, barX, barY, Math.max(18, barW * (c.muni / TOTAL)), 14, 7);
+          ctx.fill();
+        }
+
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#17432a';
+        ctx.font = '600 18px "IBM Plex Mono", monospace';
+        ctx.fillText(`${c.complete} DE 9 SUBREGIONES COMPLETAS · ${c.extras} LUGARES EXTRA`, barX, statY + 132);
+
+        // Mapa de Antioquia coloreado
+        drawCanvasMap(ctx, padX, 372, innerW, 740);
+
+        // Sellos destacados
+        const stY = 1132;
+        ctx.fillStyle = '#5d594e';
+        ctx.font = '600 18px "IBM Plex Mono", monospace';
+        ctx.textAlign = 'left';
+        ctx.fillText(visited.length ? `SELLOS EN MI COLECCIÓN (${visited.length})` : 'DESTINOS PARA EMPEZAR EL PASAPORTE', padX, stY);
+
+        const showStamps = placeList.slice(0, 8);
+        const cols = 4, cellW = innerW / cols, rowH = 216;
+        showStamps.forEach((p, idx) => {
+          const col = idx % cols, row = Math.floor(idx / cols);
+          const cx = padX + cellW * (col + 0.5);
+          const cy = stY + 26 + row * rowH + 96;
+          drawCanvasStamp(ctx, p, cx, cy, 88, imgs[p.id], !!state.visits[p.id]);
+        });
+
+        drawAchMedalsRow(ctx, achs, padX, 1618, innerW, 162);
+      } else {
+        // Cuadrado 1:1 (1080x1080) - Dos columnas: Izquierda estadísticas + sellos + logros, Derecha mapa
+        const leftW = 450, rightX = padX + leftW + 24, rightW = innerW - leftW - 24;
+        const statY = 204, statH = 152;
+        ctx.fillStyle = '#fffcf4';
+        ctx.strokeStyle = '#e2d7bf';
+        ctx.lineWidth = 1.5;
+        roundRectPath(ctx, padX, statY, leftW, statH, 12);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#17432a';
+        ctx.font = '800 54px "Bricolage Grotesque", sans-serif';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'alphabetic';
+        ctx.fillText(`${c.muni}`, padX + 22, statY + 66);
+        const nw = ctx.measureText(`${c.muni}`).width;
+        ctx.fillStyle = '#5d594e';
+        ctx.font = '600 24px "Bricolage Grotesque", sans-serif';
+        ctx.fillText(`/ ${TOTAL}`, padX + 28 + nw, statY + 62);
+
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#0f7a3d';
+        ctx.font = '700 26px "IBM Plex Mono", monospace';
+        ctx.fillText(`${pct} %`, padX + leftW - 22, statY + 60);
+
+        const barX = padX + 22, barY = statY + 84, barW = leftW - 44;
+        ctx.fillStyle = 'rgba(23, 67, 42, 0.12)';
+        roundRectPath(ctx, barX, barY, barW, 12, 6);
+        ctx.fill();
+        if (c.muni > 0) {
+          ctx.fillStyle = '#0f7a3d';
+          roundRectPath(ctx, barX, barY, Math.max(14, barW * (c.muni / TOTAL)), 12, 6);
+          ctx.fill();
+        }
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#17432a';
+        ctx.font = '600 15px "IBM Plex Mono", monospace';
+        ctx.fillText(`${c.complete}/9 SUBREGIONES · ${c.extras} EXTRAS`, barX, statY + 124);
+
+        // Cuadrícula 3x2 de sellos a la izquierda
+        ctx.fillStyle = '#5d594e';
+        ctx.font = '600 16px "IBM Plex Mono", monospace';
+        ctx.fillText(visited.length ? `SELLOS RECIENTES (${visited.length})` : 'SELLOS PARA EMPEZAR', padX, 392);
+        const showStamps = placeList.slice(0, 6);
+        const cols = 3, cellW = leftW / cols, rowH = 166;
+        showStamps.forEach((p, idx) => {
+          const col = idx % cols, row = Math.floor(idx / cols);
+          const cx = padX + cellW * (col + 0.5);
+          const cy = 412 + row * rowH + 74;
+          drawCanvasStamp(ctx, p, cx, cy, 68, imgs[p.id], !!state.visits[p.id]);
+        });
+
+        // Mapa a la derecha
+        drawCanvasMap(ctx, rightX, 200, rightW, 545);
+
+        // Insignias abajo a todo lo ancho
+        drawAchMedalsRow(ctx, achs, padX, 776, innerW, 158);
+      }
+    } else {
+      // Modo Collage de sellos
+      const barY = 204, barH = 74;
+      ctx.fillStyle = '#fffcf4';
+      ctx.strokeStyle = '#e2d7bf';
+      ctx.lineWidth = 1.5;
+      roundRectPath(ctx, padX, barY, innerW, barH, 10);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = '#17432a';
+      ctx.font = '700 22px "IBM Plex Mono", monospace';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      const summaryTxt = visited.length
+        ? `${c.muni} DE ${TOTAL} MUNICIPIOS (${pct} %) · ${c.complete}/9 SUBREGIONES · ${c.extras} EXTRAS`
+        : `VISTA PREVIA · MARCA TUS PUEBLOS VISITADOS PARA ARMAR TU COLLAGE`;
+      ctx.fillText(summaryTxt, padX + 24, barY + barH / 2);
+
+      const stageTop = 304;
+      const stageBot = shFmt === 'story' ? 1600 : 762;
+      const stageH = stageBot - stageTop;
+      const maxSlots = shFmt === 'story' ? 24 : 15;
+      const items = placeList.slice(0, maxSlots);
+      const n = items.length;
+
+      let cols = 3;
+      if (shFmt === 'story') {
+        cols = n <= 2 ? 1 : n <= 6 ? 2 : n <= 12 ? 3 : 4;
+      } else {
+        cols = n <= 1 ? 1 : n <= 4 ? 2 : n <= 9 ? 3 : n <= 12 ? 4 : 5;
+      }
+      const rows = Math.ceil(n / cols);
+      const cellW = innerW / cols;
+      const cellH = stageH / rows;
+      const R = Math.min(cellW, cellH) * 0.43;
+
+      items.forEach((p, idx) => {
+        const col = idx % cols, row = Math.floor(idx / cols);
+        const inRow = Math.min(cols, n - row * cols);
+        const startX = padX + ((cols - inRow) * cellW) / 2;
+        const cx = startX + cellW * (col + 0.5);
+        const cy = stageTop + cellH * (row + 0.5);
+        drawCanvasStamp(ctx, p, cx, cy, R, imgs[p.id], !!state.visits[p.id]);
+      });
+
+      if (visited.length > maxSlots) {
+        const extraN = visited.length - maxSlots;
+        ctx.fillStyle = '#17432a';
+        ctx.font = '700 20px "IBM Plex Mono", monospace';
+        ctx.textAlign = 'right';
+        ctx.fillText(`+ ${extraN} SELLOS MÁS EN MI PASAPORTE`, padX + innerW, stageBot + 6);
+      }
+
+      drawAchMedalsRow(ctx, achs, padX, shFmt === 'story' ? 1618 : 776, innerW, 158);
+    }
+  }
+
+  function getShareSummaryText() {
+    const c = counts();
+    const pct = Math.round((c.muni / TOTAL) * 100);
+    const achDone = evalAchs(c).filter(a => a.done).length;
+    const who = (state.traveler || '').trim();
+    const head = who ? `Pasaporte de Antioquia de ${who}` : 'Mi Pasaporte de Antioquia';
+    return `${head}: ${c.muni}/${TOTAL} municipios visitados (${pct} %), ${c.complete}/9 subregiones completas y ${achDone}/${ACHS.length} logros (${rankTitle(c)}). Crea el tuyo en https://luismateoh.github.io/pasaporte-antioquia/`;
+  }
+
+  function openShare() {
+    $('shName').value = state.traveler || '';
+    shDlg.showModal();
+    renderShareCanvas();
+    requestAnimationFrame(() => $('shShareBtn').focus());
+  }
+
+  $('shareBtn').addEventListener('click', openShare);
+  $('shClose').addEventListener('click', () => shDlg.close());
+  document.querySelectorAll('input[name="shMode"]').forEach(r => r.addEventListener('change', e => {
+    shMode = e.target.value;
+    renderShareCanvas();
+  }));
+  document.querySelectorAll('input[name="shFmt"]').forEach(r => r.addEventListener('change', e => {
+    shFmt = e.target.value;
+    renderShareCanvas();
+  }));
+  $('shName').addEventListener('input', e => {
+    state.traveler = e.target.value.slice(0, 28);
+    persist();
+    renderShareCanvas();
+  });
+
+  function downloadSharePng() {
+    const a = document.createElement('a');
+    a.download = `pasaporte-antioquia-${shFmt}-${todayISO()}.png`;
+    a.href = shCanvas.toDataURL('image/png');
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    toast('Imagen descargada lista para publicar', 'download');
+  }
+
+  $('shDownloadBtn').addEventListener('click', downloadSharePng);
+
+  $('shCopyBtn').addEventListener('click', async () => {
+    const txt = getShareSummaryText();
+    try {
+      await navigator.clipboard.writeText(txt);
+      toast('Resumen copiado al portapapeles', 'check');
+    } catch {
+      toast('No se pudo copiar automáticamente en este navegador', 'alert');
+    }
+  });
+
+  $('shShareBtn').addEventListener('click', async () => {
+    await renderShareCanvas();
+    const blob = await new Promise(res => shCanvas.toBlob(res, 'image/png'));
+    if (!blob) return downloadSharePng();
+    const file = new File([blob], `pasaporte-antioquia-${shFmt}.png`, { type: 'image/png' });
+    const shareData = {
+      title: 'Mi Pasaporte de Antioquia',
+      text: getShareSummaryText(),
+      files: [file],
+    };
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      try {
+        await navigator.share(shareData);
+        toast('Pasaporte compartido', 'check');
+        return;
+      } catch (err) {
+        if (err && err.name === 'AbortError') return;
+      }
+    }
+    downloadSharePng();
   });
 
   render();
