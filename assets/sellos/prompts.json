@@ -88,9 +88,10 @@
       "id": "sabaneta",
       "name": "Sabaneta",
       "subregion": "Valle de Aburrá",
-      "subject": "the main plaza and church of Sabaneta, Antioquia, Colombia, with the typical landscape of the Valle de Aburrá subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A traditional vendor fries a giant golden buñuelo in a copper pan beside hanging bunches of green plantains, with the green hills of the Aburrá valley behind. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "abejorral",
@@ -334,17 +335,19 @@
       "id": "betania",
       "name": "Betania",
       "subregion": "Suroeste",
-      "subject": "the main plaza and church of Betania, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A beekeeper pours golden honey from a glass jar beside burlap sacks of coffee and a traditional wooden guitar, with the jagged Farallones del Citará mountains rising above coffee-covered slopes. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "betulia",
       "name": "Betulia",
       "subregion": "Suroeste",
-      "subject": "the main plaza and church of Betulia, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "Ripe red coffee cherries spill from a handwoven basket on a steep green Betulia hillside, where the Quebrada San Mateo winds down toward the Cauca valley beneath tall guamo shade trees. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "caramanta",
@@ -420,9 +423,10 @@
       "id": "montebello",
       "name": "Montebello",
       "subregion": "Suroeste",
-      "subject": "the main plaza and church of Montebello, Antioquia, Colombia, with the typical landscape of the Suroeste subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A scenic mountain viewpoint over the deep canyon of the Río La Miel in Montebello, with a coffee farmer carrying burlap sacks along a stone trail among pine and coffee trees. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "pueblorrico",
@@ -446,10 +450,11 @@
       "id": "santa-barbara",
       "name": "Santa Bárbara",
       "subregion": "Suroeste",
-      "subject": "The Balcón de los bellos paisajes: a lookout over distant valleys and the Cauca river toward the snowy Nevado del Ruiz at dawn, with mango trees and the parish church on the central park. Draw the church faithfully from the reference photo (its real towers, domes, colors, proportions).",
+      "subject": "Ripe red-and-yellow mangoes hang from lush mango trees in the foreground above a sunny lookout over the deep Cauca River canyon and layered green mountains of Santa Bárbara. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false,
-      "referencia_foto": "the specific church named in the subject, in Santa Bárbara, Antioquia"
+      "hecho": true,
+      "referencia_foto": "the specific church named in the subject, in Santa Bárbara, Antioquia",
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "tamesis",
@@ -464,27 +469,30 @@
       "id": "tarso",
       "name": "Tarso",
       "subregion": "Suroeste",
-      "subject": "The Iglesia parroquial de San Pablo de Tarso rises with its two towers over a green hillside, while a farmer with a woven basket walks past a rustic trapiche sugarcane mill and brown panela blocks drying in the sun. Draw the church faithfully from the reference photo (its real towers, domes, colors, proportions).",
+      "subject": "A farmer walks past a rustic trapiche sugarcane mill with a woven basket, while brown panela blocks dry in the sun on a green hillside above the Cauca canyon. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false,
-      "referencia_foto": "the specific church named in the subject, in Tarso, Antioquia"
+      "hecho": true,
+      "referencia_foto": "the specific church named in the subject, in Tarso, Antioquia",
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "titiribi",
       "name": "Titiribí",
       "subregion": "Suroeste",
-      "subject": "The Iglesia Nuestra Señora de Los Dolores stands on Titiribí's central plaza beside a hilltop view of the Cauca River valley, with a gold miner's pan resting on a wooden bench and coffee bushes climbing the surrounding slopes. Draw the church faithfully from the reference photo (its real towers, domes, colors, proportions).",
+      "subject": "A gold miner's wooden batea pan rests on a bench on a hilltop overlooking the Cauca River valley, with coffee bushes climbing the surrounding green slopes. No church in this stamp.",
       "revisar": false,
-      "hecho": false,
-      "referencia_foto": "the specific church named in the subject, in Titiribí, Antioquia"
+      "hecho": true,
+      "referencia_foto": "the specific church named in the subject, in Titiribí, Antioquia",
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "urrao",
       "name": "Urrao",
       "subregion": "Suroeste",
-      "subject": "the Páramo del Sol with tall frailejón plants, high peaks and a cold lagoon above Urrao No church, no bell tower, no town plaza in this stamp.",
+      "subject": "Tall frailejón plants stand across the Páramo del Sol beneath high peaks, with a cold mountain lagoon mirroring the sky and low clouds drifting over the grassland. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "valparaiso",
@@ -1029,41 +1037,46 @@
       "id": "apartado",
       "name": "Apartadó",
       "subregion": "Urabá",
-      "subject": "endless banana plantations with banana bunches wrapped in blue bags in Apartadó",
+      "subject": "Endless lush green banana plantations in Apartadó with hanging banana bunches wrapped in bright blue protective bags and a wooden crate of ripe bananas in the foreground, Serranía de Abibe hills behind. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "arboletes",
       "name": "Arboletes",
       "subregion": "Urabá",
-      "subject": "the bubbling mud volcano pool of Arboletes next to the Caribbean sea",
+      "subject": "The wide flat gray bubbling mud crater of the Volcán de Lodo de Arboletes on a coastal cliff right beside the turquoise Caribbean Sea, lined with coconut palms. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "carepa",
       "name": "Carepa",
       "subregion": "Urabá",
-      "subject": "banana plantations and a cable line carrying banana bunches in Carepa",
+      "subject": "Green banana plantations in Carepa with an overhead steel cableway carrying harvested green banana bunches across a tropical stream, tall royal palms behind. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "chigorodo",
       "name": "Chigorodó",
       "subregion": "Urabá",
-      "subject": "banana plantations with the Serranía de Abibe mountains behind Chigorodó",
+      "subject": "The wide winding Chigorodó River lined with tall arching guadua bamboo groves and banana plantations, with the green Serranía de Abibe mountains rising in the background. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "murindo",
       "name": "Murindó",
       "subregion": "Urabá",
-      "subject": "dense rainforest and dugout canoes on the Atrato river at Murindó",
+      "subject": "Wooden dugout canoes gliding along the wide Atrato River through dense tropical Chocó-Urabá rainforest, with riverside stilt houses and red heliconia flowers in the foreground. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "mutata",
@@ -1086,33 +1099,37 @@
       "id": "san-juan-de-uraba",
       "name": "San Juan de Urabá",
       "subregion": "Urabá",
-      "subject": "a quiet Caribbean beach with fishing boats and palms at San Juan de Urabá",
+      "subject": "A serene Caribbean beach at Damaquiel in San Juan de Urabá with wooden fishing boats resting on golden sand, leaning coconut palms, and mangrove roots along the shore. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "san-pedro-de-uraba",
       "name": "San Pedro de Urabá",
       "subregion": "Urabá",
-      "subject": "the main plaza and church of San Pedro de Urabá, Antioquia, Colombia, with the typical landscape of the Urabá subregion",
-      "revisar": true,
-      "hecho": false
+      "subject": "A conical mud volcano rises among green subandean hills in San Pedro de Urabá, while colorful woven plantain-fiber baskets, sombreros vueltiaos and hammocks hang on a wooden rack in the foreground. No church, no bell tower, no town plaza in this stamp.",
+      "revisar": false,
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "turbo",
       "name": "Turbo",
       "subregion": "Urabá",
-      "subject": "a port on the Gulf of Urabá with banana boats and coconut palms in Turbo",
+      "subject": "Wooden cargo boats loaded with green plantains and bananas in the lively harbor of Turbo on the Gulf of Urabá, with coastal mangroves and coconut palms along the water. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "vigia-del-fuerte",
       "name": "Vigía del Fuerte",
       "subregion": "Urabá",
-      "subject": "stilt houses and dugout canoes on the wide Atrato river in the rainforest of Vigía del Fuerte",
+      "subject": "Colorful wooden stilt houses along the banks of the mighty Atrato River in Vigía del Fuerte, with dugout canoes on the water and dense tropical jungle canopy behind. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "canon-del-rio-claro",
@@ -1149,27 +1166,30 @@
       "name": "Cerro Tusa",
       "subregion": "Suroeste",
       "extra": true,
-      "subject": "the pyramid-shaped mountain Cerro Tusa above coffee hills, a hiker on the summit trail",
+      "subject": "The dramatic sharp pyramid-shaped peak of Cerro Tusa rising steeply above lush green coffee hills in Venecia, with a stone pre-Columbian altar rock in the foreground trail. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "plaza-botero",
       "name": "Plaza Botero",
       "subregion": "Valle de Aburrá",
       "extra": true,
-      "subject": "Botero's voluptuous bronze sculptures in the plaza with the black-and-white gothic Palacio de la Cultura behind, Medellín",
+      "subject": "Fernando Botero's iconic monumental bronze sculptures (a plump horse and standing figure) among palm trees in Plaza Botero, with the checkered black-and-white domes and arches of the Palacio de la Cultura Rafael Uribe Uribe behind. No church, no bell tower in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "jardin-botanico",
       "name": "Jardín Botánico",
       "subregion": "Valle de Aburrá",
       "extra": true,
-      "subject": "the wooden hexagonal flower-like canopy of the Orquideorama among tropical plants and orchids in the Medellín botanical garden",
+      "subject": "The iconic wooden hexagonal honeycomb-patterned canopy structures of the Orquideorama towering over lush tropical ferns, bromeliads, and blooming cattleya orchids in the Medellín Botanical Garden, with a lagoon in front. No church, no bell tower, no town plaza in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     },
     {
       "id": "comuna-13",
@@ -1185,9 +1205,10 @@
       "name": "El Poblado",
       "subregion": "Valle de Aburrá",
       "extra": true,
-      "subject": "tree-lined streets with tall modern buildings of El Poblado on the slopes of Medellín, green hills behind",
+      "subject": "Lush tree-lined steep streets of El Poblado in Medellín, with warm brick modern buildings nestled into green Andean mountain slopes, tropical philodendrons and outdoor tables in the foreground. No church, no bell tower in this stamp.",
       "revisar": false,
-      "hecho": false
+      "hecho": true,
+      "motor": "ChatGPT (chatgpt.com), conversación nueva"
     }
   ]
 }
