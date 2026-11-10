@@ -234,6 +234,9 @@ h1, h2, h3, p { margin: 0; }
   transition: background-color var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out);
 }
 @media (hover: hover) { .badge:hover { background: var(--surface); border-color: var(--ring); } }
+.tile { position: relative; display: grid; min-width: 0; }
+.badge-zoom { position: absolute; top: 0; right: 0; width: 32px; height: 32px; display: grid; place-items: center; border: 0; border-radius: 50%; background: var(--surface); color: var(--muted); cursor: pointer; --od-icon-size: 16px; opacity: .85; }
+@media (hover: hover) { .badge-zoom { opacity: 0; transition: opacity var(--t-fast) var(--ease-out); } .tile:hover .badge-zoom, .badge-zoom:focus-visible { opacity: 1; } }
 .badge-name { font-weight: 600; font-size: 14px; line-height: 1.3; width: 100%; margin-top: var(--s1); }
 .badge-meta { font: 500 12px/1.3 var(--font-mono); color: var(--muted); white-space: nowrap; }
 .badge-meta.on { color: var(--fg); }
@@ -578,7 +581,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     <div>
       <p class="eyebrow">Pasaporte de viajero</p>
       <h1 class="title">Mis sellos de Antioquia</h1>
-      <p class="lede">Un sello por cada lugar que visites. Toca uno para registrar la fecha, una nota y si te quedaste a dormir.</p>
+      <p class="lede">Un sello por cada lugar que visites. Toca un sello para marcarlo como visitado; tócalo otra vez para quitarlo.</p>
       <div class="actions od-cluster">
         <button type="button" class="btn btn-primary" id="newBtn" data-ic="plus">Nuevo lugar</button>
         <button type="button" class="btn" id="exportBtn" data-ic="download">Exportar</button>
@@ -664,18 +667,6 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
           </div>
         </div>
       </div>
-      <div class="field">
-        <label class="label" for="pdDate">Fecha de la visita</label>
-        <input class="input" type="date" id="pdDate" aria-describedby="pdDateHint pdDateErr">
-        <p class="hint" id="pdDateHint">Opcional. Si no la recuerdas, déjala en blanco.</p>
-        <p class="err" id="pdDateErr" hidden></p>
-      </div>
-      <div class="field">
-        <label class="label" for="pdNote">Nota</label>
-        <textarea class="textarea" id="pdNote" maxlength="280" aria-describedby="pdNoteHint"></textarea>
-        <p class="hint" id="pdNoteHint">Opcional. Qué hiciste, con quién fuiste, qué comiste.</p>
-      </div>
-      <label class="check"><input type="checkbox" id="pdNight"> Me quedé a dormir</label>
       <div class="confirm" id="pdConfirm" hidden role="alertdialog" aria-labelledby="pdConfirmText">
         <p id="pdConfirmText"></p>
         <div class="od-cluster">
@@ -716,12 +707,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
         <legend class="label">Figura del sello</legend>
         <div class="glyph-grid" id="npGlyphs"></div>
       </fieldset>
-      <div class="field">
-        <label class="label" for="npDate">Fecha de la visita</label>
-        <input class="input" type="date" id="npDate" aria-describedby="npDateHint npDateErr">
-        <p class="hint" id="npDateHint">Opcional. Si la escribes, el sello queda puesto de una vez.</p>
-        <p class="err" id="npDateErr" hidden></p>
-      </div>
+      <label class="check"><input type="checkbox" id="npVisited"> Ya lo visité</label>
     </div>
     <div class="dlg-foot">
       <span class="spacer"></span>
@@ -912,10 +898,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
   // ---------- utilidades ----------
   const todayISO = () => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 10); };
-  const fmtLong = new Intl.DateTimeFormat('es-CO', { day: 'numeric', month: 'short', year: 'numeric' });
-  const longDate = iso => iso ? fmtLong.format(new Date(iso + 'T12:00:00')) : '';
-  const stampDate = iso => { if (!iso) return ''; const [y, m, d] = iso.split('-'); return `${d}.${m}.${y.slice(2)}`; };
-  const visitText = v => v.date ? 'Visitado el ' + longDate(v.date) : 'Visitado · fecha por registrar';
+  const visitText = () => 'Visitado';
   const allPlaces = () => MUNIS.concat(EXTRAS, state.custom);
   const findPlace = id => allPlaces().find(p => p.id === id);
   const rot = id => { let h = 0; for (const c of id) h = (h * 31 + c.charCodeAt(0)) | 0; return (Math.abs(h) % 11) - 5; };
@@ -939,7 +922,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
       ? `<polygon points="${hexPts(60, 60, 58)}" stroke-width="3"/><polygon points="${hexPts(60, 60, 53)}" stroke-width="1.2"/>`
       : `<circle cx="60" cy="60" r="56" stroke-width="3"/><circle cx="60" cy="60" r="51" stroke-width="1.2"/>`;
     if (ART.has(p.id)) {
-      const bottom = s.n.toUpperCase() + (v && v.date ? ' · ' + stampDate(v.date) : '');
+      const bottom = s.n.toUpperCase();
       const artHref = opts.artHref || `assets/sellos/${p.id}.webp`;
       const artCls = isStamped ? 'art' : 'art art-off';
       return `<svg class="stamp${isStamped ? ' is-on' : ''}${extraCls}" viewBox="0 0 120 120" aria-hidden="true" style="--rot:${angle}deg">
@@ -962,7 +945,6 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
         <text font-size="${fs}" font-weight="600" letter-spacing="0.5"><textPath href="#${id}t" startOffset="50%" text-anchor="middle">${esc(name)}</textPath></text>
         <text font-size="7" letter-spacing="1.2"><textPath href="#${id}b" startOffset="50%" text-anchor="middle">${esc(s.n.toUpperCase())}</textPath></text>
         <circle cx="16" cy="60" r="2"/><circle cx="104" cy="60" r="2"/>
-        ${v ? `<text x="60" y="83" font-size="7.5" font-weight="600" text-anchor="middle">${stampDate(v.date)}</text>` : ''}
       </g>
       <g class="${isStamped ? '' : 'glyph-off'}" transform="translate(46 38) scale(1.1667)" fill="none" stroke="${ink}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="${glyph}"/></g>
     </svg>`;
@@ -998,11 +980,11 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   function tile(p) {
     const v = state.visits[p.id];
     const label = `${p.name}, ${SUB[p.sub].n}. ${v ? visitText(v) : 'Pendiente'}`;
-    return `<button type="button" class="badge" data-open="${esc(p.id)}" aria-label="${esc(label)}">
+    return `<div class="tile"><button type="button" class="badge" data-open="${esc(p.id)}" aria-pressed="${!!v}" aria-label="${esc(label)}">
       ${stamp(p, p.id)}
       <span class="badge-name od-clamp-2 od-lines-2">${esc(p.name)}</span>
-      <span class="badge-meta${v ? ' on' : ''}">${v ? (stampDate(v.date) || 'Visitado') : (p.custom ? 'Propio · pendiente' : p.extra ? 'Extra · pendiente' : 'Pendiente')}</span>
-    </button>`;
+      <span class="badge-meta${v ? ' on' : ''}">${v ? 'Visitado' : (p.custom ? 'Propio · pendiente' : p.extra ? 'Extra · pendiente' : 'Pendiente')}</span>
+    </button><button type="button" class="badge-zoom" data-detail="${esc(p.id)}" aria-label="Ver sello de ${esc(p.name)}" title="Ver, imprimir o descargar">${icon('zoom')}</button></div>`;
   }
 
   function render() {
@@ -1096,13 +1078,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
   // ---------- detalle de lugar ----------
   const pd = $('placeDlg');
-  let current = null, confirmAction = null, dateTouched = false;
-
-  function dateError(val, required) {
-    if (!val) return required ? 'Escribe la fecha de tu visita para poner el sello.' : '';
-    if (val > todayISO()) return 'La fecha no puede ser posterior a hoy. Revisa el día de tu visita.';
-    return '';
-  }
+  let current = null, confirmAction = null;
 
   function fillPlace() {
     const p = current, s = SUB[p.sub], v = state.visits[p.id];
@@ -1112,51 +1088,50 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     $('pdSub').textContent = s.n + (p.custom ? ' · lugar propio' : p.extra ? ' · lugar extra' : '');
     $('pdBadge').closest('.place-hero').classList.toggle('has-art', ART.has(p.id));
     $('pdDot').style.background = s.ink;
-    $('pdState').textContent = v ? visitText(v) + (v.night ? ' · con pernocta' : '') : 'Pendiente';
-    $('pdSave').textContent = v ? 'Guardar cambios' : 'Poner sello';
+    $('pdState').textContent = v ? 'Visitado' : 'Pendiente';
+    $('pdSave').textContent = v ? 'Listo' : 'Poner sello';
     $('pdRemove').hidden = !v;
     $('pdDelete').hidden = !p.custom;
   }
 
   function openPlace(id) {
     const p = findPlace(id); if (!p) return;
-    current = p; returnId = id; dateTouched = false;
+    current = p; returnId = id;
     const v = state.visits[id];
-    $('pdDate').value = v ? v.date || '' : todayISO();
-    $('pdDate').max = todayISO();
-    $('pdNote').value = v ? v.note || '' : '';
-    $('pdNight').checked = !!(v && v.night);
-    setErr($('pdDate'), $('pdDateErr'), '');
     $('pdConfirm').hidden = true;
     fillPlace();
     pd.showModal();
-    requestAnimationFrame(() => $('pdDate').focus());
+    requestAnimationFrame(() => $('pdSave').focus());
   }
 
   sectionsEl.addEventListener('click', e => {
-    const b = e.target.closest('[data-open]'); if (b) openPlace(b.dataset.open);
+    const d = e.target.closest('[data-detail]'); if (d) return openPlace(d.dataset.detail);
+    const b = e.target.closest('[data-open]'); if (b) toggleVisit(b.dataset.open);
   });
 
-  $('pdDate').addEventListener('blur', () => { dateTouched = true; setErr($('pdDate'), $('pdDateErr'), dateError($('pdDate').value, false)); });
-  $('pdDate').addEventListener('input', () => { if (dateTouched) setErr($('pdDate'), $('pdDateErr'), dateError($('pdDate').value, false)); });
+  // un toque pone o quita el sello
+  function toggleVisit(id) {
+    const p = findPlace(id); if (!p) return;
+    const was = !!state.visits[id];
+    if (was) delete state.visits[id]; else state.visits[id] = { date: '', note: '', night: false };
+    persist(); render();
+    sectionsEl.querySelector(`[data-open="${CSS.escape(id)}"]`)?.focus();
+    if (!was) flash(id);
+    toast(was ? `Sello quitado: ${p.name}` : `Sello puesto: ${p.name}`);
+  }
+
 
   function savePlace() {
-    const date = $('pdDate').value;
-    const err = dateError(date, false);
-    setErr($('pdDate'), $('pdDateErr'), err);
-    if (err) { $('pdDate').focus(); return; }
     const was = !!state.visits[current.id];
-    state.visits[current.id] = { date, note: $('pdNote').value.trim(), night: $('pdNight').checked };
+    if (was) { pd.close(); return; }
+    state.visits[current.id] = { date: '', note: '', night: false };
     persist(); render();
     const id = current.id, name = current.name;
     pd.close();
     if (!was) flash(id);
-    toast(was ? `Cambios guardados: ${name}` : `Sello puesto: ${name}`);
+    toast(`Sello puesto: ${name}`);
   }
   $('pdSave').addEventListener('click', savePlace);
-  pd.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && e.target.matches('input:not([type="checkbox"])')) { e.preventDefault(); savePlace(); }
-  });
 
   function askConfirm(text, action) {
     confirmAction = action;
@@ -1164,7 +1139,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     $('pdConfirm').hidden = false;
     $('pdConfirmNo').focus();
   }
-  $('pdRemove').addEventListener('click', () => { const p = current; askConfirm(`¿Quitar el sello de ${p.name}? Se borran la fecha y la nota.`, () => {
+  $('pdRemove').addEventListener('click', () => { const p = current; askConfirm(`¿Quitar el sello de ${p.name}? `, () => {
     delete state.visits[p.id];
     persist(); render(); toast(`Sello quitado: ${p.name}`);
   }); });
@@ -1199,31 +1174,29 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
   $('newBtn').addEventListener('click', () => {
     nameTouched = false;
-    $('npName').value = ''; $('npDate').value = ''; $('npDate').max = todayISO();
+    $('npName').value = ''; $('npVisited').checked = true;
     $('npSub').value = ui.sub !== 'todas' ? ui.sub : 'oriente';
     $('g-montana').checked = true;
-    setErr($('npName'), $('npNameErr'), ''); setErr($('npDate'), $('npDateErr'), '');
+    setErr($('npName'), $('npNameErr'), '');
     returnId = null;
     nd.showModal();
     requestAnimationFrame(() => $('npName').focus());
   });
   $('npName').addEventListener('blur', () => { nameTouched = true; setErr($('npName'), $('npNameErr'), nameError($('npName').value.trim())); });
   $('npName').addEventListener('input', () => { if (nameTouched) setErr($('npName'), $('npNameErr'), nameError($('npName').value.trim())); });
-  $('npDate').addEventListener('blur', () => setErr($('npDate'), $('npDateErr'), dateError($('npDate').value, false)));
 
   let newReturn = null;
   function createPlace() {
-    const name = $('npName').value.trim(), date = $('npDate').value;
-    const e1 = nameError(name), e2 = dateError(date, false);
-    setErr($('npName'), $('npNameErr'), e1); setErr($('npDate'), $('npDateErr'), e2);
+    const name = $('npName').value.trim(), visited = $('npVisited').checked;
+    const e1 = nameError(name);
+    setErr($('npName'), $('npNameErr'), e1);
     if (e1) { $('npName').focus(); return; }
-    if (e2) { $('npDate').focus(); return; }
     const p = { id: 'c-' + Date.now().toString(36), name, sub: $('npSub').value, glyph: nd.querySelector('input[name="npGlyph"]:checked').value, custom: true };
     state.custom.push(p);
-    if (date) state.visits[p.id] = { date, note: '', night: false };
+    if (visited) state.visits[p.id] = { date: '', note: '', night: false };
     // que el nuevo sello quede visible
     if (ui.sub !== 'todas' && ui.sub !== p.sub) ui.sub = 'todas';
-    if (ui.status === (date ? 'pendientes' : 'visitados')) { ui.status = 'todos'; $('stAll').checked = true; }
+    if (ui.status === (visited ? 'pendientes' : 'visitados')) { ui.status = 'todos'; $('stAll').checked = true; }
     if (ui.q && !norm(p.name).includes(norm(ui.q))) { ui.q = ''; $('q').value = ''; }
     persist(); render();
     newReturn = p.id;
@@ -1233,7 +1206,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   }
   $('npCreate').addEventListener('click', createPlace);
   nd.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && e.target.matches('input[type="text"], input:not([type]), input[type="date"]')) { e.preventDefault(); createPlace(); }
+    if (e.key === 'Enter' && e.target.matches('input[type="text"], input:not([type])')) { e.preventDefault(); createPlace(); }
   });
   $('npCancel').addEventListener('click', () => nd.close());
   $('npClose').addEventListener('click', () => nd.close());
@@ -1415,11 +1388,6 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     if (current) openZoom(current.id);
   });
 
-  // Doble clic en cualquier sello de la cuadrícula para ampliar directamente
-  sectionsEl.addEventListener('dblclick', e => {
-    const b = e.target.closest('[data-open]');
-    if (b) openZoom(b.dataset.open);
-  });
 
   // Imprimir sello limpio (10cm centrado, guía de corte y datos)
   function printCurrentPlace(p) {
@@ -1427,7 +1395,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     $('prPlace').textContent = p.name.toUpperCase();
     $('prSub').textContent = `${s.n} · Antioquia, Colombia`;
     $('prStatus').textContent = v
-      ? (v.date ? `Visitado el ${longDate(v.date)}` : 'Visitado · fecha por registrar') + (v.night ? ' · Con pernocta' : '')
+      ? 'Visitado'
       : 'Colección Pasaporte · Antioquia';
     $('prStampWrap').innerHTML = stamp(p, 'pr-' + p.id, { straight: true, forceColor: true });
     window.print();
