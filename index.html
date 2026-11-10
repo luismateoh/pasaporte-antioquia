@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mi pasaporte · Antioquia</title>
+<title>Mis sellos de Antioquia · Pasaporte de viajero</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -70,15 +70,18 @@
 /* /OD-LAYOUT-PRIMITIVES v1 */
 
 :root {
-  --bg: #f2f3f5;
-  --surface: #ffffff;
-  --wash: #e7e9ed;
-  --fg: #16191e;
-  --muted: #565c66;
-  --ring: #d8dbe0;
-  --ring-strong: #b4b9c1;
+  --bg: #f7f0e1;
+  --surface: #fffcf4;
+  --wash: #ece3cf;
+  --fg: #1b231d;
+  --muted: #5d594e;
+  --ring: #e2d7bf;
+  --ring-strong: #c5b796;
   --locked: #8b919a;
-  --focus: #1f4e8c;
+  --focus: #0f7a3d;
+  --paper: #f7f0e1;
+  --ant-green: #0f7a3d;
+  --ant-deep: #17432a;
   --danger: #b3261e;
   --danger-wash: #fbeceb;
 
@@ -109,19 +112,19 @@ body {
 button, input, select, textarea { font: inherit; color: inherit; }
 h1, h2, h3, p { margin: 0; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+::selection { background: rgba(15, 122, 61, .22); color: var(--ant-deep); }
+html { accent-color: var(--ant-green); scrollbar-color: var(--ring-strong) var(--bg); }
 
 .wrap { max-width: var(--page); margin: 0 auto; padding: 0 var(--gutter); }
 
 /* ---------- header ---------- */
 /* ---------- encabezado: papel de pasaporte, mapa real y bandera de Antioquia ---------- */
 .top {
-  --paper: #f7f0e1; --ant-green: #0f7a3d; --ant-deep: #17432a;
   position: relative; overflow: hidden; padding: var(--s6) 0 0; margin-bottom: var(--s5);
   background:
     repeating-radial-gradient(circle at 18% 120%, transparent 0 13px, rgba(23, 67, 42, .045) 13px 14px),
     repeating-radial-gradient(circle at 92% -20%, transparent 0 17px, rgba(122, 59, 29, .04) 17px 18px),
     var(--paper);
-  border-bottom: 1px solid #e6dcc6;
 }
 .top-grid { position: relative; z-index: 1; display: grid; gap: var(--s4); align-items: center; }
 @media (min-width: 900px) { .top-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 470px); gap: var(--s6); } }
@@ -140,12 +143,23 @@ h1, h2, h3, p { margin: 0; }
 .progress-pct { margin-left: auto; font: 600 13px/1 var(--font-mono); color: var(--ant-deep); }
 .progress-bar { margin-top: var(--s2); height: 10px; border-radius: 99px; background: rgba(23, 67, 42, .12); overflow: hidden; }
 .progress-bar > i { display: block; height: 100%; border-radius: inherit; background: var(--ant-green); transform-origin: left; transform: scaleX(var(--p, 0)); transition: transform var(--t-enter) var(--ease-out); }
-.progress-meta { margin-top: var(--s2); font-size: 13px; color: #5d594e; }
+.progress-meta { margin-top: var(--s2); font-size: 14px; color: var(--ant-deep); }
 .progress-meta b { font-weight: 700; color: var(--ant-deep); }
-.actions { margin-top: var(--s5); }
+.next { margin-top: var(--s5); max-width: 440px; display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: var(--s4); align-items: center;
+  padding: var(--s3) var(--s4) var(--s3) var(--s3); background: var(--surface); border: 1px solid var(--ring); border-radius: var(--radius);
+  box-shadow: 0 6px 18px -12px rgba(23, 67, 42, .35); }
+.next-stamp .stamp { max-width: 84px; }
+.next-label { font-size: 12.5px; font-weight: 600; color: var(--ant-green); }
+.next-name { font: 800 22px/1.15 var(--font-display); color: var(--ant-deep); margin-top: 2px; overflow-wrap: anywhere; }
+.next-why { font-size: 14px; color: var(--muted); margin-top: 2px; }
+.next-actions { margin-top: var(--s2); gap: var(--s1); }
+.next-actions .btn-ghost { color: var(--ant-deep); }
+.foot { display: grid; gap: var(--s3); }
+@media (min-width: 768px) { .foot { grid-template-columns: minmax(0, 1fr) auto; align-items: center; } }
+.chip-count .od-icon { --od-icon-size: 12px; vertical-align: -2px; color: var(--ink, var(--ant-green)); }
 
 .top-map { position: relative; margin: 0 auto; width: 100%; max-width: 470px; }
-@media (max-width: 899px) { .top-map { max-width: 330px; } }
+@media (max-width: 899px) { .top-map { max-width: 280px; } }
 .map { display: block; width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 2px 0 rgba(23, 67, 42, .18)); }
 .map .m { fill: var(--ink); fill-opacity: .2; stroke: var(--paper); stroke-width: .6; cursor: pointer; transition: fill-opacity var(--t-enter) var(--ease-out); }
 .map .m.on { fill-opacity: 1; }
@@ -167,7 +181,7 @@ h1, h2, h3, p { margin: 0; }
 }
 .btn:active { transform: translateY(1px); }
 .btn-sm { min-height: 36px; padding: 0 var(--s3); font-size: 13.5px; --od-icon-size: 16px; }
-.btn-primary { background: var(--fg); border-color: var(--fg); color: #ffffff; }
+.btn-primary { background: var(--ant-deep); border-color: var(--ant-deep); color: #ffffff; }
 .btn-danger { color: var(--danger); border-color: #e2b4b0; }
 .btn-ghost { border-color: transparent; background: transparent; }
 @media (hover: hover) {
@@ -205,9 +219,10 @@ h1, h2, h3, p { margin: 0; }
 
 /* ---------- toolbar ---------- */
 .toolbar {
-  position: sticky; top: 0; z-index: 5; background: var(--bg);
+  position: relative; z-index: 5; background: var(--bg);
   padding: var(--s4) 0; margin-top: var(--s5); border-bottom: 1px solid var(--ring);
 }
+@media (min-width: 900px) { .toolbar { position: sticky; top: 0; } }
 .toolbar-grid { display: grid; gap: var(--s3); }
 @media (min-width: 768px) { .toolbar-grid { grid-template-columns: minmax(0, 1fr) auto; align-items: end; } }
 .field { display: grid; gap: var(--s1); }
@@ -232,7 +247,7 @@ h1, h2, h3, p { margin: 0; }
 .seg input { position: absolute; opacity: 0; pointer-events: none; }
 .seg label { display: flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 var(--s4); cursor: pointer; font-weight: 500; font-size: 14px; white-space: nowrap; transition: background-color var(--t-fast) var(--ease-out); }
 .seg label + input + label, .seg input + label ~ label { border-left: 1px solid var(--ring); }
-.seg input:checked + label { background: var(--fg); color: #ffffff; }
+.seg input:checked + label { background: var(--ant-deep); color: #ffffff; }
 .seg input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: -3px; }
 @media (hover: hover) { .seg input:not(:checked) + label:hover { background: var(--wash); } }
 @media (max-width: 767px) { .seg { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-flow: row; } .seg label { padding: 0 var(--s2); } }
@@ -268,6 +283,7 @@ h1, h2, h3, p { margin: 0; }
 .badge-name { font-weight: 600; font-size: 14px; line-height: 1.3; width: 100%; margin-top: var(--s1); }
 .badge-meta { font: 500 12px/1.3 var(--font-mono); color: var(--muted); white-space: nowrap; }
 .badge-meta.on { color: var(--fg); }
+.badge-meta.todo { color: var(--ink, var(--muted)); }
 .badge-meta.on::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--ink); margin-right: 6px; vertical-align: 1px; }
 
 .stamp { display: block; width: 100%; max-width: 116px; aspect-ratio: 1; height: auto; overflow: visible; }
@@ -275,8 +291,9 @@ h1, h2, h3, p { margin: 0; }
 .stamp.is-on { transform: rotate(var(--rot, 0deg)); }
 .stamp .glyph-off { opacity: .55; }
 .stamp .art { transition: filter var(--t-fast) var(--ease-out), opacity var(--t-fast) var(--ease-out); }
-.stamp .art-off { filter: grayscale(1) contrast(.85); opacity: .5; }
-@media (hover: hover) { .badge:hover .art-off { opacity: .75; } }
+.stamp .art-off { filter: saturate(.4) contrast(.92); opacity: .82; }
+.stamp.is-off > g { opacity: .62; }
+@media (hover: hover) { .badge:hover .art-off { filter: none; opacity: 1; } .badge:hover .stamp.is-off > g { opacity: 1; } }
 .extra-tag { font: 600 10.5px/1.3 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 .just-stamped .stamp { animation: stampIn var(--t-enter) var(--ease-out); }
 @keyframes stampIn { from { opacity: 0; transform: scale(1.25) rotate(var(--rot, 0deg)); } to { opacity: 1; transform: scale(1) rotate(var(--rot, 0deg)); } }
@@ -382,10 +399,14 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 .toast-zone { position: fixed; left: 0; right: 0; bottom: calc(var(--s5) + env(safe-area-inset-bottom)); display: grid; justify-items: center; pointer-events: none; z-index: 50; padding: 0 var(--s4); }
 .toast {
   display: flex; align-items: center; gap: var(--s2); max-width: 520px;
-  background: var(--fg); color: #ffffff; padding: var(--s3) var(--s4); border-radius: var(--radius-sm);
+  background: var(--ant-deep); color: #ffffff; padding: var(--s3) var(--s4); border-radius: var(--radius-sm);
   font-weight: 500; font-size: 15px; box-shadow: 0 12px 24px -8px rgba(22, 25, 30, .4); --od-icon-size: 18px;
   animation: toastIn var(--t-enter) var(--ease-out);
 }
+.toast-act { pointer-events: auto; margin-left: var(--s2); min-height: 36px; padding: 0 var(--s3); border: 1px solid rgba(255, 255, 255, .45); border-radius: var(--radius-sm); background: transparent; color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+.toast-act:hover { background: rgba(255, 255, 255, .12); }
+.just-completed .section-head { animation: subDone 1.2s var(--ease-out); }
+@keyframes subDone { 0% { background: transparent; } 25% { background: color-mix(in srgb, var(--ink) 16%, transparent); } 100% { background: transparent; } }
 .toast.out { animation: toastOut 180ms var(--ease-in) forwards; }
 @keyframes toastIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 @keyframes toastOut { to { opacity: 0; transform: translateY(8px); } }
@@ -499,8 +520,10 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   border-top: 1px solid var(--ring);
 }
 @media (max-width: 599px) {
-  .zd-foot .od-cluster { width: 100%; }
-  .zd-foot .btn { flex: 1 1 auto; }
+  .zd-foot { display: grid; grid-template-columns: 1fr 1fr; }
+  .zd-foot .od-cluster { display: contents; }
+  .zd-foot #zdPrint, .zd-foot #zdToggle { grid-column: 1 / -1; }
+  .zd-foot .btn { width: 100%; }
 }
 
 /* ---------- impresión ---------- */
@@ -615,10 +638,17 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
         <div class="progress-bar" aria-hidden="true"><i id="stBar"></i></div>
         <p class="progress-meta"><b id="stSubs">0</b> de 9 subregiones completas · <b id="stCustom">0</b> lugares extra</p>
       </div>
-      <div class="actions od-cluster">
-        <button type="button" class="btn" id="exportBtn" data-ic="download">Exportar</button>
-        <button type="button" class="btn" id="importBtn" data-ic="upload">Importar</button>
-        <input type="file" id="importFile" accept="application/json,.json" hidden>
+      <div class="next" id="next" hidden>
+        <div class="next-stamp" id="nextStamp" aria-hidden="true"></div>
+        <div class="next-body">
+          <p class="next-label">Próximo destino</p>
+          <p class="next-name" id="nextName"></p>
+          <p class="next-why" id="nextWhy"></p>
+          <div class="next-actions od-cluster">
+            <button type="button" class="btn btn-primary btn-sm" id="nextDone" data-ic="check">Ya lo visité</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="nextOther">Otra sugerencia</button>
+          </div>
+        </div>
       </div>
     </div>
     <figure class="top-map">
@@ -648,16 +678,11 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
         <div class="seg" role="radiogroup" aria-labelledby="statusLbl">
           <input type="radio" name="status" id="stAll" value="todos" checked><label for="stAll">Todos</label>
           <input type="radio" name="status" id="stOn" value="visitados"><label for="stOn">Visitados</label>
-          <input type="radio" name="status" id="stOff" value="pendientes"><label for="stOff">Pendientes</label>
+          <input type="radio" name="status" id="stOff" value="pendientes"><label for="stOff">Por conocer</label>
         </div>
       </div>
     </div>
     <p class="result-line" id="resultLine" aria-live="polite"></p>
-  </div>
-
-  <div class="notice" id="firstHint" hidden>
-    <span data-ic="stamp"></span>
-    <div><strong>Tu pasaporte está vacío.</strong>Toca cualquier municipio para poner tu primer sello.</div>
   </div>
 
   <div id="sections"></div>
@@ -669,51 +694,14 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   </div>
 
   <footer class="foot">
-    <p id="storeNote">Tu colección se guarda en este navegador. Exporta un archivo de vez en cuando para tener copia.</p>
+    <p id="storeNote">Tu colección se guarda en este navegador. Para pasarla a otro celular o computador, expórtala y luego impórtala allá.</p>
+    <div class="foot-actions od-cluster">
+      <button type="button" class="btn btn-sm" id="exportBtn" data-ic="download">Exportar</button>
+      <button type="button" class="btn btn-sm" id="importBtn" data-ic="upload">Importar</button>
+      <input type="file" id="importFile" accept="application/json,.json" hidden>
+    </div>
   </footer>
 </main>
-
-<!-- detalle / poner sello -->
-<dialog id="placeDlg" aria-labelledby="pdName">
-  <div class="dlg">
-    <div class="dlg-head">
-      <h2 class="od-fill" id="pdTitle">Sello</h2>
-      <button type="button" class="icon-btn" id="pdClose" aria-label="Cerrar" data-ic="close"></button>
-    </div>
-    <div class="dlg-body">
-      <div class="place-hero">
-        <button type="button" class="place-hero-badge" id="pdBadgeBtn" aria-label="Ampliar e imprimir sello" title="Toca para ver el sello ampliado e imprimir">
-          <div id="pdBadge"></div>
-          <span class="zoom-badge-hint" aria-hidden="true">
-            <svg class="od-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 15l6 6M10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14Zm-3-7h6M10 7v6"/></svg>
-            <span>Ampliar</span>
-          </span>
-        </button>
-        <div>
-          <p class="place-name" id="pdName"></p>
-          <p class="place-sub"><span class="dot" id="pdDot"></span><span id="pdSub"></span></p>
-          <p class="place-state" id="pdState"></p>
-          <div style="margin-top: var(--s2);">
-            <button type="button" class="btn btn-sm" id="pdZoomBtn" data-ic="zoom">Ampliar e imprimir</button>
-          </div>
-        </div>
-      </div>
-      <div class="confirm" id="pdConfirm" hidden role="alertdialog" aria-labelledby="pdConfirmText">
-        <p id="pdConfirmText"></p>
-        <div class="od-cluster">
-          <button type="button" class="btn btn-danger" id="pdConfirmYes">Sí, quitar</button>
-          <button type="button" class="btn" id="pdConfirmNo">No, conservar</button>
-        </div>
-      </div>
-    </div>
-    <div class="dlg-foot">
-      <button type="button" class="btn btn-danger" id="pdRemove">Quitar sello</button>
-      <span class="spacer"></span>
-      <button type="button" class="btn btn-ghost" id="pdCancel">Cancelar</button>
-      <button type="button" class="btn btn-primary" id="pdSave">Poner sello</button>
-    </div>
-  </div>
-</dialog>
 
 <!-- visor ampliado y preparado para imprimir -->
 <dialog id="zoomDlg" aria-labelledby="zdTitle">
@@ -755,10 +743,10 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     <div class="dlg-foot zd-foot">
       <div class="od-cluster od-fill">
         <button type="button" class="btn btn-primary" id="zdPrint" data-ic="print">Imprimir sello</button>
-        <button type="button" class="btn" id="zdDownloadPng" data-ic="download">Descargar PNG (HD)</button>
-        <button type="button" class="btn" id="zdDownloadSvg" data-ic="download">Descargar SVG</button>
+        <button type="button" class="btn" id="zdDownloadPng" data-ic="download" aria-label="Descargar PNG en alta resolución">PNG</button>
+        <button type="button" class="btn" id="zdDownloadSvg" data-ic="download" aria-label="Descargar SVG">SVG</button>
       </div>
-      <button type="button" class="btn btn-ghost" id="zdBack">Volver</button>
+      <button type="button" class="btn" id="zdToggle" aria-pressed="false">Poner sello</button>
     </div>
   </div>
 </dialog>
@@ -896,11 +884,19 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   }).join(' ');
 
   const LOCKED = '#8b919a';
+  // la cuadrícula usa miniaturas de 256px y solo las pide cuando el sello se acerca a la pantalla
+  const artLoaded = new Set();
+  const artIO = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+    for (const e of entries) if (e.isIntersecting) loadArt(e.target);
+  }, { rootMargin: '600px 0px' }) : null;
+  function loadArt(im) { im.setAttribute('href', im.dataset.href); artLoaded.add(im.dataset.id); artIO?.unobserve(im); }
+  function lazyArt(root) { for (const im of root.querySelectorAll('image[data-href]')) artIO ? artIO.observe(im) : loadArt(im); }
+
   function stamp(p, uid, opts = {}) {
     const v = state.visits[p.id];
     const s = SUB[p.sub];
     const isStamped = !!(v || opts.forceColor);
-    const ink = isStamped ? s.ink : LOCKED;
+    const ink = s.ink;
     const id = 'st-' + uid;
     const name = p.name.toUpperCase();
     const fs = Math.min(9, 112 / (name.length * 0.66)).toFixed(2);
@@ -912,12 +908,13 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
       : `<circle cx="60" cy="60" r="56" stroke-width="3"/><circle cx="60" cy="60" r="51" stroke-width="1.2"/>`;
     if (ART.has(p.id)) {
       const bottom = s.n.toUpperCase();
-      const artHref = opts.artHref || `assets/sellos/${p.id}.webp`;
+      const artHref = opts.artHref || (opts.lazy ? `assets/sellos-mini/${p.id}.webp` : `assets/sellos/${p.id}.webp`);
+      const hrefAttr = opts.lazy && !artLoaded.has(p.id) ? `data-href="${artHref}" data-id="${p.id}"` : `href="${artHref}"`;
       const artCls = isStamped ? 'art' : 'art art-off';
-      return `<svg class="stamp${isStamped ? ' is-on' : ''}${extraCls}" viewBox="0 0 120 120" aria-hidden="true" style="--rot:${angle}deg">
+      return `<svg class="stamp${isStamped ? ' is-on' : ' is-off'}${extraCls}" viewBox="0 0 120 120" aria-hidden="true" style="--rot:${angle}deg">
       <defs><path id="${id}t" d="M23 60a37 37 0 0 1 74 0"/><path id="${id}b" d="M16 60a44 44 0 0 0 88 0"/><clipPath id="${id}c"><circle cx="60" cy="60" r="33.5"/></clipPath></defs>
       <circle cx="60" cy="60" r="56" fill="#ffffff"/>
-      <image class="${artCls}" href="${artHref}" x="24" y="24" width="72" height="72" clip-path="url(#${id}c)" preserveAspectRatio="xMidYMid slice"/>
+      <image class="${artCls}" ${hrefAttr} x="24" y="24" width="72" height="72" clip-path="url(#${id}c)" preserveAspectRatio="xMidYMid slice"/>
       <g fill="none" stroke="${ink}"${dash}><circle cx="60" cy="60" r="56" stroke-width="3"/><circle cx="60" cy="60" r="51" stroke-width="1.2"/><circle cx="60" cy="60" r="34" stroke-width="1.5"/></g>
       <g fill="${ink}">
         <text font-size="${fs}" font-weight="600" letter-spacing="0.5"><textPath href="#${id}t" startOffset="50%" text-anchor="middle">${esc(name)}</textPath></text>
@@ -927,7 +924,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     </svg>`;
     }
     const glyph = (GLYPHS[p.glyph] || GLYPHS.montana).d;
-    return `<svg class="stamp${isStamped ? ' is-on' : ''}${extraCls}" viewBox="0 0 120 120" aria-hidden="true" style="--rot:${angle}deg">
+    return `<svg class="stamp${isStamped ? ' is-on' : ' is-off'}${extraCls}" viewBox="0 0 120 120" aria-hidden="true" style="--rot:${angle}deg">
       <defs><path id="${id}t" d="M23 60a37 37 0 0 1 74 0"/><path id="${id}b" d="M16 60a44 44 0 0 0 88 0"/></defs>
       <g fill="none" stroke="${ink}"${dash}>${frame}<circle cx="60" cy="60" r="30" stroke-width="1"/></g>
       <g fill="${ink}">
@@ -968,11 +965,11 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
   function tile(p) {
     const v = state.visits[p.id];
-    const label = `${p.name}, ${SUB[p.sub].n}. ${v ? visitText(v) : 'Pendiente'}`;
+    const label = `${p.name}, ${SUB[p.sub].n}. ${v ? visitText(v) : 'Por conocer'}`;
     return `<div class="tile"><button type="button" class="badge" data-open="${esc(p.id)}" aria-pressed="${!!v}" aria-label="${esc(label)}">
-      ${stamp(p, p.id)}
+      ${stamp(p, p.id, { lazy: true })}
       <span class="badge-name od-clamp-2 od-lines-2">${esc(p.name)}</span>
-      <span class="badge-meta${v ? ' on' : ''}">${v ? 'Visitado' : (p.custom ? 'Propio · pendiente' : p.extra ? 'Extra · pendiente' : 'Pendiente')}</span>
+      <span class="badge-meta${v ? ' on' : ' todo'}">${v ? 'Visitado' : p.extra ? 'Extra · por conocer' : 'Por conocer'}</span>
     </button><button type="button" class="badge-zoom" data-detail="${esc(p.id)}" aria-label="Ver sello de ${esc(p.name)}" title="Ver, imprimir o descargar">${icon('zoom')}</button></div>`;
   }
 
@@ -1019,12 +1016,13 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
         const n = c.per[s.k], done = n === s.m.length;
         return `<button type="button" class="chip" data-sub="${s.k}" aria-pressed="${ui.sub === s.k}" style="--ink:${s.ink}" aria-label="${esc(s.n)}: ${n} de ${s.m.length}${done ? ', completa' : ''}">
           ${medal(s, done)}
-          <span class="chip-body"><span class="chip-name">${esc(s.n)}</span><span class="chip-count">${n} de ${s.m.length}${done ? ' ✓' : ''}</span></span>
+          <span class="chip-body"><span class="chip-name">${esc(s.n)}</span><span class="chip-count">${n} de ${s.m.length}${done ? ' ' + icon('check') : ''}</span></span>
           <span class="bar"><i style="--p:${n / s.m.length}"></i></span>
         </button>`;
       }).join('');
 
     let shown = 0;
+    artIO?.disconnect();
     sectionsEl.innerHTML = SUBS.map(s => {
       const items = MUNIS.concat(EXTRAS, state.custom).filter(p => p.sub === s.k).filter(matches);
       if (!items.length) return '';
@@ -1036,6 +1034,8 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
       </section>`;
     }).join('');
 
+    lazyArt(sectionsEl);
+    renderNext(c);
     emptyEl.hidden = shown > 0;
     sectionsEl.hidden = shown === 0;
     if (!shown) $('emptyText').textContent = ui.q
@@ -1043,7 +1043,6 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
       : ui.status === 'visitados' ? 'Aún no tienes sellos aquí. Cambia a «Todos» y toca un municipio para registrarlo.'
       : 'Ya tienes todos los sellos de esta selección.';
     $('resultLine').textContent = shown === 1 ? 'Mostrando 1 lugar' : `Mostrando ${shown} lugares`;
-    $('firstHint').hidden = c.muni > 0 || state.custom.length > 0 || Object.keys(state.visits).length > 0;
   }
 
   // ---------- filtros ----------
@@ -1063,11 +1062,12 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
   // ---------- toast ----------
   let toastTimer;
-  function toast(msg, kind = 'check') {
+  function toast(msg, kind = 'check', action) {
     const zone = $('toastZone');
-    zone.innerHTML = `<div class="toast">${icon(kind)}<span>${esc(msg)}</span></div>`;
+    zone.innerHTML = `<div class="toast">${icon(kind)}<span>${esc(msg)}</span>${action ? `<button type="button" class="toast-act">${esc(action.label)}</button>` : ''}</div>`;
+    if (action) zone.querySelector('.toast-act').addEventListener('click', () => { zone.innerHTML = ''; action.run(); });
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => { zone.firstElementChild?.classList.add('out'); setTimeout(() => { zone.innerHTML = ''; }, 200); }, 2800);
+    toastTimer = setTimeout(() => { zone.firstElementChild?.classList.add('out'); setTimeout(() => { zone.innerHTML = ''; }, 200); }, action ? 5000 : 2800);
   }
 
   // ---------- foco al cerrar ----------
@@ -1092,81 +1092,55 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   }
 
   // ---------- detalle de lugar ----------
-  const pd = $('placeDlg');
-  let current = null, confirmAction = null;
-
-  function fillPlace() {
-    const p = current, s = SUB[p.sub], v = state.visits[p.id];
-    $('pdTitle').textContent = v ? 'Sello puesto' : 'Poner sello';
-    $('pdBadge').innerHTML = stamp(p, p.id + '-d');
-    $('pdName').textContent = p.name;
-    $('pdSub').textContent = s.n + (p.custom ? ' · lugar propio' : p.extra ? ' · lugar extra' : '');
-    $('pdBadge').closest('.place-hero').classList.toggle('has-art', ART.has(p.id));
-    $('pdDot').style.background = s.ink;
-    $('pdState').textContent = v ? 'Visitado' : 'Pendiente';
-    $('pdSave').textContent = v ? 'Listo' : 'Poner sello';
-    $('pdRemove').hidden = !v;
-  }
-
-  function openPlace(id) {
-    const p = findPlace(id); if (!p) return;
-    current = p; returnId = id;
-    const v = state.visits[id];
-    $('pdConfirm').hidden = true;
-    fillPlace();
-    pd.showModal();
-    requestAnimationFrame(() => $('pdSave').focus());
-  }
-
   sectionsEl.addEventListener('click', e => {
-    const d = e.target.closest('[data-detail]'); if (d) return openPlace(d.dataset.detail);
+    const d = e.target.closest('[data-detail]'); if (d) return openZoom(d.dataset.detail);
     const b = e.target.closest('[data-open]'); if (b) toggleVisit(b.dataset.open);
   });
 
-  // un toque pone o quita el sello
+  const subDone = k => SUB[k].m.every(name => state.visits[slug(name)]);
+
+  // un toque pone o quita el sello; quitarlo se puede deshacer desde el aviso
   function toggleVisit(id) {
     const p = findPlace(id); if (!p) return;
-    const was = !!state.visits[id];
+    const was = !!state.visits[id], wasDone = subDone(p.sub);
     if (was) delete state.visits[id]; else state.visits[id] = { date: '', note: '', night: false };
     persist(); render();
-    sectionsEl.querySelector(`[data-open="${CSS.escape(id)}"]`)?.focus();
-    if (!was) flash(id);
-    toast(was ? `Sello quitado: ${p.name}` : `Sello puesto: ${p.name}`);
+    if (!zd.open) sectionsEl.querySelector(`[data-open="${CSS.escape(id)}"]`)?.focus();
+    if (was) return toast(`Sello quitado: ${p.name}`, 'check', { label: 'Deshacer', run: () => toggleVisit(id) });
+    flash(id);
+    const s = SUB[p.sub];
+    if (!wasDone && subDone(p.sub)) { celebrate(p.sub); toast(`¡Completaste ${s.n}! ${s.m.length} de ${s.m.length} municipios`, 'stamp'); }
+    else toast(`Sello puesto: ${p.name}`);
+  }
+  function celebrate(k) {
+    const h = sectionsEl.querySelector(`#h-${k}`)?.closest('.section');
+    h?.classList.add('just-completed'); setTimeout(() => h?.classList.remove('just-completed'), 1400);
   }
 
-
-  function savePlace() {
-    const was = !!state.visits[current.id];
-    if (was) { pd.close(); return; }
-    state.visits[current.id] = { date: '', note: '', night: false };
-    persist(); render();
-    const id = current.id, name = current.name;
-    pd.close();
-    if (!was) flash(id);
-    toast(`Sello puesto: ${name}`);
+  // próximo destino: un municipio por conocer en la subregión más cerca de completarse
+  let nextId = null;
+  function pickNext(skip) {
+    const open = SUBS.filter(s => !subDone(s.k));
+    if (!open.length) return null;
+    const ratio = s => s.m.filter(n => state.visits[slug(n)]).length / s.m.length;
+    const best = Math.max(...open.map(ratio));
+    const subs = best > 0 ? open.filter(s => ratio(s) === best) : open;
+    const pool = subs.flatMap(s => s.m.map(slug)).filter(id => !state.visits[id] && id !== skip);
+    return pool.length ? pool[Math.floor(Math.random() * pool.length)] : null;
   }
-  $('pdSave').addEventListener('click', savePlace);
-
-  function askConfirm(text, action) {
-    confirmAction = action;
-    $('pdConfirmText').textContent = text;
-    $('pdConfirm').hidden = false;
-    $('pdConfirmNo').focus();
+  function renderNext(c) {
+    if (!nextId || state.visits[nextId]) nextId = pickNext();
+    const box = $('next'); box.hidden = !nextId;
+    if (!nextId) return;
+    const p = findPlace(nextId), s = SUB[p.sub], left = c.per ? s.m.length - c.per[p.sub] : s.m.length;
+    $('nextStamp').innerHTML = stamp(p, 'nx-' + p.id, { artHref: `assets/sellos-mini/${p.id}.webp` });
+    $('nextName').textContent = p.name;
+    $('nextWhy').textContent = c.muni === 0
+      ? `Tu pasaporte está vacío. Toca cualquier sello de la lista cuando lo visites, o empieza por ${s.n}.`
+      : left === 1 ? `Es el último que te falta para completar ${s.n}.` : `Te faltan ${left} para completar ${s.n}.`;
   }
-  $('pdRemove').addEventListener('click', () => { const p = current; askConfirm(`¿Quitar el sello de ${p.name}? `, () => {
-    delete state.visits[p.id];
-    persist(); render(); toast(`Sello quitado: ${p.name}`);
-  }); });
-  $('pdConfirmNo').addEventListener('click', () => { $('pdConfirm').hidden = true; confirmAction = null; $('pdRemove').focus(); });
-  $('pdConfirmYes').addEventListener('click', () => {
-    const a = confirmAction, id = returnId;
-    confirmAction = null; returnId = null;
-    pd.close(); a && a();
-    returnId = id; restoreFocus();
-  });
-  $('pdCancel').addEventListener('click', () => pd.close());
-  $('pdClose').addEventListener('click', () => pd.close());
-  pd.addEventListener('close', () => { if (returnId !== null) restoreFocus(); current = null; });
+  $('nextDone').addEventListener('click', () => { const id = nextId; nextId = null; toggleVisit(id); });
+  $('nextOther').addEventListener('click', () => { nextId = pickNext(nextId) || nextId; render(); });
 
   // ---------- exportar / importar ----------
   $('exportBtn').addEventListener('click', () => {
@@ -1237,7 +1211,9 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     const hasArt = ART.has(p.id);
 
     $('zdTitle').textContent = p.name;
-    $('zdSub').textContent = `${s.n}${p.custom ? ' · lugar propio' : p.extra ? ' · lugar extra' : ''} · ${v ? visitText(v) : 'Pendiente'}`;
+    $('zdSub').textContent = `${s.n}${p.custom ? ' · lugar propio' : p.extra ? ' · lugar extra' : ''} · ${v ? visitText(v) : 'Por conocer'}`;
+    $('zdToggle').textContent = v ? 'Quitar sello' : 'Poner sello';
+    $('zdToggle').setAttribute('aria-pressed', !!v);
 
     $('zdTabs').hidden = !hasArt;
     if (!hasArt && currentView === 'art') {
@@ -1260,7 +1236,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
       $('zdArtImg').src = `assets/sellos/${p.id}.webp`;
       $('zdStraightWrap').hidden = true;
       $('zdMetaNote').textContent = 'Ilustración serigráfica vintage · 1024 × 1024 px';
-      $('zdDownloadPng').textContent = 'Descargar arte (1024px)';
+      setPngBtn('Arte PNG', 'Descargar ilustración original en 1024 px');
       $('zdDownloadSvg').hidden = true;
     } else {
       $('zdStampWrap').hidden = false;
@@ -1274,7 +1250,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
       $('zdMetaNote').textContent = hasArt
         ? 'Sello completo vectorial + arte 1024px'
         : 'Sello completo vectorial (escalable)';
-      $('zdDownloadPng').textContent = 'Descargar PNG (2048px)';
+      setPngBtn('PNG', 'Descargar sello en PNG de 2048 px');
       $('zdDownloadSvg').hidden = false;
     }
   }
@@ -1282,7 +1258,6 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   function openZoom(id, view = 'stamp') {
     const p = findPlace(id);
     if (!p) return;
-    if (pd.open) pd.close();
     returnId = id;
     currentView = (view === 'art' && ART.has(p.id)) ? 'art' : 'stamp';
     if ($('zvStamp')) $('zvStamp').checked = currentView === 'stamp';
@@ -1303,11 +1278,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   $('zdPrev').addEventListener('click', () => stepZoom(-1));
   $('zdNext').addEventListener('click', () => stepZoom(1));
   $('zdClose').addEventListener('click', () => zd.close());
-  $('zdBack').addEventListener('click', () => {
-    const id = zoomCurrent ? zoomCurrent.id : returnId;
-    zd.close();
-    if (id) openPlace(id);
-  });
+  $('zdToggle').addEventListener('click', () => { if (zoomCurrent) { toggleVisit(zoomCurrent.id); fillZoom(zoomCurrent); } });
   zd.addEventListener('close', () => {
     if (returnId !== null) restoreFocus();
     zoomCurrent = null;
@@ -1325,13 +1296,6 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   });
   $('zdStraight').addEventListener('change', renderZoomStage);
 
-  // Botones en la ficha de lugar para abrir visor
-  $('pdBadgeBtn').addEventListener('click', () => {
-    if (current) openZoom(current.id);
-  });
-  $('pdZoomBtn').addEventListener('click', () => {
-    if (current) openZoom(current.id);
-  });
 
 
   // Imprimir sello limpio (10cm centrado, guía de corte y datos)
@@ -1455,6 +1419,9 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     }
   }
 
+  function setPngBtn(text, label) {
+    const b = $('zdDownloadPng'); b.innerHTML = icon('download') + esc(text); b.setAttribute('aria-label', label);
+  }
   $('zdDownloadPng').addEventListener('click', () => {
     if (!zoomCurrent) return;
     if (currentView === 'art' && ART.has(zoomCurrent.id)) {
