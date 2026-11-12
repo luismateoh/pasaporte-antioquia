@@ -222,6 +222,7 @@ html { accent-color: var(--ant-green); scrollbar-color: var(--ring-strong) var(-
   --od-icon-size: 18px;
 }
 .btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: .45; cursor: not-allowed; pointer-events: none; }
 .btn-sm { min-height: 36px; padding: 0 var(--s3); font-size: 13.5px; --od-icon-size: 16px; }
 .btn-primary { background: var(--ant-deep); border-color: var(--ant-deep); color: #ffffff; }
 .btn-danger { color: var(--danger); border-color: #e2b4b0; }
@@ -547,24 +548,39 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  max-height: 168px;
-  overflow-y: auto;
   padding: 2px 0;
 }
-@media (max-width: 759px) {
-  .sh-pills { max-height: 92px; }
+#shSub { font-family: var(--font-sans); }
+/* interruptores independientes: el segmento marcado lleva su palomita dibujada */
+.sh-toggles label { gap: 8px; }
+.sh-toggles label::before {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid currentColor;
+  border-radius: 3px;
+  box-sizing: border-box;
+  flex: none;
+}
+.sh-toggles input:checked + label::before {
+  border-color: #ffffff;
+  border-width: 0 2px 2px 0;
+  width: 6px;
+  height: 11px;
+  border-radius: 0;
+  transform: rotate(45deg) translate(-1px, -2px);
 }
 .sh-pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 30px;
-  padding: 4px 10px;
+  min-height: 44px;
+  padding: 4px 14px;
   border-radius: 99px;
   border: 1px solid var(--ring-strong);
   background: var(--surface);
   color: var(--fg);
-  font: 600 12px/1.2 var(--font-sans);
+  font: 600 13.5px/1.2 var(--font-sans);
   cursor: pointer;
   transition: background var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out), opacity var(--t-fast) var(--ease-out);
 }
@@ -578,10 +594,6 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 .sh-pill[aria-pressed="true"] {
   border-color: var(--ink, var(--ant-green));
   background: color-mix(in srgb, var(--ink, var(--ant-green)) 11%, #fffcf4);
-}
-.sh-pill[aria-pressed="false"] {
-  opacity: .56;
-  border-style: dashed;
 }
 .sh-pill-tag {
   font: 600 11px/1 var(--font-mono);
@@ -602,8 +614,8 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   display: block;
   width: auto;
   height: auto;
-  max-width: min(100%, 420px);
-  max-height: 66dvh;
+  max-width: min(100%, 460px);
+  max-height: 70dvh;
   border-radius: var(--radius-sm);
   box-shadow: 0 16px 36px -8px rgba(22, 25, 30, .28);
   border: 1px solid var(--ring-strong);
@@ -863,22 +875,17 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     </div>
     <div class="dlg-body zd-body">
       <div class="sh-opts">
-        <div class="field">
-          <span class="label" id="shModeLbl">Diseño</span>
-          <div class="seg" role="radiogroup" aria-labelledby="shModeLbl">
-            <input type="radio" name="shMode" id="smPassport" value="passport" checked>
-            <label for="smPassport">Con mapa</label>
-            <input type="radio" name="shMode" id="smCollage" value="collage">
-            <label for="smCollage">Solo sellos</label>
-          </div>
+        <div class="field sh-field-full">
+          <label class="label" for="shName">Tu nombre o apodo (opcional)</label>
+          <input class="input" id="shName" type="text" maxlength="28" autocomplete="off" placeholder="Ej. Luis, Rodada Antioquia, Familia Mateo…">
         </div>
         <div class="field">
-          <span class="label" id="shHillsLbl">Paisaje de abajo</span>
-          <div class="seg" role="radiogroup" aria-labelledby="shHillsLbl">
-            <input type="radio" name="shHills" id="shHillsOn" value="on" checked>
-            <label for="shHillsOn">Con paisaje</label>
-            <input type="radio" name="shHills" id="shHillsOff" value="off">
-            <label for="shHillsOff">Sin paisaje</label>
+          <span class="label" id="shIncLbl">Incluir en la imagen</span>
+          <div class="seg sh-toggles" role="group" aria-labelledby="shIncLbl">
+            <input type="checkbox" id="shMapOn" checked>
+            <label for="shMapOn">Mapa</label>
+            <input type="checkbox" id="shHillsOn" checked>
+            <label for="shHillsOn">Paisaje de abajo</label>
           </div>
         </div>
         <div class="field">
@@ -890,16 +897,12 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
             <label for="sfSquare">Cuadrado (1:1)</label>
           </div>
         </div>
-        <div class="field sh-field-full">
-          <label class="label" for="shName">Tu nombre o apodo (opcional)</label>
-          <input class="input" id="shName" type="text" maxlength="28" autocomplete="off" placeholder="Ej. Luis, Rodada Antioquia, Familia Mateo…">
-        </div>
-        <div class="sh-pick-box sh-field-full" id="shPickBox">
+        <div class="sh-pick-box sh-field-full">
           <div class="sh-pick-head">
-            <span class="label" id="shPickLbl">Sellos destacados en la imagen</span>
+            <span class="label" id="shPickLbl">Sellos en el mapa</span>
             <div class="od-cluster">
-              <button type="button" class="btn btn-sm" id="shShuffleBtn" data-ic="shuffle">Mezclar sellos</button>
-              <button type="button" class="btn btn-ghost btn-sm" id="shResetPickBtn" hidden>Orden automático</button>
+              <button type="button" class="btn" id="shShuffleBtn" data-ic="shuffle">Otro acomodo</button>
+              <button type="button" class="btn btn-ghost" id="shResetPickBtn" hidden>Orden automático</button>
             </div>
           </div>
           <p class="sh-pick-hint" id="shPickHint"></p>
@@ -1765,11 +1768,10 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
   // ---------- estudio para compartir (Historia 9:16 y Cuadrado 1:1) ----------
   const shDlg = $('shareDlg'), shCanvas = $('shCanvas');
-  let shMode = 'passport', shFmt = 'story', shSeed = 0;
+  let shMode = 'passport', shFmt = 'story', shSeed = 0; // shMode: 'passport' con mapa, 'collage' solo sellos
   let shHills = true; // paisaje ilustrado al pie; sin él, la hoja de sellos baja hasta las insignias
   let shLayout = 1; // semilla de la hoja: nueva en cada apertura, así ninguna imagen sale igual a otra
   let shCustomOrder = [];
-  const shExcluded = new Set();
   const miniCache = new Map();
   let hillsImgPromise = null;
 
@@ -1902,6 +1904,12 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     return { callouts: 0, total: Infinity };
   }
 
+  // Con pocos sellos el mapa se queda con la mitad, para que la hoja de abajo nunca quede vacía
+  function mapCount(n) {
+    const max = getShareLimits().callouts;
+    return n >= max * 2 ? max : Math.floor(n / 2);
+  }
+
   function buildSharePlaceList() {
     const diverse = getDiversifiedVisited();
     if (!diverse.length) {
@@ -1913,53 +1921,45 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
     const validIds = new Set(diverse.map(p => p.id));
     shCustomOrder = shCustomOrder.filter(id => validIds.has(id));
-    for (const id of [...shExcluded]) if (!validIds.has(id)) shExcluded.delete(id);
-
-    const pinned = shCustomOrder.filter(id => !shExcluded.has(id)).map(findPlace).filter(Boolean);
+    const pinned = shCustomOrder.map(findPlace).filter(Boolean);
     const pinnedSet = new Set(pinned.map(p => p.id));
-    const rest = diverse.filter(p => !pinnedSet.has(p.id) && !shExcluded.has(p.id));
-    let activeList = pinned.concat(rest);
-    if (!activeList.length && diverse.length) {
-      shExcluded.clear();
-      activeList = diverse;
-    }
-    return { allVisited: diverse, activeList };
+    return { allVisited: diverse, activeList: pinned.concat(diverse.filter(p => !pinnedSet.has(p.id))) };
   }
 
   function renderSharePickerUI(allVisited, activeList) {
     const pillsEl = $('shPills'), hintEl = $('shPickHint'), resetBtn = $('shResetPickBtn');
     const lim = getShareLimits();
-    const hasCustom = shCustomOrder.length > 0 || shExcluded.size > 0 || shSeed > 0;
-    resetBtn.hidden = !hasCustom;
+    const empty = !allVisited.length;
+    resetBtn.hidden = !(shCustomOrder.length > 0 || shSeed > 0);
 
-    if (!allVisited.length) {
-      pillsEl.hidden = true;
+    // Sin visitas no hay nada propio que compartir: la vista previa es de ejemplo y las acciones se apagan
+    for (const id of ['shShareBtn', 'shDownloadBtn', 'shCopyBtn']) $(id).disabled = empty;
+    $('shSub').textContent = empty
+      ? 'Marca tu primer sello para compartir tu pasaporte. Esto es una vista previa de ejemplo.'
+      : 'Crea una imagen lista para Historia de Instagram, WhatsApp o X';
+
+    const showMapPick = shMode === 'passport' && !empty;
+    pillsEl.hidden = !showMapPick;
+    $('shPickLbl').textContent = shMode === 'passport' ? 'Sellos en el mapa' : 'Hoja de sellos';
+    if (empty) {
+      hintEl.textContent = 'Cuando marques sellos, aquí eliges cuáles van conectados al mapa.';
       pillsEl.innerHTML = '';
-      hintEl.textContent = 'Vista previa de ejemplo · Marca tus municipios visitados para personalizar qué sellos destacar.';
       return;
     }
-
-    pillsEl.hidden = false;
-    const shownSlice = activeList.slice(0, lim.total);
-    const shownSet = new Set(shownSlice.map(p => p.id));
-    const calloutSet = new Set(shownSlice.slice(0, lim.callouts).map(p => p.id));
-
-    hintEl.textContent = shMode === 'passport'
-      ? `${shownSlice.length} de ${allVisited.length} sellos en la imagen (${Math.min(lim.callouts, shownSlice.length)} conectados al mapa). Toca un pueblo para llevarlo al mapa; tócalo otra vez para quitarlo:`
-      : `${shownSlice.length} de ${allVisited.length} sellos en la hoja. Toca un pueblo para que salga más grande; tócalo otra vez para quitarlo:`;
-
-    // Mostrar los activos primero en el orden actual y luego los desactivados
-    const orderedForPills = shownSlice
-      .concat(activeList.slice(lim.total))
-      .concat(allVisited.filter(p => shExcluded.has(p.id)));
-
-    pillsEl.innerHTML = orderedForPills.map(p => {
-      const isShown = shownSet.has(p.id);
-      const isMap = calloutSet.has(p.id);
-      return `<button type="button" class="sh-pill" data-sh-id="${esc(p.id)}" aria-pressed="${isShown}" style="--ink:${SUB[p.sub].ink}" title="${isMap ? 'Destacado en el mapa (toca para ocultar)' : isShown ? 'En la hoja (toca para destacar en el mapa)' : 'Oculto (toca para mostrar en el mapa)'}">
+    const nMap = mapCount(activeList.length);
+    if (!showMapPick) {
+      hintEl.textContent = `Tus ${allVisited.length} sellos salen en la hoja. «Otro acomodo» los vuelve a regar.`;
+      pillsEl.innerHTML = '';
+      return;
+    }
+    hintEl.textContent = `Salen tus ${allVisited.length} sellos. Toca un pueblo para ponerlo en el mapa (caben ${nMap}).`;
+    const mapSet = new Set(activeList.slice(0, nMap).map(p => p.id));
+    pillsEl.innerHTML = activeList.map(p => {
+      const onMap = mapSet.has(p.id);
+      return `<button type="button" class="sh-pill" data-sh-id="${esc(p.id)}" aria-pressed="${onMap}" style="--ink:${SUB[p.sub].ink}" title="${onMap ? 'En el mapa · toca para sacarlo' : 'Toca para ponerlo en el mapa'}">
         <span class="sh-pill-dot"></span>
         <span>${esc(p.name)}</span>
-        ${isMap ? '<span class="sh-pill-tag">Mapa</span>' : ''}
+        ${onMap ? '<span class="sh-pill-tag">Mapa</span>' : ''}
       </button>`;
     }).join('');
   }
@@ -2311,7 +2311,8 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     if (!n) return;
     const rnd = mulberry32(shLayout);
     const { x, y, w, h } = box;
-    const R = Math.min(maxR, Math.sqrt((w * h * 1.5) / (n * Math.PI)));
+    // pocos sellos: grandes y sin dejar la hoja vacía; muchos: más pequeños y encimados
+    const R = Math.min(maxR, Math.min(w, h) / 2.6, Math.sqrt((w * h * 1.5) / (n * Math.PI)));
     const big = n > 6 ? Math.max(1, Math.round(n * 0.12)) : 0;
     const placed = [];
     for (let i = 0; i < n; i++) {
@@ -2588,7 +2589,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
           { x: 932, y: 476 }, // Oriente / Nordeste
           { x: 912, y: 768 }, // Sureste (bajo Magdalena Medio)
         ];
-        const calloutCount = Math.min(lim.callouts, shownPlaces.length);
+        const calloutCount = mapCount(shownPlaces.length);
         const calloutPlaces = shownPlaces.slice(0, calloutCount);
         const spreadPlaces = shownPlaces.slice(calloutCount, lim.total);
 
@@ -2619,7 +2620,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
           ctx.fillText(hdrTxt, midX, hdrY);
           ctx.restore();
 
-          drawScatterSheet(ctx, spreadPlaces, { x: padX, y: 940, w: innerW, h: 635 + grow }, imgs, 84);
+          drawScatterSheet(ctx, spreadPlaces, { x: padX, y: 940, w: innerW, h: 635 + grow }, imgs, 130);
         }
 
         // 3. Insignias sobre el paisaje ilustrado
@@ -2633,7 +2634,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
           { x: 934, y: 634 }, // Abajo-derecha (bajo Magdalena Medio)
           { x: 548, y: 694 }, // Abajo-centro (bajo Suroeste)
         ];
-        const calloutCount = Math.min(lim.callouts, shownPlaces.length);
+        const calloutCount = mapCount(shownPlaces.length);
         const calloutPlaces = shownPlaces.slice(0, calloutCount);
         const spreadPlaces = shownPlaces.slice(calloutCount, lim.total);
 
@@ -2649,7 +2650,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
         ctx.fillText(leftHdr, padX + 6, 228);
 
         if (spreadPlaces.length > 0) {
-          drawScatterSheet(ctx, spreadPlaces, { x: padX, y: 246, w: 376, h: 516 + grow }, imgs, 62);
+          drawScatterSheet(ctx, spreadPlaces, { x: padX, y: 246, w: 376, h: 516 + grow }, imgs, 90);
         }
 
         drawAchRibbon(ctx, achs, padX, ribbonY, innerW);
@@ -2667,7 +2668,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
         hideLabels: true,
       });
 
-      drawScatterSheet(ctx, shownPlaces, { x: padX, y: stageTop, w: innerW, h: stageH }, imgs, shFmt === 'story' ? 110 : 90);
+      drawScatterSheet(ctx, shownPlaces, { x: padX, y: stageTop, w: innerW, h: stageH }, imgs, shFmt === 'story' ? 150 : 120);
 
       drawAchRibbon(ctx, achs, padX, ribbonY, innerW);
     }
@@ -2692,14 +2693,14 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
   $('shareBtn').addEventListener('click', openShare);
   $('shClose').addEventListener('click', () => shDlg.close());
-  document.querySelectorAll('input[name="shMode"]').forEach(r => r.addEventListener('change', e => {
-    shMode = e.target.value;
+  $('shMapOn').addEventListener('change', e => {
+    shMode = e.target.checked ? 'passport' : 'collage';
     renderShareCanvas();
-  }));
-  document.querySelectorAll('input[name="shHills"]').forEach(r => r.addEventListener('change', e => {
-    shHills = e.target.value === 'on';
+  });
+  $('shHillsOn').addEventListener('change', e => {
+    shHills = e.target.checked;
     renderShareCanvas();
-  }));
+  });
   document.querySelectorAll('input[name="shFmt"]').forEach(r => r.addEventListener('change', e => {
     shFmt = e.target.value;
     renderShareCanvas();
@@ -2710,42 +2711,24 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     renderShareCanvas();
   });
   $('shShuffleBtn').addEventListener('click', () => {
-    shSeed++;
     shLayout = (Math.random() * 4294967296) >>> 0;
-    if (shCustomOrder.length > 1) {
-      shCustomOrder.push(shCustomOrder.shift());
-    }
     renderShareCanvas();
   });
+
   $('shResetPickBtn').addEventListener('click', () => {
     shSeed = 0;
     shCustomOrder = [];
-    shExcluded.clear();
     renderShareCanvas();
   });
   $('shPills').addEventListener('click', e => {
     const btn = e.target.closest('[data-sh-id]');
     if (!btn) return;
     const id = btn.dataset.shId;
-    const lim = getShareLimits();
-    const { allVisited, activeList } = buildSharePlaceList();
-    const shownSlice = activeList.slice(0, lim.total);
-    const calloutCount = Math.min(lim.callouts, shownSlice.length);
-    const isTopFeatured = calloutCount > 0
-      ? shownSlice.slice(0, calloutCount).some(p => p.id === id)
-      : shownSlice[0]?.id === id;
-
-    if (shExcluded.has(id)) {
-      shExcluded.delete(id);
-      shCustomOrder = [id, ...shCustomOrder.filter(x => x !== id)];
-    } else if (!isTopFeatured) {
-      // Llevar al primer lugar (conectado al mapa / inicio del mosaico)
-      shCustomOrder = [id, ...activeList.map(p => p.id).filter(x => x !== id)];
-    } else if (allVisited.length > 1 && shExcluded.size < allVisited.length - 1) {
-      // Si ya estaba destacado en el mapa, un segundo toque lo oculta para dar paso a otro
-      shExcluded.add(id);
-      shCustomOrder = shCustomOrder.filter(x => x !== id);
-    }
+    const ids = buildSharePlaceList().activeList.map(p => p.id).filter(x => x !== id);
+    const onMap = btn.getAttribute('aria-pressed') === 'true';
+    // dentro del mapa sale a la hoja y entra el siguiente; fuera, entra de primero
+    if (onMap) ids.splice(mapCount(ids.length + 1), 0, id); else ids.unshift(id);
+    shCustomOrder = ids;
     renderShareCanvas();
   });
 
