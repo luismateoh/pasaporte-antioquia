@@ -867,9 +867,18 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
           <span class="label" id="shModeLbl">Diseño</span>
           <div class="seg" role="radiogroup" aria-labelledby="shModeLbl">
             <input type="radio" name="shMode" id="smPassport" value="passport" checked>
-            <label for="smPassport">Mapa + Sellos</label>
+            <label for="smPassport">Con mapa</label>
             <input type="radio" name="shMode" id="smCollage" value="collage">
-            <label for="smCollage">Hoja de sellos</label>
+            <label for="smCollage">Solo sellos</label>
+          </div>
+        </div>
+        <div class="field">
+          <span class="label" id="shHillsLbl">Paisaje de abajo</span>
+          <div class="seg" role="radiogroup" aria-labelledby="shHillsLbl">
+            <input type="radio" name="shHills" id="shHillsOn" value="on" checked>
+            <label for="shHillsOn">Con paisaje</label>
+            <input type="radio" name="shHills" id="shHillsOff" value="off">
+            <label for="shHillsOff">Sin paisaje</label>
           </div>
         </div>
         <div class="field">
@@ -1757,6 +1766,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   // ---------- estudio para compartir (Historia 9:16 y Cuadrado 1:1) ----------
   const shDlg = $('shareDlg'), shCanvas = $('shCanvas');
   let shMode = 'passport', shFmt = 'story', shSeed = 0;
+  let shHills = true; // paisaje ilustrado al pie; sin él, la hoja de sellos baja hasta las insignias
   let shLayout = 1; // semilla de la hoja: nueva en cada apertura, así ninguna imagen sale igual a otra
   let shCustomOrder = [];
   const shExcluded = new Set();
@@ -2556,13 +2566,15 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
     // Pre-cargar miniaturas y paisaje ilustrado
     const [hillsImg, ...imgEntries] = await Promise.all([
-      loadHillsImg(),
+      shHills ? loadHillsImg() : null,
       ...shownPlaces.map(async p => [p.id, await loadMiniImg(p.id)]),
     ]);
     const imgs = Object.fromEntries(imgEntries);
 
     drawPassportBackdrop(ctx, W, H, c, achs, hillsImg);
     const padX = 68, innerW = W - padX * 2;
+    const grow = shHills ? 0 : (shFmt === 'story' ? 95 : 54); // espacio que libera el paisaje
+    const ribbonY = (shFmt === 'story' ? 1605 : 796) + grow;
 
     if (shMode === 'passport') {
       if (shFmt === 'story') {
@@ -2607,11 +2619,11 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
           ctx.fillText(hdrTxt, midX, hdrY);
           ctx.restore();
 
-          drawScatterSheet(ctx, spreadPlaces, { x: padX, y: 940, w: innerW, h: 635 }, imgs, 84);
+          drawScatterSheet(ctx, spreadPlaces, { x: padX, y: 940, w: innerW, h: 635 + grow }, imgs, 84);
         }
 
         // 3. Insignias sobre el paisaje ilustrado
-        drawAchRibbon(ctx, achs, padX, 1605, innerW);
+        drawAchRibbon(ctx, achs, padX, ribbonY, innerW);
       } else {
         // Cuadrado 1:1 (1080x1080): Izquierda composición orgánica de 8 sellos, Derecha mapa con 4 sellos conectados
         const mapMeta = drawCanvasMap(ctx, 456, 206, 436, 460);
@@ -2637,15 +2649,15 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
         ctx.fillText(leftHdr, padX + 6, 228);
 
         if (spreadPlaces.length > 0) {
-          drawScatterSheet(ctx, spreadPlaces, { x: padX, y: 246, w: 376, h: 516 }, imgs, 62);
+          drawScatterSheet(ctx, spreadPlaces, { x: padX, y: 246, w: 376, h: 516 + grow }, imgs, 62);
         }
 
-        drawAchRibbon(ctx, achs, padX, 796, innerW);
+        drawAchRibbon(ctx, achs, padX, ribbonY, innerW);
       }
     } else {
       // Modo hoja de sellos: mapa en marca de agua de fondo + todos los sellos regados encima
       const stageTop = 224;
-      const stageBot = shFmt === 'story' ? 1580 : 776;
+      const stageBot = (shFmt === 'story' ? 1580 : 776) + grow;
       const stageH = stageBot - stageTop;
 
       // Silueta del mapa como marca de agua suave en el centro de la hoja
@@ -2657,7 +2669,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
       drawScatterSheet(ctx, shownPlaces, { x: padX, y: stageTop, w: innerW, h: stageH }, imgs, shFmt === 'story' ? 110 : 90);
 
-      drawAchRibbon(ctx, achs, padX, shFmt === 'story' ? 1605 : 796, innerW);
+      drawAchRibbon(ctx, achs, padX, ribbonY, innerW);
     }
   }
 
@@ -2682,6 +2694,10 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   $('shClose').addEventListener('click', () => shDlg.close());
   document.querySelectorAll('input[name="shMode"]').forEach(r => r.addEventListener('change', e => {
     shMode = e.target.value;
+    renderShareCanvas();
+  }));
+  document.querySelectorAll('input[name="shHills"]').forEach(r => r.addEventListener('change', e => {
+    shHills = e.target.value === 'on';
     renderShareCanvas();
   }));
   document.querySelectorAll('input[name="shFmt"]').forEach(r => r.addEventListener('change', e => {
