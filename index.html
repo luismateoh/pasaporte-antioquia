@@ -885,7 +885,9 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
             <input type="checkbox" id="shMapOn" checked>
             <label for="shMapOn">Mapa</label>
             <input type="checkbox" id="shHillsOn" checked>
-            <label for="shHillsOn">Paisaje de abajo</label>
+            <label for="shHillsOn">Paisaje</label>
+            <input type="checkbox" id="shAchsOn" checked>
+            <label for="shAchsOn">Insignias</label>
           </div>
         </div>
         <div class="field">
@@ -1770,6 +1772,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   const shDlg = $('shareDlg'), shCanvas = $('shCanvas');
   let shMode = 'passport', shFmt = 'story', shSeed = 0; // shMode: 'passport' con mapa, 'collage' solo sellos
   let shHills = true; // paisaje ilustrado al pie; sin él, la hoja de sellos baja hasta las insignias
+  let shAchs = true; // franja de insignias del viajero; sin ella, los sellos ocupan su lugar
   let shLayout = 1; // semilla de la hoja: nueva en cada apertura, así ninguna imagen sale igual a otra
   let shCustomOrder = [];
   const miniCache = new Map();
@@ -2574,8 +2577,10 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
     drawPassportBackdrop(ctx, W, H, c, achs, hillsImg);
     const padX = 68, innerW = W - padX * 2;
-    const grow = shHills ? 0 : (shFmt === 'story' ? 95 : 54); // espacio que libera el paisaje
-    const ribbonY = (shFmt === 'story' ? 1605 : 796) + grow;
+    const hillsGrow = shHills ? 0 : (shFmt === 'story' ? 95 : 54); // espacio que libera el paisaje
+    const ribbonY = (shFmt === 'story' ? 1605 : 796) + hillsGrow;
+    // y el que libera la franja de insignias (con paisaje, menos: los sellos no deben tapar la casita)
+    const grow = hillsGrow + (shAchs ? 0 : !shHills ? 120 : shFmt === 'story' ? 100 : 30);
 
     if (shMode === 'passport') {
       if (shFmt === 'story') {
@@ -2624,7 +2629,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
         }
 
         // 3. Insignias sobre el paisaje ilustrado
-        drawAchRibbon(ctx, achs, padX, ribbonY, innerW);
+        if (shAchs) drawAchRibbon(ctx, achs, padX, ribbonY, innerW);
       } else {
         // Cuadrado 1:1 (1080x1080): Izquierda composición orgánica de 8 sellos, Derecha mapa con 4 sellos conectados
         const mapMeta = drawCanvasMap(ctx, 456, 206, 436, 460);
@@ -2653,7 +2658,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
           drawScatterSheet(ctx, spreadPlaces, { x: padX, y: 246, w: 376, h: 516 + grow }, imgs, 90);
         }
 
-        drawAchRibbon(ctx, achs, padX, ribbonY, innerW);
+        if (shAchs) drawAchRibbon(ctx, achs, padX, ribbonY, innerW);
       }
     } else {
       // Modo hoja de sellos: mapa en marca de agua de fondo + todos los sellos regados encima
@@ -2670,7 +2675,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
       drawScatterSheet(ctx, shownPlaces, { x: padX, y: stageTop, w: innerW, h: stageH }, imgs, shFmt === 'story' ? 150 : 120);
 
-      drawAchRibbon(ctx, achs, padX, ribbonY, innerW);
+      if (shAchs) drawAchRibbon(ctx, achs, padX, ribbonY, innerW);
     }
   }
 
@@ -2695,6 +2700,10 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   $('shClose').addEventListener('click', () => shDlg.close());
   $('shMapOn').addEventListener('change', e => {
     shMode = e.target.checked ? 'passport' : 'collage';
+    renderShareCanvas();
+  });
+  $('shAchsOn').addEventListener('change', e => {
+    shAchs = e.target.checked;
     renderShareCanvas();
   });
   $('shHillsOn').addEventListener('change', e => {
