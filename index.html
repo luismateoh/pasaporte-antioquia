@@ -611,6 +611,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 }
 @media (max-width: 759px) {
   .sh-canvas { max-height: 50dvh; }
+  .sh-stage { order: -1; } /* en celular la imagen va primero; las opciones quedan debajo */
 }
 @media (max-width: 599px) {
   .zd-foot #shShareBtn { grid-column: 1 / -1; }
@@ -868,7 +869,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
             <input type="radio" name="shMode" id="smPassport" value="passport" checked>
             <label for="smPassport">Mapa + Sellos</label>
             <input type="radio" name="shMode" id="smCollage" value="collage">
-            <label for="smCollage">Mosaico artístico</label>
+            <label for="smCollage">Hoja de sellos</label>
           </div>
         </div>
         <div class="field">
@@ -1756,6 +1757,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   // ---------- estudio para compartir (Historia 9:16 y Cuadrado 1:1) ----------
   const shDlg = $('shareDlg'), shCanvas = $('shCanvas');
   let shMode = 'passport', shFmt = 'story', shSeed = 0;
+  let shLayout = 1; // semilla de la hoja: nueva en cada apertura, así ninguna imagen sale igual a otra
   let shCustomOrder = [];
   const shExcluded = new Set();
   const miniCache = new Map();
@@ -1885,13 +1887,9 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
   function getShareLimits() {
     if (shMode === 'passport') {
-      return shFmt === 'story'
-        ? { callouts: 6, extra: 12, total: 18 }
-        : { callouts: 4, extra: 8, total: 12 };
+      return { callouts: shFmt === 'story' ? 6 : 4, total: Infinity };
     }
-    return shFmt === 'story'
-      ? { callouts: 0, extra: 28, total: 28 }
-      : { callouts: 0, extra: 18, total: 18 };
+    return { callouts: 0, total: Infinity };
   }
 
   function buildSharePlaceList() {
@@ -1937,8 +1935,8 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     const calloutSet = new Set(shownSlice.slice(0, lim.callouts).map(p => p.id));
 
     hintEl.textContent = shMode === 'passport'
-      ? `Mostrando ${shownSlice.length} de ${allVisited.length} sellos (${Math.min(lim.callouts, shownSlice.length)} conectados al mapa). Toca un pueblo para llevarlo al mapa o alternarlo:`
-      : `Mostrando ${shownSlice.length} de ${allVisited.length} sellos en el mosaico. Toca un pueblo para destacarlo de primero o alternarlo:`;
+      ? `${shownSlice.length} de ${allVisited.length} sellos en la imagen (${Math.min(lim.callouts, shownSlice.length)} conectados al mapa). Toca un pueblo para llevarlo al mapa; tócalo otra vez para quitarlo:`
+      : `${shownSlice.length} de ${allVisited.length} sellos en la hoja. Toca un pueblo para que salga más grande; tócalo otra vez para quitarlo:`;
 
     // Mostrar los activos primero en el orden actual y luego los desactivados
     const orderedForPills = shownSlice
@@ -2287,64 +2285,39 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     });
   }
 
-  // Disposición orgánica tipo hoja de pasaporte (panal escalonado + variación natural de ángulo y tamaño)
-  function drawOrganicStampSpread(ctx, items, box, imgs, opts = {}) {
+  function mulberry32(a) {
+    return () => {
+      a = (a + 0x6D2B79F5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  // Hoja de pasaporte de verdad: todos los sellos, sueltos y encimados, con posición, giro y tamaño al azar.
+  // Los primeros de la lista salen un poco más grandes y quedan encima; el resto se reparte sin cuadrícula.
+  function drawScatterSheet(ctx, items, box, imgs, maxR) {
     const n = items.length;
     if (!n) return;
+    const rnd = mulberry32(shLayout);
     const { x, y, w, h } = box;
-
-    // Matasellos de ondas postales sutiles de fondo
-    drawPostmarkWaves(ctx, x + 28, y + h * 0.22, 180, 4, 8, 3, 'rgba(23, 67, 42, 0.075)');
-    drawPostmarkWaves(ctx, x + w - 210, y + h * 0.72, 180, 4, 8, 3, 'rgba(122, 59, 29, 0.075)');
-
-    const maxCols = opts.maxCols || (w > 650 ? (n <= 3 ? n : n <= 8 ? 4 : 4) : (n <= 4 ? 2 : 3));
-    const rowCounts = [];
-    let rem = n, rIdx = 0;
-    while (rem > 0) {
-      // Alternar filas de maxCols y maxCols-1 cuando hay suficientes sellos para efecto panal artístico
-      const want = (n >= 7 && rIdx % 2 === 1 && maxCols >= 3 && rem > maxCols - 1) ? maxCols - 1 : Math.min(maxCols, rem);
-      rowCounts.push(want);
-      rem -= want;
-      rIdx++;
-    }
-    // Si la última fila quedó con 1 solo sello suelto y la anterior tiene >=3, balancear
-    if (rowCounts.length >= 2 && rowCounts[rowCounts.length - 1] === 1 && rowCounts[rowCounts.length - 2] >= 3) {
-      rowCounts[rowCounts.length - 2]--;
-      rowCounts[rowCounts.length - 1]++;
-    }
-
-    const rows = rowCounts.length;
-    const maxInRow = Math.max(...rowCounts);
-    const cellW = w / maxInRow;
-    const cellH = h / rows;
-    const baseR = Math.min(opts.maxR || 92, Math.min(cellW * 0.45, cellH * 0.47));
-
-    let cursor = 0;
-    for (let r = 0; r < rows; r++) {
-      const cnt = rowCounts[r];
-      const rowSpanW = cnt * cellW;
-      // Desfase horizontal orgánico cuando dos filas seguidas tienen igual cantidad
-      const stagger = (cnt === maxInRow && rows > 1)
-        ? (r % 2 === 0 ? -cellW * 0.08 : cellW * 0.08)
-        : 0;
-      const startX = x + (w - rowSpanW) / 2 + stagger;
-
-      for (let c = 0; c < cnt; c++) {
-        const p = items[cursor++];
-        const h1 = seededHash(p.id, shSeed * 37 + cursor * 7);
-        const h2 = seededHash(p.id, shSeed * 73 + cursor * 13);
-        const h3 = seededHash(p.id, shSeed * 101 + cursor * 29);
-
-        const jx = (h1 - 0.5) * Math.min(22, cellW * 0.13);
-        const jy = (h2 - 0.5) * Math.min(18, cellH * 0.12);
-        const scaleVar = 0.95 + h3 * 0.1;
-        const angle = (h1 - 0.5) * 18; // -9° a +9°
-
-        const cx = Math.max(x + baseR, Math.min(x + w - baseR, startX + cellW * (c + 0.5) + jx));
-        const cy = Math.max(y + baseR, Math.min(y + h - baseR, y + cellH * (r + 0.5) + jy));
-        drawCanvasStamp(ctx, p, cx, cy, baseR * scaleVar, imgs[p.id], !!state.visits[p.id], angle);
+    const R = Math.min(maxR, Math.sqrt((w * h * 1.5) / (n * Math.PI)));
+    const big = n > 6 ? Math.max(1, Math.round(n * 0.12)) : 0;
+    const placed = [];
+    for (let i = 0; i < n; i++) {
+      const r = i < big ? R * 1.25 : R * (0.82 + rnd() * 0.26);
+      let best = null, bestGap = -Infinity;
+      for (let k = 0; k < 16; k++) {
+        const cx = x + r + rnd() * Math.max(0, w - 2 * r);
+        const cy = y + r + rnd() * Math.max(0, h - 2 * r);
+        let gap = Infinity;
+        for (const q of placed) gap = Math.min(gap, Math.hypot(cx - q.cx, cy - q.cy) - q.r - r);
+        if (gap > bestGap) { bestGap = gap; best = { cx, cy }; }
       }
+      placed.push({ p: items[i], r, ...best, a: (rnd() - 0.5) * 44, z: (i < big ? 1 : 0) + rnd() });
     }
+    placed.sort((m, o) => m.z - o.z);
+    for (const q of placed) drawCanvasStamp(ctx, q.p, q.cx, q.cy, q.r, imgs[q.p.id], !!state.visits[q.p.id], q.a);
   }
 
   function drawCustomsPostmark(ctx, cx, cy, c, achs, scale = 1) {
@@ -2614,9 +2587,9 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
         if (spreadPlaces.length > 0) {
           ctx.save();
           const hdrY = 918;
-          const hdrTxt = allVisited.length > lim.total
-            ? `MÁS SELLOS DE MI RUTA · +${allVisited.length - lim.total} EN EL PASAPORTE`
-            : `HOJA DE SELLOS · ${allVisited.length ? `${shownPlaces.length} DESTACADOS` : 'DESTINOS DE EJEMPLO'}`;
+          const hdrTxt = allVisited.length
+            ? `HOJA DE SELLOS · ${shownPlaces.length} ${shownPlaces.length === 1 ? 'LUGAR VISITADO' : 'LUGARES VISITADOS'}`
+            : 'HOJA DE SELLOS · DESTINOS DE EJEMPLO';
           ctx.font = '600 15.5px "IBM Plex Mono", monospace';
           const tw = ctx.measureText(hdrTxt).width + 28;
           const midX = W / 2;
@@ -2634,7 +2607,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
           ctx.fillText(hdrTxt, midX, hdrY);
           ctx.restore();
 
-          drawOrganicStampSpread(ctx, spreadPlaces, { x: padX, y: 940, w: innerW, h: 635 }, imgs, { maxCols: 4, maxR: 84 });
+          drawScatterSheet(ctx, spreadPlaces, { x: padX, y: 940, w: innerW, h: 635 }, imgs, 84);
         }
 
         // 3. Insignias sobre el paisaje ilustrado
@@ -2660,19 +2633,17 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
         ctx.font = '600 15px "IBM Plex Mono", monospace';
         ctx.textAlign = 'left';
         ctx.textBaseline = 'middle';
-        const leftHdr = allVisited.length > lim.total
-          ? `MI COLECCIÓN (+${allVisited.length - lim.total} MÁS)`
-          : `HOJA DE SELLOS (${shownPlaces.length})`;
+        const leftHdr = `HOJA DE SELLOS (${shownPlaces.length})`;
         ctx.fillText(leftHdr, padX + 6, 228);
 
         if (spreadPlaces.length > 0) {
-          drawOrganicStampSpread(ctx, spreadPlaces, { x: padX, y: 246, w: 376, h: 516 }, imgs, { maxCols: 3, maxR: 62 });
+          drawScatterSheet(ctx, spreadPlaces, { x: padX, y: 246, w: 376, h: 516 }, imgs, 62);
         }
 
         drawAchRibbon(ctx, achs, padX, 796, innerW);
       }
     } else {
-      // Modo Mosaico artístico: mapa en marca de agua de fondo + composición panal de hasta 28 sellos
+      // Modo hoja de sellos: mapa en marca de agua de fondo + todos los sellos regados encima
       const stageTop = 224;
       const stageBot = shFmt === 'story' ? 1580 : 776;
       const stageH = stageBot - stageTop;
@@ -2684,14 +2655,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
         hideLabels: true,
       });
 
-      const maxCols = shFmt === 'story'
-        ? (shownPlaces.length <= 6 ? 2 : shownPlaces.length <= 15 ? 3 : 4)
-        : (shownPlaces.length <= 6 ? 3 : shownPlaces.length <= 12 ? 4 : 5);
-
-      drawOrganicStampSpread(ctx, shownPlaces, { x: padX, y: stageTop, w: innerW, h: stageH }, imgs, {
-        maxCols,
-        maxR: shFmt === 'story' ? 96 : 78,
-      });
+      drawScatterSheet(ctx, shownPlaces, { x: padX, y: stageTop, w: innerW, h: stageH }, imgs, shFmt === 'story' ? 110 : 90);
 
       drawAchRibbon(ctx, achs, padX, shFmt === 'story' ? 1605 : 796, innerW);
     }
@@ -2708,6 +2672,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
 
   function openShare() {
     $('shName').value = state.traveler || '';
+    shLayout = (Math.random() * 4294967296) >>> 0;
     shDlg.showModal();
     renderShareCanvas();
     requestAnimationFrame(() => $('shShareBtn').focus());
@@ -2730,6 +2695,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   });
   $('shShuffleBtn').addEventListener('click', () => {
     shSeed++;
+    shLayout = (Math.random() * 4294967296) >>> 0;
     if (shCustomOrder.length > 1) {
       shCustomOrder.push(shCustomOrder.shift());
     }
