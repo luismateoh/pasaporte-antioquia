@@ -891,6 +891,15 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
           </div>
         </div>
         <div class="field">
+          <span class="label" id="shPackLbl">Acomodo de los sellos</span>
+          <div class="seg" role="radiogroup" aria-labelledby="shPackLbl">
+            <input type="radio" name="shPack" id="spCollage" value="collage" checked>
+            <label for="spCollage">Collage</label>
+            <input type="radio" name="shPack" id="spOrden" value="orden">
+            <label for="spOrden">Ordenado</label>
+          </div>
+        </div>
+        <div class="field">
           <span class="label" id="shFmtLbl">Formato</span>
           <div class="seg" role="radiogroup" aria-labelledby="shFmtLbl">
             <input type="radio" name="shFmt" id="sfStory" value="story" checked>
@@ -1773,6 +1782,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   let shMode = 'passport', shFmt = 'story', shSeed = 0; // shMode: 'passport' con mapa, 'collage' solo sellos
   let shHills = true; // paisaje ilustrado al pie; sin él, la hoja de sellos baja hasta las insignias
   let shAchs = true; // franja de insignias del viajero; sin ella, los sellos ocupan su lugar
+  let shPack = 'collage'; // 'collage': encimados a propósito; 'orden': casi sin encime
   let shLayout = 1; // semilla de la hoja: nueva en cada apertura, así ninguna imagen sale igual a otra
   let shCustomOrder = [];
   const miniCache = new Map();
@@ -2308,7 +2318,8 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
   }
 
   // Hoja de pasaporte de verdad: todos los sellos, con giro y tamaño al azar, repartidos por empacado de
-  // círculos. Se riegan al azar y luego se "inflan" por relajación: los que se pisan se empujan, y mientras
+  // círculos. En «collage» cada sello reserva solo ~70 % de su radio, así se enciman a propósito pero
+  // ninguno queda tapado del todo; en «ordenado» reserva casi todo y apenas se tocan. Se riegan al azar y luego se "inflan" por relajación: los que se pisan se empujan, y mientras
   // casi no se pisen crecen un poco. Termina cuando la hoja queda trabada: sellos lo más grandes posible,
   // con el mínimo de encime y de huecos. Los primeros de la lista salen más grandes y quedan encima.
   function drawScatterSheet(ctx, items, box, imgs, maxR) {
@@ -2316,7 +2327,8 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     if (!n) return;
     const rnd = mulberry32(shLayout);
     const { x, y, w, h } = box;
-    const big = n > 6 ? Math.max(1, Math.round(n * 0.12)) : 0;
+    const collage = shPack === 'collage';
+    const big = n > 6 ? Math.max(1, Math.round(n * (collage ? 0.15 : 0.12))) : 0;
     // arranque en malla hexagonal con ruido (casi la densidad máxima), en orden barajado
     const cols = Math.max(1, Math.round(Math.sqrt((n * w) / (h * 0.866))));
     const rows = Math.ceil(n / cols);
@@ -2324,17 +2336,17 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     const slots = Array.from({ length: n }, (_, i) => i).sort(() => rnd() - 0.5);
     const st = items.map((p, i) => ({
       p,
-      k: i < big ? 1.3 : 0.8 + rnd() * 0.3, // tamaño relativo
+      k: i < big ? (collage ? 1.45 : 1.3) : collage ? 0.72 + rnd() * 0.5 : 0.8 + rnd() * 0.3, // tamaño relativo
       cx: x + cw * ((slots[i] % cols) + 0.5 + (Math.floor(slots[i] / cols) % 2) * 0.5) + (rnd() - 0.5) * cw * 0.5,
       cy: y + ch * (Math.floor(slots[i] / cols) + 0.5) + (rnd() - 0.5) * ch * 0.5,
-      a: (rnd() - 0.5) * 44,
+      a: (rnd() - 0.5) * (collage ? 60 : 44),
       z: (i < big ? 1 : 0) + rnd(),
     }));
     const sumK2 = st.reduce((t, q) => t + q.k * q.k, 0);
     const kMax = Math.max(...st.map(q => q.k));
     const rCap = Math.min(maxR, Math.min(w, h) / 2.2) / kMax; // tope de tamaño
     let s = 0;
-    const ink = 0.96; // radio visible del sello (papel) respecto a R
+    const ink = collage ? 0.7 : 0.96; // radio que cada sello reserva respecto a R
 
     const relax = iters => {
       let over = 0;
@@ -2356,8 +2368,8 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
             B.cx += ux * push; B.cy += uy * push;
           }
         }
-        for (const q of st) { // dentro de la hoja
-          const r = q.k * s * ink;
+        for (const q of st) { // dentro de la hoja: el borde usa el sello completo, no solo lo reservado
+          const r = q.k * s * 0.96;
           q.cx = Math.min(x + w - r, Math.max(x + r, q.cx));
           q.cy = Math.min(y + h - r, Math.max(y + r, q.cy));
         }
@@ -2367,7 +2379,7 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     };
 
     // Búsqueda binaria del tamaño más grande que cabe casi sin encime (el techo es ~90 % de la hoja cubierta)
-    let lo = 0, hi = Math.min(rCap, Math.sqrt((w * h * 0.9) / (Math.PI * sumK2))), best = null;
+    let lo = 0, hi = Math.min(rCap, Math.sqrt((w * h * 0.9) / (Math.PI * sumK2)) / ink), best = null;
     for (let step = 0; step < 12; step++) {
       s = step === 0 ? hi : (lo + hi) / 2;
       if (relax(80) < 0.01) {
@@ -2752,6 +2764,10 @@ dialog::backdrop { background: rgba(22, 25, 30, .48); }
     shMode = e.target.checked ? 'passport' : 'collage';
     renderShareCanvas();
   });
+  document.querySelectorAll('input[name="shPack"]').forEach(r => r.addEventListener('change', e => {
+    shPack = e.target.value;
+    renderShareCanvas();
+  }));
   $('shAchsOn').addEventListener('change', e => {
     shAchs = e.target.checked;
     renderShareCanvas();
